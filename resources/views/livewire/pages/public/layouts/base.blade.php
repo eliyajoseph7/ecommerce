@@ -16,8 +16,9 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
         {{-- flowbite --}}
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+        <link href="{{ asset('assets/lib/flowbite/flowbite.min.css') }}" rel="stylesheet" />
+        <script src="{{ asset('assets/lib/flowbite/flowbite.min.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
         <style>
             input {
@@ -28,9 +29,10 @@
     </head>
     <body class="font-sans text-gray-900 antialiased">
         @livewire('pages.public.layouts.header')
-        <div class="min-h-[70vh] flex flex-col sm:justify-start items-center py-0 sm:pt-0 bg-gray-100 dark:bg-gray-900 sm:px-2 md:px-72 mb-5 overflow-x-hidden">
+        <div class="min-h-[70vh] flex flex-col sm:justify-start items-center py-0 sm:pt-0 bg-gray-50 dark:bg-gray-900 pb-5 overflow-x-hidden">
             {{ $slot }}
         </div>
         @livewire('pages.public.layouts.footer')
     </body>
+    @yield('scripts')
 </html>
