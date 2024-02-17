@@ -4,7 +4,7 @@
     @else
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0">
         @forelse ($newest as $new)
-            <div class="border-t-[1px] border-l-[1px] border-r-[1px] hover:border-b-[1px] px-2 p y-3.5 mb-4 cursor-pointer">
+            <div class="border-[1px] border-b-white hover:border-b-gray-300 px-2 p y-3.5 mb-4 cursor-pointer">
                 <div class="h-72">
                     <img src="{{ $new->image }}" class="h-full w-full rounded-lg object-cover ease-in-out duration-700 hover:scale-105">
                 </div>
