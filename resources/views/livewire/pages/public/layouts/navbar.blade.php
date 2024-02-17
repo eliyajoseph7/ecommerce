@@ -1,4 +1,3 @@
-
 <nav class="bg-sky-900 border-green-200 dark:bg-green-900 dark:border-green-700 z-50">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto sm:py-1 md:py-3 px-2 md:px-0">
         <a href="/" class="flex items-center space-x-1 rtl:space-x-reverse h-12 md:hidden">
@@ -18,7 +17,42 @@
         <div class="hidden w-full md:block md:w-auto" id="navbar-multi-level">
             <ul
                 class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-inherit rounded-lg sm:bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-inherit dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                <li>
+                @foreach ($menus as $menu)
+                    <li>
+                        <button id="{{ $menu->slug }}Link" data-dropdown-toggle="{{ $menu->slug }}"
+                            class="flex items-center justify-between text-sm w-full py-2 px-3 text-gray-300 hover:text-gray-50 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
+                            {{ $menu->name }}
+                            <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 1 4 4 4-4" />
+                            </svg></button>
+                        <!-- Dropdown menu -->
+                        <div id="{{ $menu->slug }}"
+                            class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-b-md shadow w-screen min-h-32 dark:bg-gray-700 dark:divide-gray-600">
+                            <div class="flex md:mx-80 px-20 sm:py-1 md:py-3 md:px-0 ">
+                                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200 md:grid md:grid-flow-col justify-start"
+                                    aria-labelledby="dropdownLargeButton">
+                                    @foreach ($menu->categories as $category)
+                                        <li class="px-4">
+                                            <a href="#"
+                                                class="block py-2 font-bold hover:text-sky-900 dark:hover:bg-gray-600 dark:hover:text-white">{{ $category->name }}</a>
+                                            <ul>
+                                                @foreach ($category->sub_categories as $sub_category)
+                                                    <li>
+                                                        <a href="#" class="block py-1 hover:text-sky-800">{{ $sub_category->name }}</a>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </li>
+                                    @endforeach
+                                </ul>
+
+                            </div>
+                        </div>
+                    </li>
+                @endforeach
+                {{-- <li>
                     <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar"
                         class="flex items-center justify-between text-sm w-full py-2 px-3 text-gray-300 hover:text-gray-50 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
                         Electronics
@@ -234,7 +268,7 @@
                                 out</a>
                         </div>
                     </div>
-                </li>
+                </li> --}}
             </ul>
         </div>
     </div>

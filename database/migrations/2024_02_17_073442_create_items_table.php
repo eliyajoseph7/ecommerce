@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('short_description');
             $table->longText('description');
             $table->double('price');
-            $table->foreignId('category_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('sub_category_id')->nullable()->constrained()->nullOnDelete();
             $table->timestamps();
         });
     }

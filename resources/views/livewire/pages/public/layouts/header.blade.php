@@ -79,6 +79,8 @@
         </div>
     </div>
 
-    @include('livewire/pages/public/layouts/navbar')
+    @include('livewire/pages/public/layouts/navbar', [
+        'menus' => $menus
+    ])
 
 </div>
