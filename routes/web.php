@@ -1,5 +1,15 @@
 <?php
 
+use App\Livewire\Pages\Admin\Categories\CategoryForm;
+use App\Livewire\Pages\Admin\Categories\CategoryList;
+use App\Livewire\Pages\Admin\Dashboard\Dashboard;
+use App\Livewire\Pages\Admin\Items\ItemForm;
+use App\Livewire\Pages\Admin\Items\ItemList;
+use App\Livewire\Pages\Admin\Items\ItemView;
+use App\Livewire\Pages\Admin\Mainmenu\MenuForm;
+use App\Livewire\Pages\Admin\Mainmenu\MenuList;
+use App\Livewire\Pages\Admin\Subcategories\SubCategoryForm;
+use App\Livewire\Pages\Admin\Subcategories\SubCategoryList;
 use App\Livewire\Pages\Public\Home\Home;
 use Illuminate\Support\Facades\Route;
 
@@ -16,12 +26,46 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', Home::class)->name('home');
 
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+
+Route::middleware(['auth', 'verified'])->group(function () {
+
+    Route::prefix('admin')->group(function() {
+        Route::get('dashboard', Dashboard::class)->name('dashboard');
+
+        // main menu management
+        Route::prefix('main-menus')->group(function() {
+            Route::get('list', MenuList::class)->name('main_menu_list');
+            Route::get('form', MenuForm::class)->name('main_menu_form');
+            Route::get('form/{menuId}', MenuForm::class)->name('main_menu_form_edit');
+        });
+
+        // categories management
+        Route::prefix('categories')->group(function() {
+            Route::get('list', CategoryList::class)->name('category_list');
+            Route::get('form', CategoryForm::class)->name('category_form');
+            Route::get('form/{categoryId}', CategoryForm::class)->name('category_form_edit');
+        });
+
+        // sub-categories management
+        Route::prefix('sub-categories')->group(function() {
+            Route::get('list', SubCategoryList::class)->name('sub_category_list');
+            Route::get('form', SubCategoryForm::class)->name('sub_category_form');
+            Route::get('form/{subCategoryId}', SubCategoryForm::class)->name('sub_category_form_edit');
+        });
+
+        // items management
+        Route::prefix('items')->group(function() {
+            Route::get('list', ItemList::class)->name('item_list');
+            Route::get('form', ItemForm::class)->name('item_form');
+            Route::get('form/{itemId}', ItemForm::class)->name('item_form_edit');
+            Route::get('view/{itemId}', ItemView::class)->name('item_view');
+        });
+
+    });
+});
 
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

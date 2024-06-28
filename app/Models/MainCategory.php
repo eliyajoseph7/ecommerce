@@ -12,4 +12,10 @@ class MainCategory extends Model
     public function categories() {
         return $this->hasMany(Category::class);
     }
+
+    public function scopeSearch($qs, $keyword)
+    {
+        return $qs->where('name', 'like', '%' . $keyword . '%')
+        ->orWhere('slug', 'like', '%' . $keyword . '%');
+    }
 }

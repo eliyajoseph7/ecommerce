@@ -16,4 +16,14 @@ class Category extends Model
     public function main_category() {
         return $this->belongsTo(MainCategory::class);
     }
+
+    public function scopeSearch($qs, $keyword)
+    {
+        $qs->where('name', 'like', '%' . $keyword . '%')
+        ->orWhere('slug', 'like', '%' . $keyword . '%')
+        ->orWhere('status', 'like', '%' . $keyword . '%')
+        ->orWhereHas('main_category', function($qs) use($keyword) {
+            $qs->where('name', 'like', '%' . $keyword . '%');
+        });
+    }
 }

@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -17,9 +18,22 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('status', ['active', 'in active'])->default('active');
             $table->rememberToken();
             $table->timestamps();
         });
+        
+        // insert initial user
+
+        DB::table('users')->insert(
+            array(
+                [
+                    'name' => 'Admin',
+                    'email' => 'admin@business.com',
+                    'password' => Hash::make('admin'),
+                ],
+            )
+        );
     }
 
     /**

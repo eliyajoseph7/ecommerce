@@ -19,6 +19,7 @@ return new class extends Migration
             $table->longText('description');
             $table->double('price');
             $table->foreignId('sub_category_id')->nullable()->constrained()->nullOnDelete();
+            $table->enum('status', ['active', 'in active'])->default('active');
             $table->timestamps();
         });
     }
