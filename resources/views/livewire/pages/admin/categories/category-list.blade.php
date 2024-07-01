@@ -54,7 +54,7 @@
                                                     'displayName' => 'Category Name',
                                                 ])
                                                 @include('includes.table-header-sort', [
-                                                    'name' => 'name',
+                                                    'name' => 'slug',
                                                     'displayName' => 'Slug',
                                                 ])
                                                 @include('includes.table-header-sort', [

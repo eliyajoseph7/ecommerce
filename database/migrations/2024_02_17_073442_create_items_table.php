@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('short_description');
             $table->longText('description');
             $table->double('price');
+            $table->double('clicks')->default(0);
+            $table->double('ordered')->default(0);
             $table->foreignId('sub_category_id')->nullable()->constrained()->nullOnDelete();
             $table->enum('status', ['active', 'in active'])->default('active');
             $table->timestamps();
