@@ -7,6 +7,8 @@ use App\Models\Gallery;
 use App\Models\Item;
 use App\Models\MainCategory;
 use App\Models\SubCategory;
+use Illuminate\Support\Facades\Storage;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
@@ -19,22 +21,53 @@ class ItemForm extends Component
     public $categories = [];
     public $subCategories = [];
 
+    public $action = 'add';
+    public $id;
+
     protected $rules = [
         'items.*.name' => 'required|string|max:255',
-        'items.*.slug' => 'required|string|max:255',
+        'items.*.slug' => 'nullable|string|max:255',
         'items.*.short_description' => 'required|string|max:255',
         'items.*.description' => 'required|string',
         'items.*.price' => 'required|numeric',
         'items.*.main_category_id' => 'nullable|exists:main_categories,id',
         'items.*.category_id' => 'nullable|exists:categories,id',
         'items.*.sub_category_id' => 'required|exists:sub_categories,id',
-        'items.*.images.*' => 'required|image|max:1024', // 1MB Max
     ];
 
-    public function mount()
+    protected $messages =
+    [
+        'items.*.*.required' => 'This field is required'
+    ];
+
+    public function mount($itemId = null)
     {
         $this->mainCategories = MainCategory::all();
-        $this->addItem();
+        if ($itemId) {
+            $this->action = 'update';
+            $this->id = $itemId;
+            // action is editing
+            // Load existing item data
+            $item = Item::with('images')->find($itemId);
+            $this->categories[0] = Category::where('main_category_id', $item->category?->category?->main_category_id)->get();
+            $this->subCategories[0] = SubCategory::where('category_id', $item->category?->category_id)->get();
+            $this->items[] = [
+                'id' => $item->id,
+                'name' => $item->name,
+                'slug' => $item->slug,
+                'short_description' => $item->short_description,
+                'description' => $item->description,
+                'price' => $item->price,
+                'main_category_id' => $item->category->category->main_category_id ?? null,
+                'category_id' => $item->category->category_id ?? null,
+                'sub_category_id' => $item->sub_category_id,
+                'images' => [],
+                'existing_images' => $item->images->pluck('image')->toArray(),
+            ];
+            // dd($item->category->category);
+        } else {
+            $this->addItem();
+        }
     }
 
     public function addItem()
@@ -59,8 +92,9 @@ class ItemForm extends Component
         $this->items = array_values($this->items);
     }
 
-    
-    public function generateSlug($name) {
+
+    public function generateSlug($name)
+    {
         $slug = strtolower(str_replace(' ', '-', $name));
         return $slug;
     }
@@ -86,17 +120,49 @@ class ItemForm extends Component
     public function submit()
     {
         $this->validate();
+        if ($this->action == 'add') {
+            $this->validate([
+                'items.*.images' => 'required',
+                'items.*.images.*' => 'image',
+            ]);
+        } else {
+            $this->validate([
+                'items.*.images' => 'nullable',
+                // 'items.*.images.*' => 'image',
+            ]);
+        }
 
         foreach ($this->items as $itemData) {
-            $item = Item::create([
-                'name' => $itemData['name'],
-                'slug' => $this->generateSlug($itemData['name']),
-                'short_description' => $itemData['short_description'],
-                'description' => $itemData['description'],
-                'price' => $itemData['price'],
-                'sub_category_id' => $itemData['sub_category_id'],
-            ]);
+            // Update existing item if ID is provided
+            if (isset($itemData['id'])) {
+                $item = Item::find($itemData['id']);
+                $item->update([
+                    'name' => $itemData['name'],
+                    'slug' => $this->generateSlug($itemData['name']),
+                    'short_description' => $itemData['short_description'],
+                    'description' => $itemData['description'],
+                    'price' => $itemData['price'],
+                    'sub_category_id' => $itemData['sub_category_id'],
+                ]);
 
+                // // Handle existing images (edit or delete)
+                // foreach ($item->images as $image) {
+                //     // Delete images not in current list
+                //     if (!in_array($image->image, $itemData['existing_images'])) {
+                //         // Implement deletion logic as per your requirements
+                //         $image->delete();
+                //     }
+                // }
+            } else {
+                $item = Item::create([
+                    'name' => $itemData['name'],
+                    'slug' => $this->generateSlug($itemData['name']),
+                    'short_description' => $itemData['short_description'],
+                    'description' => $itemData['description'],
+                    'price' => $itemData['price'],
+                    'sub_category_id' => $itemData['sub_category_id'],
+                ]);
+            }
             foreach ($itemData['images'] as $image) {
                 $fileNameToSave = null;
                 $this->file = (object)$image;
@@ -105,7 +171,7 @@ class ItemForm extends Component
                     $extension = $this->file->getClientOriginalExtension();
                     $fileName = pathinfo($file, PATHINFO_FILENAME) . "-" . date('Ymd-His') . "." . $extension;
                     $this->file->storeAs('itemImages', $fileName, 'public');
-    
+
                     $fileNameToSave = '/storage/itemImages/' . $fileName;
                 } catch (\Throwable $e) {
                 }
@@ -116,12 +182,29 @@ class ItemForm extends Component
             }
         }
 
-        session()->flash('message', [
+        session()->flash('info', [
             'type' => 'success',
-            'message' => 'Items successfully created.',
+            'message' => $this->action == 'add' ? 'Items successfully created.' : 'Items successfully updated.',
         ]);
 
         return redirect()->route('item_list');
+    }
+
+    #[On('delete_image')]
+    public function deleteImage($image)
+    {
+        $item = Item::find($this->id);
+        // dd($image['image']);
+        $imgname = str_replace(substr($image['image'], 0, 9), '', $image['image']);
+        Gallery::where('item_id', $this->id)->where('image', $image['image'])->first()?->delete();
+        // dd($imgname);
+        $check = Storage::disk('public')->exists($imgname);
+        if ($check) {
+            Storage::disk('public')->delete($imgname);
+        }
+
+        $this->dispatch('success', 'image deleted');
+        $this->items[0]['existing_images'] = $item->images->pluck('image')->toArray();
     }
 
 

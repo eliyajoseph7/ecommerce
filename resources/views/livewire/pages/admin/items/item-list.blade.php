@@ -59,7 +59,7 @@
                                                 ])
                                                 @include('includes.table-header-sort', [
                                                     'name' => 'price',
-                                                    'displayName' => 'Price',
+                                                    'displayName' => 'Price (Tsh.)',
                                                 ])
                                                 @include('includes.table-header-sort', [
                                                     'name' => 'status',
@@ -78,7 +78,7 @@
                                             class="[&>*:nth-child(even)]:bg-[#F6F9FF] [&>*:nth-child(even)]:dark:bg-gray-600">
                                             @forelse ($data as $key=>$values)
                                                 <tr class="!bg-gray-300/80">
-                                                    <td colspan="6" class="px-3 font-bold text-lg text-gray-700">
+                                                    <td colspan="7" class="px-3 font-bold text-lg text-gray-700">
                                                         Category:
                                                         {{ $key }}</td>
 
@@ -93,8 +93,8 @@
                                                             {{ $dt->name }}</td>
                                                         <td class="px-4 py-3">
                                                             {{ $dt->short_description }}</td>
-                                                        <td class="px-4 py-3 whitespace-nowrap">
-                                                            {{ $dt->price }}</td>
+                                                        <td class="px-4 py-3 whitespace-nowrap text-right">
+                                                            {{ number_format($dt->price, 2) }}</td>
                                                         <td class="px-4 py-3 whitespace-nowrap">
                                                             {{ $dt->status }}</td>
                                                         <td class="px-4 py-3 whitespace-nowrap">
@@ -138,12 +138,12 @@
         </div>
 
     </div>
-    @if (session()->has('alert'))
+    @if (session()->has('info'))
         <script>
             document.addEventListener('livewire:init', () => {
                 Toast.fire({
-                    icon: '{{ session('alert.type') }}',
-                    title: '{{ session('alert.message') }}',
+                    icon: '{{ session('info.type') }}',
+                    title: '{{ session('info.message') }}',
                 });
             })
         </script>

@@ -19,7 +19,7 @@ class Item extends Model
     ];
 
     public function images() {
-        return $this->hasMany(Gallery::class, 'item_images');
+        return $this->hasMany(Gallery::class);
     }
 
     public function category() {

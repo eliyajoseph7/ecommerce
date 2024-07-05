@@ -130,7 +130,7 @@
 <script data-navigate-once>
     document.addEventListener('livewire:init', () => {
         // add
-        Livewire.on('show_success', (message) => {
+        Livewire.on('success', (message) => {
             Toast.fire({
                 icon: 'success',
                 title: message,
