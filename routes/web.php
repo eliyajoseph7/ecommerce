@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', Home::class)->name('home');
 // Route::get('{categorySlug}', Items::class)->name('public_items');
 // Route::get('{itemSlug}', ItemDetails::class)->name('public_item_details');
-Route::get('{slug}', Items::class)->name('public_items');
+Route::get('bs/{slug}', Items::class)->name('public_items');
 
 
 Route::middleware(['auth', 'verified'])->group(function () {

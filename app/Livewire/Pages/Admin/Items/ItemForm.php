@@ -65,6 +65,7 @@ class ItemForm extends Component
                 'existing_images' => $item->images->pluck('image')->toArray(),
             ];
             // dd($item->category->category);
+            $this->dispatch('set_description', $item->description);
         } else {
             $this->addItem();
         }
@@ -72,7 +73,7 @@ class ItemForm extends Component
 
     public function addItem()
     {
-        $this->validate();
+        // $this->validate();
         $this->items[] = [
             'name' => '',
             'slug' => '',
@@ -84,6 +85,8 @@ class ItemForm extends Component
             'sub_category_id' => '',
             'images' => [],
         ];
+
+        $this->dispatch('reinitialize_tinymce');
     }
 
     public function removeItem($index)
@@ -123,7 +126,7 @@ class ItemForm extends Component
         if ($this->action == 'add') {
             $this->validate([
                 'items.*.images' => 'required',
-                'items.*.images.*' => 'image',
+                // 'items.*.images.*' => 'image',
             ]);
         } else {
             $this->validate([

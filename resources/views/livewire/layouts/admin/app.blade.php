@@ -92,6 +92,14 @@
 <!-- optional -->
 <script src="https://code.highcharts.com/modules/offline-exporting.js"></script>
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://cdn.tiny.cloud/1/9kwmev7of6r1gwfblgyke70ptjc8153as3hzygkrfa2kc91n/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+      selector: 'textarea#myeditorinstance', // Replace this CSS selector to match the placeholder element for TinyMCE
+      plugins: 'code table lists',
+      toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table'
+    });
+  </script>
 
 <script data-navigate-once>
     const Toast = Swal.mixin({

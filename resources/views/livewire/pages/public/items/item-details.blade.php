@@ -94,8 +94,8 @@
                     <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="description" role="tabpanel"
                         aria-labelledby="description-tab">
                         <div class="">
-                            <div class="">{{ $data->short_description }}</div>
-                            <div class="">{{ $data->description }}</div>
+                            <div class="pb-2 font-bold">{{ $data->short_description }}</div>
+                            <div class="">{!! $data->description !!}</div>
                         </div>
                     </div>
                     <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="reviews" role="tabpanel"

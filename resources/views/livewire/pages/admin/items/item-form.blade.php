@@ -70,7 +70,7 @@
                                 @enderror
                             </div>
 
-                            <div class="mb-4">
+                            <div class="mb-4 hidden">
                                 <label class="block text-sm font-medium text-gray-700">Description <span
                                         class="text-red-500 text-sm">*</span></label>
                                 <textarea wire:model.live="items.{{ $index }}.description"
@@ -79,7 +79,14 @@
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
                             </div>
-
+                            <div class="mb-4">
+                                <div wire:ignore>
+                                    <textarea id="itemDescription-{{ $index }}" data-index="{{ $index }}"></textarea>
+                                </div>
+                                @error("items.$index.description")
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
+                            </div>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 md:gap-3">
                                 <div class="mb-4">
@@ -249,5 +256,56 @@
 
 
         })
+    </script>
+    <script>
+        function initTinyMce() {
+            tinymce.init({
+                // selector: '#itemDescription',
+                selector: 'textarea[id^="itemDescription-"]',
+                setup: function (editor) {
+                    editor.on('init change', function () {
+                        editor.save();
+                    });
+                    editor.on('change keyup paste', function (e) {
+                        var id = $(this).attr('id')
+                        var index = $('#' + id).attr('data-index');
+                        @this.set('items.' + index + '.description', editor.getContent());
+                    });
+                }
+            });
+        }
+        document.addEventListener('livewire:init', function () {
+            initTinyMce()
+
+            Livewire.on('reinitialize_tinymce', () => {
+                // console.log('initialized');
+                tinymce.remove()
+                setTimeout(initTinyMce, 100)
+            })
+    
+            Livewire.on('set_description', description => {
+                // console.log(description);
+                var editorId = 'itemDescription-0';
+                if (tinymce.get(editorId)) {
+                    tinymce.get(editorId).setContent(description[0]); // Set content using TinyMCE API
+                } else {
+                    $('#' + editorId).val(description[0]); // Fallback to jQuery if TinyMCE instance is not initialized
+                }
+            });
+
+
+            Livewire.on('contentChanged', function() {
+                setTimeout(initTinyMce, 100); // reinitialize after content change
+            });
+        });
+    
+        // document.addEventListener('livewire:update', function () {
+        //     tinymce.get('itemDescription').setContent(@this.get('description'));
+        // });
+
+        // document.addEventListener('livewire:update', function () {
+        //     console.log('upda');
+        //     setTimeout(initTinyMce, 100); // reinitialize after Livewire update
+        // });
     </script>
 </div>
