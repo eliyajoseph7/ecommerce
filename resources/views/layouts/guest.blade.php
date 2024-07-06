@@ -28,7 +28,7 @@
             class="w-full dark:bg-gray-800 overflow-hidden sm:rounded-lg">
 
             <div class="py-16">
-                <div class="flex bg-white rounded-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl">
+                <div class="flex bg-white rounded-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl shadow-md border-t-4 border-sky-900">
                     <div class="hidden lg:block lg:w-1/2 bg-cover bg-left"
                         style="background-image:url('https://unctad.org/sites/default/files/2024-03/20240315_NewsPic_shutterstock_694579021_1200X675.jpg')">
                     </div>

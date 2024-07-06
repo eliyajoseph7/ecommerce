@@ -9,23 +9,25 @@
                     x-init="setInterval(() => { if (autoChange && {{ count($new->images) }}) { activeTab = (activeTab + 1) % {{ count($new->images) }}; } }, 5000)" @mouseover="autoChange = false" @mouseleave="autoChange = true">
                     <div class="h-72 relative">
                         <!-- Images -->
-                        <div class="relative h-full w-full">
-                            @foreach ($new->images as $index => $image)
-                                <img x-show="activeTab === {{ $index }}" src="{{ asset($image->image) }}"
-                                    class="absolute inset-0 h-full w-full rounded-lg object-cover ease-in-out duration-1000"
-                                    x-transition:enter="transition ease-out duration-300"
-                                    x-transition:enter-start="opacity-0 scale-98"
-                                    x-transition:enter-end="opacity-100 scale-100">
-                            @endforeach
-                        </div>
+                        <a href="{{ route('public_items', $new->slug) }}">
+                            <div class="relative h-full w-full">
+                                @foreach ($new->images as $index => $image)
+                                    <img x-show="activeTab === {{ $index }}" src="{{ asset($image->image) }}"
+                                        class="absolute inset-0 h-full w-full rounded-lg object-cover ease-in-out duration-1000"
+                                        x-transition:enter="transition ease-out duration-300"
+                                        x-transition:enter-start="opacity-0 scale-98"
+                                        x-transition:enter-end="opacity-100 scale-100">
+                                @endforeach
+                            </div>
+                        </a>
 
                         <!-- Tabs for Images (Only show if more than one image) -->
                         @if (count($new->images) > 1)
                             <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2">
                                 @foreach ($new->images as $index => $image)
                                     <button @mouseover="activeTab = {{ $index }}"
-                                        :class="{ 'bg-sky-700 text-white': activeTab ===
-                                            {{ $index }}, 'bg-white': activeTab !== {{ $index }} }"
+                                        :class="{ 'bg-teal-500 text-white': activeTab ===
+                                            {{ $index }}, 'bg-gray-400/50': activeTab !== {{ $index }} }"
                                         class="border border-transparent rounded-full w-4 h-4 hover:bg-sky-900 hover:text-white transition duration-300 ease-in-out">
                                     </button>
                                 @endforeach

@@ -35,12 +35,12 @@
                                     aria-labelledby="dropdownLargeButton">
                                     @foreach ($menu->categories as $category)
                                         <li class="px-4">
-                                            <a href="#"
+                                            <a href="{{ route('public_items', $category->slug) }}"
                                                 class="block py-2 font-bold hover:text-sky-900 dark:hover:bg-gray-600 dark:hover:text-white">{{ $category->name }}</a>
                                             <ul>
                                                 @foreach ($category->sub_categories as $sub_category)
                                                     <li>
-                                                        <a href="#" class="block py-1 hover:text-sky-800">{{ $sub_category->name }}</a>
+                                                        <a href="{{ route('public_items', $sub_category->slug) }}" class="block py-1 hover:text-sky-800">{{ $sub_category->name }}</a>
                                                     </li>
                                                 @endforeach
                                             </ul>

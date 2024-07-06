@@ -11,6 +11,8 @@ use App\Livewire\Pages\Admin\Mainmenu\MenuList;
 use App\Livewire\Pages\Admin\Subcategories\SubCategoryForm;
 use App\Livewire\Pages\Admin\Subcategories\SubCategoryList;
 use App\Livewire\Pages\Public\Home\Home;
+use App\Livewire\Pages\Public\Items\ItemDetails;
+use App\Livewire\Pages\Public\Items\Items;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +27,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', Home::class)->name('home');
+// Route::get('{categorySlug}', Items::class)->name('public_items');
+// Route::get('{itemSlug}', ItemDetails::class)->name('public_item_details');
+Route::get('{slug}', Items::class)->name('public_items');
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
