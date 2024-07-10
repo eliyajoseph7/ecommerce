@@ -1,5 +1,5 @@
 <div class="">
-    <div class="h-28 sm:px-2 md:px-72 items-center">
+    <div class="h-28 sm:px-2 md:px-32 lg:px-72 items-center">
         <div class="md:py-10 flex-col-reverse md:flex-row justify-between items-center">
             <div class="flex space-x-8 items-center md:float-right w-full md:w-auto pt-5 md:-mt-2.5 justify-between px-2.5 md:px-0 border-b-2 md:border-0">
                 <div>

@@ -2,12 +2,12 @@
     @if ($loading)
         Loading
     @else
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-0">
             @forelse ($newest as $new)
                 <div x-data="{ activeTab: 0, autoChange: true }"
-                    class="relative border-[1px] border-b-white hover:border-b-gray-300 px-2 py-3.5 mb-4 cursor-pointer"
+                    class="relative border-[1px] border-b-white hover:border-b-gray-300 px-2 py-3.5 mb-0 cursor-pointer"
                     x-init="setInterval(() => { if (autoChange && {{ count($new->images) }}) { activeTab = (activeTab + 1) % {{ count($new->images) }}; } }, 5000)" @mouseover="autoChange = false" @mouseleave="autoChange = true">
-                    <div class="h-72 relative">
+                    <div class="h-32 md:h-72 relative">
                         <!-- Images -->
                         <a href="{{ route('public_items', $new->slug) }}">
                             <div class="relative h-full w-full">
@@ -28,17 +28,22 @@
                                     <button @mouseover="activeTab = {{ $index }}"
                                         :class="{ 'bg-teal-500 text-white': activeTab ===
                                             {{ $index }}, 'bg-gray-400/50': activeTab !== {{ $index }} }"
-                                        class="border border-transparent rounded-full w-4 h-4 hover:bg-sky-900 hover:text-white transition duration-300 ease-in-out">
+                                        class="border border-transparent rounded-full w-2 h-2 hover:bg-sky-900 hover:text-white transition duration-300 ease-in-out">
                                     </button>
                                 @endforeach
                             </div>
                         @endif
                     </div>
-                    <div class="py-4">{{ $new->name }}</div>
-                    <div class="flex justify-between py-2">
-                        <div class="">TSh. {{ number_format($new->price, 2) }}</div>
+                    <div class="py-4">
+                        <div class="">
+                            {{ $new->name }}
+                            <div class="h-10 py-1 text-gray-500 text-sm">{{ Str::length($new->short_description) > 50 ? Str::limit($new->short_description, 50, '...') : $new->short_description }}</div>
+                        </div>
+                    </div>
+                    <div class="md:flex justify-between pb-2">
+                        <div class="font-bold text-gray-600 leading-10">TSh. {{ number_format($new->price, 2) }}</div>
                         <button
-                            class="rounded-md p-1 ring-2 ring-green-700 hover:ring-green-600 hover:bg-green-600 hover:shadow-sm text-green-700 hover:text-white">
+                            class="rounded-md px-2 py-1 ring-2 ring-teal-700 hover:ring-teal-600 hover:bg-teal-600 hover:shadow-sm text-teal-700 hover:text-white">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                                 <path stroke-linecap="round" stroke-linejoin="round"
