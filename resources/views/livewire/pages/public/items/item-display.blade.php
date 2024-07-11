@@ -18,7 +18,7 @@
                                             clip-rule="evenodd" />
                                     </svg>
                                 </div>
-                                <div class="text-gray-400 hover:text-teal-500" title="Add to wishlist">
+                                <div wire:click="$dispatch('wish_item', {itemId: {{ $new->id }}})" class="text-gray-400 hover:text-teal-500" title="Add to wishlist">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="size-6">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -66,8 +66,8 @@
                         <div class="md:flex justify-between pb-2 px-1">
                             <div class="font-black text-gray-700 leading-10">TSh.
                                 {{ number_format($new->price, 2) }}</div>
-                            <button
-                                class="rounded-md px-2 py-0 bg-teal-100/50 rin g-2 ring-teal-700 hover:ring-teal-600 hover:bg-teal-600 hover:shadow-sm text-teal-700 hover:text-white">
+                            <button wire:click="$dispatch('add_item', {itemId: {{ $new->id }}})"
+                                class="add_to_cart rounded-md px-2 py-0 bg-teal-100/50 rin g-2 ring-teal-700 hover:ring-teal-600 hover:bg-teal-600 hover:shadow-sm text-teal-700 hover:text-white">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                     stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"

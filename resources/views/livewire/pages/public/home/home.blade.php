@@ -1,13 +1,13 @@
 <div class="w-full">
-    <div class="w-full px-2 md:px-32 lg:px-72">
+    <div class="w-full sm:px-2 md:px-32 lg:px-72">
         @include('livewire.pages.public.home.components.slider')
         
     </div>
-    <div class="px-2 md:px-32 lg:px-72">
+    <div class="sm:px-2 md:px-32 lg:px-72">
         @include('livewire.pages.public.home.components.services')
     </div>
     <div class="bg-white">
-        <div class="px-2 md:px-32 lg:px-72 py-4">
+        <div class="sm:px-2 md:px-32 lg:px-72 py-4">
             @livewire('pages.public.home.components.interest.interests')
         </div>
 

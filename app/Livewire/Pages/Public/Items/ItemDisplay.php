@@ -5,10 +5,12 @@ namespace App\Livewire\Pages\Public\Items;
 use App\Models\Category;
 use App\Models\Item;
 use App\Models\SubCategory;
+use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Reactive;
 use Livewire\Component;
 
+#[Layout('pages.public.layouts.base')]
 class ItemDisplay extends Component
 {
     public $data = [];

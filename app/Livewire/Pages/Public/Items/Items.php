@@ -41,6 +41,7 @@ class Items extends Component
             $this->category = 'item';
         }
         
+        $this->getData();
     }
 
     public function updatingSelectedMinPrice() {
@@ -107,7 +108,7 @@ class Items extends Component
 
     public function render()
     {
-        $this->getData();
+        // $this->getData();
         return view($this->view);
     }
 
