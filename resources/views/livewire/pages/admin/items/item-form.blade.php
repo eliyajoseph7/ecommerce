@@ -260,21 +260,50 @@
     <script>
         function initTinyMce() {
             tinymce.init({
-                // selector: '#itemDescription',
                 selector: 'textarea[id^="itemDescription-"]',
-                setup: function (editor) {
-                    editor.on('init change', function () {
+                setup: function(editor) {
+                    editor.on('init change', function() {
                         editor.save();
                     });
-                    editor.on('change keyup paste', function (e) {
-                        var id = $(this).attr('id')
+                    editor.on('change keyup paste', function(e) {
+                        var id = $(this).attr('id');
                         var index = $('#' + id).attr('data-index');
                         @this.set('items.' + index + '.description', editor.getContent());
                     });
-                }
+                },
+                plugins: 'code table lists advlist',
+                toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons",
+                menubar: true,
+                // content_css: "{{ asset('assets/tinymce/default/content.css') }}'}}", // Include your custom CSS here
+                extended_valid_elements: 'class', // Preserve classes on spans
             });
         }
-        document.addEventListener('livewire:init', function () {
+
+        // function initTinyMce() {
+        //     tinymce.init({
+        //         // selector: '#itemDescription',
+        //         selector: 'textarea[id^="itemDescription-"]',
+        //         setup: function(editor) {
+        //             editor.on('init change', function() {
+        //                 editor.save();
+        //             });
+        //             editor.on('change keyup paste', function(e) {
+        //                 var id = $(this).attr('id')
+        //                 var index = $('#' + id).attr('data-index');
+        //                 @this.set('items.' + index + '.description', editor.getContent());
+        //             });
+        //         },
+        //         plugins: 'code table lists advlist',
+        //         // plugins: [
+        //         //     "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+        //         //     "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+        //         //     "save table contextmenu directionality emoticons template paste textcolor"
+        //         // ],
+        //         toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons",
+        //         menubar: true,
+        //     });
+        // }
+        document.addEventListener('livewire:init', function() {
             initTinyMce()
 
             Livewire.on('reinitialize_tinymce', () => {
@@ -282,14 +311,15 @@
                 tinymce.remove()
                 setTimeout(initTinyMce, 100)
             })
-    
+
             Livewire.on('set_description', description => {
                 // console.log(description);
                 var editorId = 'itemDescription-0';
                 if (tinymce.get(editorId)) {
                     tinymce.get(editorId).setContent(description[0]); // Set content using TinyMCE API
                 } else {
-                    $('#' + editorId).val(description[0]); // Fallback to jQuery if TinyMCE instance is not initialized
+                    $('#' + editorId).val(description[
+                        0]); // Fallback to jQuery if TinyMCE instance is not initialized
                 }
             });
 
@@ -298,7 +328,7 @@
                 setTimeout(initTinyMce, 100); // reinitialize after content change
             });
         });
-    
+
         // document.addEventListener('livewire:update', function () {
         //     tinymce.get('itemDescription').setContent(@this.get('description'));
         // });

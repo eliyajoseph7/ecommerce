@@ -1,5 +1,5 @@
 <div class="w-full">
-    <div class="w-full sm:px-2 md:px-32 lg:px-72">
+    <div class="w-full px-2 md:px-32 lg:px-72">
         <div class="pt-8 font-bold text-2xl text-gray-700">
             {{ $qs->name }}
         </div>
@@ -18,7 +18,7 @@
                 <div class="md:col-span-2">
                     @forelse ($context['sub_categories'] as $dt)
                         <div class="py-1 font-bold text-sm text-gray-800">
-                            <a href="{{ route('public_items', $dt->slug) }}">{{ $dt->name }}</a>
+                            <a href="{{ route('public_items', $dt->slug) }}" class="block hover:text-teal-700">{{ $dt->name }}</a>
                         </div>
                     @empty
                     @endforelse

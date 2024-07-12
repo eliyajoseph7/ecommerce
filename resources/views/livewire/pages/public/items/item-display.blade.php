@@ -4,7 +4,7 @@
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0">
                 @forelse ($data as $new)
                     <div x-data="{ activeTab: 0, autoChange: true, view: false }"
-                        class="relative border-[1px] border-b-white hover:border-b-gray-300 z-30 hover:z-40 hover:p-3 hover:rounded-sm hover:scale-105 hover:border-0 hover:shadow-md bg-white px-1 py-0.5 mb-4 cursor-pointer"
+                        class="relative border-[1px] border-b-white hover:border-b-gray-300 z-30 hover:z-40 hover:p-3 hover:rounded-sm hover:scale-110 hover:border-0 hover:shadow-md bg-white px-1 py-0.5 mb-4 cursor-pointer"
                         x-init="setInterval(() => { if (autoChange && {{ count($new->images) }}) { activeTab = (activeTab + 1) % {{ count($new->images) }}; } }, 5000)" @mouseover="autoChange = false, view = true"
                         @mouseleave="autoChange = true, view=false">
                         <div class="h-32 md:h-72 relative">

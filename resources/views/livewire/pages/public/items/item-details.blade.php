@@ -1,5 +1,8 @@
 <div class="w-full">
-    <div class="pt-4 w-full sm:px-2 md:px-32 lg:px-72">
+    <style>
+        
+    </style>
+    <div class="pt-4 w-full !px-4 md:px-32 lg:px-72">
         <div class="text-gray-400 py-2 flex space-x-1 border-b border-gray-300/70">
             <a class="pr-1 hover:text-teal-700" href="{{ route('home') }}">Home</a>/
             <a class="pr-1 hover:text-teal-700"
@@ -12,7 +15,7 @@
             <div class="">{{ $data->name }}</div>
             <div class="grid sm:grid-cols-1 md:grid-cols-12 gap-2">
 
-                <div class="grid gap-4 col-span-8">
+                <div class="grid gap-4 md:col-span-8">
                     <div>
                         <img class="h-[60vh] w-full rounded-lg object-cover" src="{{ $context['active_img'] }}"
                             alt="">
@@ -53,7 +56,7 @@
                             <div id="default-tab-content">
                                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="description"
                                     role="tabpanel" aria-labelledby="description-tab">
-                                    <div class="">
+                                    <div class="mce-content-body">
                                         <div class="pb-2 font-bold">{{ $data->short_description }}</div>
                                         <div class="">{!! $data->description !!}</div>
                                     </div>
@@ -66,7 +69,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-span-4 px-3">
+                <div class="md:col-span-4 px-3">
                     <div class="bg-gray-50 rounded-md shadow-lg px-4 py-2 border-t-2 border-gray-200">
                         <div class="">
                             <div class="flex items-center mb-4 text-gray-300">

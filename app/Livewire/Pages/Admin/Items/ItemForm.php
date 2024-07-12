@@ -137,35 +137,46 @@ class ItemForm extends Component
 
         foreach ($this->items as $itemData) {
             // Update existing item if ID is provided
-            if (isset($itemData['id'])) {
-                $item = Item::find($itemData['id']);
-                $item->update([
-                    'name' => $itemData['name'],
-                    'slug' => $this->generateSlug($itemData['name']),
-                    'short_description' => $itemData['short_description'],
-                    'description' => $itemData['description'],
-                    'price' => $itemData['price'],
-                    'sub_category_id' => $itemData['sub_category_id'],
-                ]);
+            // if (isset($itemData['id'])) {
+            //     $item = Item::find($itemData['id']);
+            //     $item->update([
+            //         'name' => $itemData['name'],
+            //         'slug' => $this->generateSlug($itemData['name']),
+            //         'short_description' => $itemData['short_description'],
+            //         'description' => $itemData['description'],
+            //         'price' => $itemData['price'],
+            //         'sub_category_id' => $itemData['sub_category_id'],
+            //     ]);
 
-                // // Handle existing images (edit or delete)
-                // foreach ($item->images as $image) {
-                //     // Delete images not in current list
-                //     if (!in_array($image->image, $itemData['existing_images'])) {
-                //         // Implement deletion logic as per your requirements
-                //         $image->delete();
-                //     }
-                // }
-            } else {
-                $item = Item::create([
-                    'name' => $itemData['name'],
-                    'slug' => $this->generateSlug($itemData['name']),
-                    'short_description' => $itemData['short_description'],
-                    'description' => $itemData['description'],
-                    'price' => $itemData['price'],
-                    'sub_category_id' => $itemData['sub_category_id'],
-                ]);
-            }
+            //     // // Handle existing images (edit or delete)
+            //     // foreach ($item->images as $image) {
+            //     //     // Delete images not in current list
+            //     //     if (!in_array($image->image, $itemData['existing_images'])) {
+            //     //         // Implement deletion logic as per your requirements
+            //     //         $image->delete();
+            //     //     }
+            //     // }
+            // } else {
+            //     $item = Item::create([
+            //         'name' => $itemData['name'],
+            //         'slug' => $this->generateSlug($itemData['name']),
+            //         'short_description' => $itemData['short_description'],
+            //         'description' => $itemData['description'],
+            //         'price' => $itemData['price'],
+            //         'sub_category_id' => $itemData['sub_category_id'],
+            //     ]);
+            // }
+
+            // dd($itemData['description']);
+            // Update existing item or create new item
+            $item = Item::updateOrCreate(['id' => $itemData['id'] ?? null], [
+                'name' => $itemData['name'],
+                'slug' => $this->generateSlug($itemData['name']),
+                'short_description' => $itemData['short_description'],
+                'description' => $itemData['description'], // Ensure this contains HTML from TinyMCE
+                'price' => $itemData['price'],
+                'sub_category_id' => $itemData['sub_category_id'],
+            ]);
             foreach ($itemData['images'] as $image) {
                 $fileNameToSave = null;
                 $this->file = (object)$image;
