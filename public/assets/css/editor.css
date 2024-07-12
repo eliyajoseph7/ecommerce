@@ -1,0 +1,148 @@
+
+/* tinymce-content.css */
+
+/* Default TinyMCE Content Styles */
+.mce-content-body {
+    color: #333;
+    font-family: Arial, sans-serif;
+    /* font-size: 16px; */
+    line-height: 1.6;
+}
+
+.mce-content-body h1,
+.mce-content-body h2,
+.mce-content-body h3,
+.mce-content-body h4,
+.mce-content-body h5,
+.mce-content-body h6 {
+    color: #2c3e50;
+    font-weight: bold;
+    margin: 0 0 1.2em;
+    line-height: 1.2;
+}
+
+.mce-content-body p {
+    margin: 0 0 1.6em;
+}
+
+.mce-content-body a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.mce-content-body a:hover {
+    text-decoration: underline;
+}
+
+.mce-content-body ul,
+.mce-content-body ol {
+    margin: 0 0 1.6em 2em;
+    padding-left: 2em;
+}
+
+.mce-content-body ul li,
+.mce-content-body ol li {
+    margin: 0.5em 0;
+}
+
+.mce-content-body ol {
+    list-style-type: decimal;
+}
+
+.mce-content-body ol ol {
+    list-style-type: lower-roman;
+}
+
+.mce-content-body ol ol ol {
+    list-style-type: lower-alpha;
+}
+
+.mce-content-body ol ol ol ol {
+    list-style-type: decimal;
+}
+
+.mce-content-body table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 1.6em;
+    border: 1px solid #ccc;
+}
+
+.mce-content-body th,
+.mce-content-body td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+.mce-content-body th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.mce-content-body blockquote {
+    margin: 0 0 1.6em;
+    padding: 10px 20px;
+    background-color: #f9f9f9;
+    border-left: 5px solid #ccc;
+}
+
+.mce-content-body img {
+    max-width: 100%;
+    height: auto;
+}
+
+.mce-content-body hr {
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1.6em 0;
+}
+
+.mce-content-body code {
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 2px 4px;
+    margin: 0 2px;
+}
+
+.mce-content-body pre {
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 10px;
+    overflow: auto;
+}
+
+/* Default TinyMCE Skin Styles */
+.mce-content-body .tox {
+    box-shadow: none;
+}
+
+.mce-content-body .tox .tox-editor-container {
+    border: 1px solid #d1d1d1;
+    border-radius: 4px;
+    box-shadow: none;
+}
+
+.mce-content-body .tox .tox-tbtn {
+    background: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: #333;
+}
+
+.mce-content-body .tox .tox-tbtn:hover {
+    background: #f0f0f0;
+    border-color: #d1d1d1;
+}
+
+.mce-content-body .tox .tox-tbtn.tox-tbtn--enabled:focus {
+    border-color: #3498db;
+}
+
+.mce-content-body .tox .tox-tbtn.tox-tbtn--enabled:focus:not(.tox-tbtn--disabled) {
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.5);
+}
