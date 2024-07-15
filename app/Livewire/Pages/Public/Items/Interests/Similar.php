@@ -2,8 +2,10 @@
 
 namespace App\Livewire\Pages\Public\Items\Interests;
 
+use App\Http\Controllers\Actions\ItemVisitController;
 use App\Models\Item;
 use App\Models\SubCategory;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Similar extends Component
@@ -22,6 +24,14 @@ class Similar extends Component
 
         $this->loading = false;
 
+    }
+
+
+    #[On('count_visit')]
+    public function countVisit($itemId, $routeName, $routeArg) {
+        $userId = auth()->check() ? auth()->id() : null;
+        (new ItemVisitController)->recordVisit($itemId, $userId);
+        return redirect()->route($routeName, $routeArg);
     }
 
     public function render()

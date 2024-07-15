@@ -2,9 +2,11 @@
 
 namespace App\Livewire\Pages\Public\Items;
 
+use App\Http\Controllers\Actions\ItemVisitController;
 use App\Models\Category;
 use App\Models\Item;
 use App\Models\SubCategory;
+use Illuminate\Http\Request;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Reactive;
@@ -47,6 +49,13 @@ class ItemDisplay extends Component
 
         $this->loading = false;
         $this->render();
+    }
+
+    #[On('count_visit')]
+    public function countVisit($itemId, $routeName, $routeArg) {
+        $userId = auth()->check() ? auth()->id() : null;
+        (new ItemVisitController)->recordVisit($itemId, $userId);
+        return redirect()->route($routeName, $routeArg);
     }
     
     public function render()

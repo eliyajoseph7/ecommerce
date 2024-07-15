@@ -15,12 +15,12 @@
     @else
         <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-0">
             @forelse ($similar as $new)
-                <div x-data="{ activeTab: 0, autoChange: true }"
+                <div x-data="{ activeTab: 0, autoChange: true }" title="{{ $new->name }}"
                     class="relative border-[1px] border-b-white hover:border-b-gray-300 z-30 hover:z-40 hover:p-3 hover:rounded-sm hover:scale-110 hover:border-0 hover:shadow-md bg-white px-2 py-3.5 mb-0 cursor-pointer"
                     x-init="setInterval(() => { if (autoChange && {{ count($new->images) }}) { activeTab = (activeTab + 1) % {{ count($new->images) }}; } }, 5000)" @mouseover="autoChange = false" @mouseleave="autoChange = true">
                     <div class="h-32 md:h-72 relative">
                         <!-- Images -->
-                        <a href="{{ route('public_items', $new->slug) }}">
+                        <a  wire:click="$dispatch('count_visit', {itemId: {{ $new->id }}, routeName: 'public_items', routeArg: '{{ $new->slug }}' })">
                             <div class="relative h-full w-full">
                                 @foreach ($new->images as $index => $image)
                                     <img x-show="activeTab === {{ $index }}" src="{{ asset($image->image) }}"
@@ -50,7 +50,7 @@
                     </div>
                     <div class="py-4">
                         <div class="">
-                            {{ $new->name }}
+                            <a  wire:click="$dispatch('count_visit', {itemId: {{ $new->id }}, routeName: 'public_items', routeArg: '{{ $new->slug }}' })">{{ $new->name }}</a>
                             <div class="h-10 py-1 text-gray-500 text-sm">
                                 {{ Str::length($new->short_description) > 50 ? Str::limit($new->short_description, 50, '...') : $new->short_description }}
                             </div>

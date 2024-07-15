@@ -3,13 +3,13 @@
         <div>
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0">
                 @forelse ($data as $new)
-                    <div x-data="{ activeTab: 0, autoChange: true, view: false }"
+                    <div x-data="{ activeTab: 0, autoChange: true, view: false }" title="{{ $new->name }}"
                         class="relative border-[1px] border-b-white hover:border-b-gray-300 z-30 hover:z-40 hover:p-3 hover:rounded-sm hover:scale-110 hover:border-0 hover:shadow-md bg-white px-1 py-0.5 mb-4 cursor-pointer"
                         x-init="setInterval(() => { if (autoChange && {{ count($new->images) }}) { activeTab = (activeTab + 1) % {{ count($new->images) }}; } }, 5000)" @mouseover="autoChange = false, view = true"
                         @mouseleave="autoChange = true, view=false">
                         <div class="h-32 md:h-72 relative">
                             <div class="absolute top-3 right-2 z-50" x-show="view">
-                                <div class="text-gray-400 hover:text-teal-500" title="View item">
+                                <div class="text-gray-400 hover:text-teal-500" title="View item" wire:click="$dispatch('count_visit', {itemId: {{ $new->id }}})">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                         class="size-6">
                                         <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
@@ -27,7 +27,7 @@
                                 </div>
                             </div>
                             <!-- Images -->
-                            <a href="{{ route('public_items', $new->slug) }}">
+                            <a wire:click="$dispatch('count_visit', {itemId: {{ $new->id }}, routeName: 'public_items', routeArg: '{{ $new->slug }}' })">
                                 <div class="relative h-full w-full">
                                     @foreach ($new->images as $index => $image)
                                         <img x-show="activeTab === {{ $index }}" src="{{ asset($image->image) }}"
@@ -57,7 +57,7 @@
                         </div>
                         <div class="py-4 px-1">
                             <div class="">
-                                {{ $new->name }}
+                                <a  wire:click="$dispatch('count_visit', {itemId: {{ $new->id }}, routeName: 'public_items', routeArg: '{{ $new->slug }}' })">{{ $new->name }}</a>
                                 <div class="h-10 py-0 text-gray-500 text-xs">
                                     {{ Str::length($new->short_description) > 50 ? Str::limit($new->short_description, 50, '...') : $new->short_description }}
                                 </div>
