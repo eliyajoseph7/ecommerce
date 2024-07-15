@@ -69,7 +69,7 @@
                                         <tbody
                                             class="[&>*:nth-child(even)]:bg-[#F6F9FF] [&>*:nth-child(even)]:dark:bg-gray-600">
                                             @forelse ($data as $key=>$values)
-                                                <tr class="!bg-gray-300/80">
+                                                <tr class="!bg-gray-100">
                                                     <td colspan="6" class="px-3 font-bold text-lg text-gray-700">
                                                         Category:
                                                         {{ $key }}</td>
@@ -126,12 +126,12 @@
         </div>
 
     </div>
-    @if (session()->has('alert'))
+    @if (session()->has('info'))
         <script>
             document.addEventListener('livewire:init', () => {
                 Toast.fire({
-                    icon: '{{ session('alert.type') }}',
-                    title: '{{ session('alert.message') }}',
+                    icon: '{{ session('info.type') }}',
+                    title: '{{ session('info.message') }}',
                 });
             })
         </script>

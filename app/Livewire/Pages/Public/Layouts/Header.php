@@ -16,7 +16,9 @@ class Header extends Component
     public $wishCount;
 
     public function mount() {
-        $this->menus = MainCategory::with('categories')->get();
+        $this->menus = MainCategory::with(['categories' => function($qs) {
+            return $qs->where('status', 'active');
+        }])->where('status', 'active')->orderBy('rank')->get();
         $sessionId = Cookie::get('cart_session_id');
         $this->cartCount = Cart::where('session_id', $sessionId)->sum('quantity');
         $this->wishCount = WishList::where('session_id', $sessionId)->count();

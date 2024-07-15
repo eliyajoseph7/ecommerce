@@ -37,7 +37,7 @@
             </li>
             <li>
                 <a href="{{ route('category_list') }}"
-                    class="flex items-center p-2 rounded-lg dark:text-white {{ Route::is('category_list') ? 'bg-sky-700 text-white font-bold hover:bg-sky-600' : 'font-normal text-gray-900 hover:bg-gray-200' }} dark:hover:bg-gray-700 group">
+                    class="flex items-center p-2 rounded-lg dark:text-white {{ Route::is('category_list') || Route::is('category_form') || Route::is('category_form_edit') ? 'bg-sky-700 text-white font-bold hover:bg-sky-600' : 'font-normal text-gray-900 hover:bg-gray-200' }} dark:hover:bg-gray-700 group">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round"

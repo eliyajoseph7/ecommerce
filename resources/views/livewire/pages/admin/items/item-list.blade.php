@@ -77,7 +77,7 @@
                                         <tbody
                                             class="[&>*:nth-child(even)]:bg-[#F6F9FF] [&>*:nth-child(even)]:dark:bg-gray-600">
                                             @forelse ($data as $key=>$values)
-                                                <tr class="!bg-gray-300/80">
+                                                <tr class="!bg-gray-100">
                                                     <td colspan="7" class="px-3 font-bold text-lg text-gray-700">
                                                         Category:
                                                         {{ $key }}</td>

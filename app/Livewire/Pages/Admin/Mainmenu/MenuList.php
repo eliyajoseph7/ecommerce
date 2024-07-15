@@ -28,7 +28,7 @@ class MenuList extends Component
         $qs = MainCategory::find($id);
         $qs->delete();
 
-        $this->dispatch('show_success', 'Record deleted successfully');
+        $this->dispatch('success', 'Record deleted successfully');
     }
 
     public function getData() {

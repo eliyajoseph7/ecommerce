@@ -123,12 +123,12 @@
         </div>
 
     </div>
-    @if (session()->has('alert'))
+    @if (session()->has('info'))
         <script>
             document.addEventListener('livewire:init', () => {
                 Toast.fire({
-                    icon: '{{ session('alert.type') }}',
-                    title: '{{ session('alert.message') }}',
+                    icon: '{{ session('info.type') }}',
+                    title: '{{ session('info.message') }}',
                 });
             })
         </script>

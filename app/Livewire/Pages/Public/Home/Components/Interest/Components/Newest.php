@@ -28,7 +28,7 @@ class Newest extends Component
         // } catch(\Throwable $e) {
         //     logs($e);
         // }
-        $this->newest = Item::latest()->get();
+        $this->newest = Item::where('status', 'active')->latest()->get();
 
         $this->loading = false;
 

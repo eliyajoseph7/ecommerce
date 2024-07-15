@@ -79,7 +79,7 @@
                     <div class="relative w-full">
                         <input type="text" id="search"
                             class="block p-2 w-full z-20 text-sm text-gray-900 bg-green-50 focus:bg-gray-100 rounded-xl border-transparent focus:ring-0 focus:border-transparent"
-                            placeholder="Search Mockups, Logos, Design Templates..." required />
+                            placeholder="Search product items..." required />
                         <div
                             class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-gray-400 bg-transparent rounded-lg border border-transparent">
                             <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
