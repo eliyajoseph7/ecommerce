@@ -10,9 +10,11 @@ use App\Livewire\Pages\Admin\Mainmenu\MenuForm;
 use App\Livewire\Pages\Admin\Mainmenu\MenuList;
 use App\Livewire\Pages\Admin\Subcategories\SubCategoryForm;
 use App\Livewire\Pages\Admin\Subcategories\SubCategoryList;
+use App\Livewire\Pages\Public\Cart\CartItems;
 use App\Livewire\Pages\Public\Home\Home;
 use App\Livewire\Pages\Public\Items\ItemDetails;
 use App\Livewire\Pages\Public\Items\Items;
+use App\Livewire\Pages\Public\Wish\WishLists;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +33,8 @@ Route::get('/', Home::class)->name('home');
 // Route::get('{itemSlug}', ItemDetails::class)->name('public_item_details');
 Route::get('bs/{slug}', Items::class)->name('public_items');
 
+Route::get('my-cart', CartItems::class)->name('cart');
+Route::get('my-wish-list', WishLists::class)->name('wish_list');
 
 Route::middleware(['auth', 'verified'])->group(function () {
 

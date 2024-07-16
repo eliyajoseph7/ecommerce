@@ -18,4 +18,12 @@ class Cart extends Model
     public function item() {
         return $this->belongsTo(Item::class);
     }
+
+    protected $appends = ['cost'];
+
+    public function getCostAttribute() {
+        $cost = $this->quantity * $this->item->price;
+
+        return $cost;
+    }
 }

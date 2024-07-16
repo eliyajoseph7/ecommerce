@@ -2,15 +2,18 @@
 
 namespace App\Livewire\Pages\Public\Wish;
 
+use App\Http\Controllers\Actions\ItemVisitController;
 use App\Models\WishList;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Str;
+use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
+#[Layout('livewire.pages.public.layouts.base')]
 class WishLists extends Component
 {
-    public $loadData;
+    public $loadData = true;
     public $wishListItems = [];
     public $wishListCount = 0;
 
@@ -48,6 +51,7 @@ class WishLists extends Component
     }
 
 
+    #[On('remove_wish_item')]
     public function removeItem($wishListId)
     {
         $wishList = WishList::find($wishListId);
@@ -56,6 +60,13 @@ class WishLists extends Component
             $this->loadWishList();
             $this->dispatch('wishListUpdated', $this->wishListCount);
         }
+    }
+
+    #[On('clear_wish_list')]
+    public function clearList() {
+        WishList::where('session_id', $this->getSessionId())?->delete();
+        $this->loadWishList();
+        $this->dispatch('wishListUpdated', $this->wishListCount);
     }
 
     private function getSessionId()
@@ -70,8 +81,17 @@ class WishLists extends Component
         return $sessionId;
     }
 
+
+    #[On('count_visit')]
+    public function countVisit($itemId, $routeName, $routeArg) {
+        $userId = auth()->check() ? auth()->id() : null;
+        (new ItemVisitController)->recordVisit($itemId, $userId);
+        return redirect()->route($routeName, $routeArg);
+    }
+
     public function render()
     {
-        return view('livewire.pages.public.wish.wish-lists');
+        $data = $this->wishListItems;
+        return view('livewire.pages.public.wish.wish-lists', compact('data'));
     }
 }

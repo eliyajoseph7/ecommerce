@@ -15,12 +15,34 @@
     @else
         <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-0">
             @forelse ($random as $new)
-                <div x-data="{ activeTab: 0, autoChange: true }" title="{{ $new->name }}"
+                <div x-data="{ activeTab: 0, autoChange: true, view: false }" title="{{ $new->name }}"
                     class="relative border-[1px] border-b-white hover:border-b-gray-300 z-30 hover:z-40 hover:p-3 hover:rounded-sm hover:scale-110 hover:border-0 hover:shadow-md bg-white px-2 py-3.5 mb-0 cursor-pointer"
-                    x-init="setInterval(() => { if (autoChange && {{ count($new->images) }}) { activeTab = (activeTab + 1) % {{ count($new->images) }}; } }, 5000)" @mouseover="autoChange = false" @mouseleave="autoChange = true">
+                    x-init="setInterval(() => { if (autoChange && {{ count($new->images) }}) { activeTab = (activeTab + 1) % {{ count($new->images) }}; } }, 5000)" @mouseover="autoChange = false, view = true"
+                    @mouseleave="autoChange = true, view = false">
                     <div class="h-32 md:h-72 relative">
+                        <div class="absolute top-3 right-2 z-50" x-show="view">
+                            <div class="text-gray-400 hover:text-teal-500" title="View item"
+                                wire:click="$dispatch('count_visit', {itemId: {{ $new->id }}, routeName: 'public_items', routeArg: '{{ $new->slug }}'})">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                    class="size-6">
+                                    <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                                    <path fill-rule="evenodd"
+                                        d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 0 1 0-1.113ZM17.25 12a5.25 5.25 0 1 1-10.5 0 5.25 5.25 0 0 1 10.5 0Z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div wire:click="$dispatch('wish_item', {itemId: {{ $new->id }}})"
+                                class="text-gray-400 hover:text-teal-500" title="Add to wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                                </svg>
+                            </div>
+                        </div>
                         <!-- Images -->
-                        <a  wire:click="$dispatch('count_visit', {itemId: {{ $new->id }}, routeName: 'public_items', routeArg: '{{ $new->slug }}' })">
+                        <a
+                            wire:click="$dispatch('count_visit', {itemId: {{ $new->id }}, routeName: 'public_items', routeArg: '{{ $new->slug }}' })">
                             <div class="relative h-full w-full">
                                 @foreach ($new->images as $index => $image)
                                     <img x-show="activeTab === {{ $index }}" src="{{ asset($image->image) }}"
@@ -50,7 +72,8 @@
                     </div>
                     <div class="py-4">
                         <div class="">
-                            <a wire:click="$dispatch('count_visit', {itemId: {{ $new->id }}, routeName: 'public_items', routeArg: '{{ $new->slug }}' })">{{ $new->name }}</a>
+                            <a
+                                wire:click="$dispatch('count_visit', {itemId: {{ $new->id }}, routeName: 'public_items', routeArg: '{{ $new->slug }}' })">{{ $new->name }}</a>
                             <div class="h-10 py-1 text-gray-500 text-sm">
                                 {{ Str::length($new->short_description) > 50 ? Str::limit($new->short_description, 50, '...') : $new->short_description }}
                             </div>

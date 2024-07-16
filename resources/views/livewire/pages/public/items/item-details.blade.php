@@ -103,16 +103,30 @@
                         <div class="text-xl font-black leading-3 py-2">
                             <span class="text-gray-500">Tsh.</span> {{ number_format($data->price) }}
                         </div>
-                        <div class="py-4 grid grid-cols-4 gap-4">
-                            <div class="col-span-1">
-                                <div class="flex space-x-2">
-                                    <button class="text-2xl" wire:click="decrementQuantity">-</button>
+                        <div class="py-4 grid grid-cols-6 gap-4">
+                            <div class="col-span-2">
+                                <div class="flex space-x-2 bg-gray-200/50 px-2 text-gray-600 rounded-md py-0.5">
+                                    <button class="" wire:click="decrementQuantity">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                            class="size-4">
+                                            <path fill-rule="evenodd"
+                                                d="M4.25 12a.75.75 0 0 1 .75-.75h14a.75.75 0 0 1 0 1.5H5a.75.75 0 0 1-.75-.75Z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </button>
                                     <input type="text" wire:model.live="quantity" id=""
-                                        class="w-full px-0 text-center !border-gray-300 rounded-md shadow-sm focus:border-sky-700">
-                                    <button class="text-2xl" wire:click="incrementQuantity">+</button>
+                                        class="w-8 px-0 text-center border-0 focus:outline-none focus:ring-0 focus:shadow-none rounded-md shadow-sm bg-transparent focus:border-sky-700">
+                                    <button class="" wire:click="incrementQuantity">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                            class="size-4">
+                                            <path fill-rule="evenodd"
+                                                d="M12 3.75a.75.75 0 0 1 .75.75v6.75h6.75a.75.75 0 0 1 0 1.5h-6.75v6.75a.75.75 0 0 1-1.5 0v-6.75H4.5a.75.75 0 0 1 0-1.5h6.75V4.5a.75.75 0 0 1 .75-.75Z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </button>
                                 </div>
                             </div>
-                            <div class="col-span-3">
+                            <div class="col-span-4">
                                 <button
                                     class="bg-teal-600 hover:bg-teal-500 rounded-md font-bold items-center px-3 py-2 w-full flex justify-center space-x-2 text-white">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"

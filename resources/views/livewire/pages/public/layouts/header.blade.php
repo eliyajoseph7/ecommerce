@@ -43,39 +43,47 @@
                     </div>
                 </div>
                 <div class="flex space-x-3 items-center">
-                    <a href="" title="My wish list" class="hover:text-teal-500">
-                        
+                    <a href="{{ route('wish_list') }}" title="My wish list" class="hover:text-teal-500">
+
                         <div class="relative hover:bg-gray-200 rounded-full cursor-pointer">
                             <div
                                 class="absolute -top-4 -right-2 bg-red-500 text-white border-gray-100 border-2 shadow-2xl ring-0 rounded-full px-1.5 text-sm">
                                 {{ $wishCount }}</div>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="size-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="size-6">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
                             </svg>
                         </div>
                     </a>
-                    <div class="relative hover:bg-gray-200 rounded-full cursor-pointer">
+                    <a href="{{ route('cart') }}" class="relative hover:bg-gray-200 rounded-full cursor-pointer">
                         <div
-                            class="absolute -top-3 -right-2 bg-gray-50 border-gray-100 border-2 shadow-2xl ring-0 rounded-full px-1.5 text-sm">
+                            class="absolute -top-3 -right-2 w-6 h-6 text-center {{ $cartCount > 0 ? 'bg-red-600 animate-bounce text-white' : 'bg-gray-50' }} border-gray-100 border-2 shadow-2xl ring-0 rounded-full px-0.5 py-0 text-sm">
                             {{ $cartCount }}</div>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-8 h-8 px-1.5 ">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                            class="w-10 h-10 px-1.5 text-sky-900">
+                            <path
+                                d="M2.25 2.25a.75.75 0 0 0 0 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 0 0-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 0 0 0-1.5H5.378A2.25 2.25 0 0 1 7.5 15h11.218a.75.75 0 0 0 .674-.421 60.358 60.358 0 0 0 2.96-7.228.75.75 0 0 0-.525-.965A60.864 60.864 0 0 0 5.68 4.509l-.232-.867A1.875 1.875 0 0 0 3.636 2.25H2.25ZM3.75 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0ZM16.5 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z" />
                         </svg>
-                    </div>
+                    </a>
                 </div>
             </div>
-
-            <div class="flex justify-start md:space-x-5 md:w-2/3 items-center p-2.5 md:p-0 md:float-left">
+            <div class="flex justify-start lg:space-x-5 lg:w-2/3 items-center p-2.5 lg:p-0 lg:float-left">
+                <button id="triggerDrawer"
+                    class="text-gray-700 font-medium rounded-full hidden md:block lg:hidden mr-1 px-2.5 py-2.5 ring ring-gray-300/50"
+                    type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </button>
                 <a href="/" class="h-14 hidden md:flex items-center">
                     <div class="text-4xl">🇹🇿</div>
                     <img src="{{ asset('assets/images/logo.png') }}" class="h-full">
                 </a>
 
-                <div class="flex w-full md:w-1/2">
+                <div class="hidden lg:flex w-full lg:w-1/2">
                     <div class="relative w-full">
                         <input type="text" id="search"
                             class="block p-2 w-full z-20 text-sm text-gray-900 bg-green-50 focus:bg-gray-100 rounded-xl border-transparent focus:ring-0 focus:border-transparent"
@@ -105,30 +113,35 @@
         ])
     </div>
     <div class="bg-sky-900"
-        :class="{ 'fixed top-0 left-0 right-0 z-50 shadow-xl !bg-gray-100 border-b-8 border-gray-100': !atTop }">
+        :class="{ 'fixed top-0 left-0 right-0 z-50 shadow-xl md:bg-gray-100 border-b-8 border-gray-100': !atTop }">
         @include('livewire/pages/public/layouts/navbar', [
             'menus' => $menus,
         ])
 
     </div>
 
-    <div class="fixed top-1/4 right-2" :class="{ 'hidden': atTop }">
-        <div class="relative hover:bg-gray-200 rounded-full cursor-pointer bg-gray-100 shadow-lg">
-            <div
-                class="absolute -top-3 -right-2 bg-gray-50 border-gray-100 border-2 shadow-2xl ring-0 rounded-full px-1.5 text-sm">
-                {{ $cartCount }}</div>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="w-10 h-10 px-1.5 text-sky-900">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-            </svg>
-        </div>
-        <a href="" title="My wish list" class="mt-5 text-gray-700 hover:text-teal-500 flex justify-center hover:bg-gray-200 rounded-full bg-gray-100 shadow-lg">
+    <div class="fixed top-1/4 right-2 z-50" :class="{ 'hidden': atTop }">
+        <a href="{{ route('cart') }}"
+            class="mt-5 flex justify-center hover:bg-gray-200 rounded-full bg-gray-100 shadow-sm">
+            <div class="relative hover:bg-gray-200 rounded-full cursor-pointer">
+                <div
+                    class="absolute -top-3 -right-2 w-6 h-6 text-center {{ $cartCount > 0 ? 'bg-red-600 animate-bounce text-white' : 'bg-gray-50' }} border-gray-100 border-2 shadow-2xl ring-0 rounded-full px-0.5 py-0 text-sm">
+                    {{ $cartCount }}
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                    class="w-10 h-10 px-1.5 text-sky-900">
+                    <path
+                        d="M2.25 2.25a.75.75 0 0 0 0 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 0 0-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 0 0 0-1.5H5.378A2.25 2.25 0 0 1 7.5 15h11.218a.75.75 0 0 0 .674-.421 60.358 60.358 0 0 0 2.96-7.228.75.75 0 0 0-.525-.965A60.864 60.864 0 0 0 5.68 4.509l-.232-.867A1.875 1.875 0 0 0 3.636 2.25H2.25ZM3.75 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0ZM16.5 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z" />
+                </svg>
+            </div>
+        </a>
+        <a href="{{ route('wish_list') }}" title="My wish list"
+            class="mt-5 text-gray-700 hover:text-teal-500 flex justify-center hover:bg-gray-200 rounded-full bg-gray-100 shadow-sm">
             <div class="relative hover:bg-gray-200 rounded-full cursor-pointer">
                 <div
                     class="absolute -top-4 -right-2 bg-red-500 text-white border-gray-100 border-2 shadow-2xl ring-0 rounded-full px-1.5 text-sm">
                     {{ $wishCount }}</div>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-8">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />

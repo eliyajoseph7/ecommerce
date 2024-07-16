@@ -9,10 +9,10 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
-#[Layout('pages.public.layouts.base')]
+#[Layout('livewire.pages.public.layouts.base')]
 class CartItems extends Component
 {
-    public $loadData;
+    public $loadData = true;
     public $cartItems = [];
     public $cartCount = 0;
 
@@ -63,6 +63,7 @@ class CartItems extends Component
         }
     }
 
+    #[On('remove_cart_item')]
     public function removeItem($cartId)
     {
         $cart = Cart::find($cartId);
@@ -71,6 +72,14 @@ class CartItems extends Component
             $this->loadCart();
             $this->dispatch('cartUpdated', $this->cartCount);
         }
+    }
+
+
+    #[On('clear_cart')]
+    public function clearCart() {
+        Cart::where('session_id', $this->getSessionId())?->delete();
+        $this->loadCart();
+        $this->dispatch('cartUpdated', $this->cartCount);
     }
 
     private function getSessionId()
@@ -87,6 +96,8 @@ class CartItems extends Component
 
     public function render()
     {
-        return view('livewire.pages.public.cart.cart-items');
+
+        $data = collect($this->cartItems);
+        return view('livewire.pages.public.cart.cart-items', compact('data'));
     }
 }
