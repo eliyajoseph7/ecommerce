@@ -11,6 +11,7 @@ use App\Livewire\Pages\Admin\Mainmenu\MenuList;
 use App\Livewire\Pages\Admin\Subcategories\SubCategoryForm;
 use App\Livewire\Pages\Admin\Subcategories\SubCategoryList;
 use App\Livewire\Pages\Public\Cart\CartItems;
+use App\Livewire\Pages\Public\Check\Checkout;
 use App\Livewire\Pages\Public\Home\Home;
 use App\Livewire\Pages\Public\Items\ItemDetails;
 use App\Livewire\Pages\Public\Items\Items;
@@ -35,6 +36,7 @@ Route::get('bs/{slug}', Items::class)->name('public_items');
 
 Route::get('my-cart', CartItems::class)->name('cart');
 Route::get('my-wish-list', WishLists::class)->name('wish_list');
+Route::get('checkout', Checkout::class)->name('checkout');
 
 Route::middleware(['auth', 'verified'])->group(function () {
 

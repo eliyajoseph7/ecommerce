@@ -30,7 +30,7 @@
                                 class="bg-teal-600 hover:bg-teal-500 text-gray-100 rounded-md px-2 py-1">
                                 Continue shopping
                             </a>
-                            <a href="{{ route('home') }}"
+                            <a href="{{ route('checkout') }}"
                                 class="bg-gray-600 hover:bg-gray-500 text-gray-100 rounded-md px-2 py-1 flex space-x-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -119,7 +119,7 @@
                             </div>
                         </div>
                     @empty
-                        <div class="bg-gray-300/30 rounded-md text-gray-600 p-3 col-span-full">There is nothing in
+                        <div class="bg-gray-300/30 rounded-md text-gray-600 p-3 col-span-full mb-2">There is nothing in
                             the cart</div>
                         <div role="status"
                             class="col-span-full space-y-8 md:space-y-0 md:space-x-8 rtl:space-x-reverse md:flex md:items-center">
@@ -141,6 +141,7 @@
                             <span class="sr-only">Loading...</span>
                         </div>
                     @endforelse
+
                     <div class="border border-gray-200 rounded-lg p-3 mx-2 my-4">
                         <div class="flex justify-end border-b">
                             <div class="grid grid-cols-3 gap-4">
@@ -166,17 +167,19 @@
                             class="bg-teal-600 hover:bg-teal-500 text-gray-100 rounded-md px-2 py-1">
                             Continue shopping
                         </a>
-                        <a href="{{ route('home') }}"
-                            class="bg-gray-600 hover:bg-gray-500 text-gray-100 rounded-md px-2 py-1 flex space-x-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
-                            </svg>
-                            <span>
-                                Proceed to checkout
-                            </span>
-                        </a>
+                        @if (count($data))
+                            <a href="{{ route('checkout') }}"
+                                class="bg-gray-600 hover:bg-gray-500 text-gray-100 rounded-md px-2 py-1 flex space-x-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
+                                </svg>
+                                <span>
+                                    Proceed to checkout
+                                </span>
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>
