@@ -21,10 +21,29 @@
                         <div class="flex justify-end mb-2">
                             <button wire:click="$dispatch('clear_cart')"
                                 class="bg-gray-200/50 text-gray-500 hover:text-gray-800 px-3 py-1 rounded-md">Clear
-                                List</button>
+                                Cart</button>
+                        </div>
+
+                        <div
+                            class="block mt-2 md:flex justify-between space-x-2 items-center bg-gray-200 px-2 py-3 rounded-md">
+                            <a href="{{ route('home') }}"
+                                class="bg-teal-600 hover:bg-teal-500 text-gray-100 rounded-md px-2 py-1">
+                                Continue shopping
+                            </a>
+                            <a href="{{ route('home') }}"
+                                class="bg-gray-600 hover:bg-gray-500 text-gray-100 rounded-md px-2 py-1 flex space-x-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
+                                </svg>
+                                <span>
+                                    Proceed to checkout
+                                </span>
+                            </a>
                         </div>
                     @endif
-                    <div class="col-span-full grid sm:grid-cols-2 lg:grid-cols-10 gap-4">
+                    <div class="col-span-full grid sm:grid-cols-2 lg:grid-cols-10 gap-4 mt-2">
                         <div class="font-bold hidden lg:flex">Product</div>
                         <div class="lg:col-span-5 hidden lg:flex"></div>
                         <div class="font-bold hidden lg:flex">Unit Price</div>
@@ -33,7 +52,8 @@
                         <div class="hidden lg:flex"></div>
                     </div>
                     @forelse ($data ?? [] as $dt)
-                        <div class="col-span-full grid grid-cols-2 lg:grid-cols-10 gap-4 my-5 bg-gray-100/50 p-1 rounded-md">
+                        <div
+                            class="col-span-full grid grid-cols-2 lg:grid-cols-10 gap-4 my-5 bg-gray-100/50 p-1 rounded-md">
                             <div class="">
                                 <div class="font-bold lg:hidden">Product</div>
                                 <a class="cursor-pointer rounded-md"
@@ -58,7 +78,8 @@
                                 <div class="mt-1 font-bold lg:hidden">Quantity</div>
                                 <div class="flex justify-center">
                                     <div class="flex space-x-2 bg-gray-200/50 px-2 text-gray-600 rounded-md py-0.5">
-                                        <button class="text-md hover:text-teal-700" wire:click="decrementQuantity">
+                                        <button class="text-md hover:text-teal-700"
+                                            wire:click="decrementQuantity({{ $dt->id }})">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                                 fill="currentColor" class="size-4">
                                                 <path fill-rule="evenodd"
@@ -68,7 +89,8 @@
                                         </button>
                                         <input type="text" value="{{ $dt->quantity }}" id=""
                                             class="w-14 p-0 border-0 focus:outline-none focus:ring-0 focus:shadow-none bg-transparent text-gray-600 text-center  rounded-md">
-                                        <button class="text-md hover:text-teal-700" wire:click="incrementQuantity">
+                                        <button class="text-md hover:text-teal-700"
+                                            wire:click="incrementQuantity({{ $dt->id }})">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                                 fill="currentColor" class="size-4">
                                                 <path fill-rule="evenodd"
@@ -129,17 +151,32 @@
                                 <div class="col-span-2 text-right px-2 text-gray-400">Tsh. 0</div>
                             </div>
                         </div>
-                        <div class="block mt-2 md:flex justify-between items-center">
-                            <a href="{{ route('home') }}"
-                                class="bg-teal-600 hover:bg-teal-500 text-gray-100 rounded-md px-2 py-1">
-                                Continue shopping
-                            </a>
-                            <div class="grid grid-cols-3 gap-4 py-4">
+                        <div class="block mt-2 md:flex justify-end items-center">
+                            <div class="grid grid-cols-3 gap-4 py-1">
                                 <div class="text-gray-400 text-xl font-bold">Total Cost</div>
                                 <div class="col-span-2 text-right px-2 text-gray-700 font-bold">Tsh.
                                     {{ number_format($data->sum('cost')) }}</div>
                             </div>
                         </div>
+                    </div>
+
+                    <div
+                        class="block mt-2 md:flex justify-between space-x-2 items-center bg-gray-200 px-2 py-3 rounded-md">
+                        <a href="{{ route('home') }}"
+                            class="bg-teal-600 hover:bg-teal-500 text-gray-100 rounded-md px-2 py-1">
+                            Continue shopping
+                        </a>
+                        <a href="{{ route('home') }}"
+                            class="bg-gray-600 hover:bg-gray-500 text-gray-100 rounded-md px-2 py-1 flex space-x-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
+                            </svg>
+                            <span>
+                                Proceed to checkout
+                            </span>
+                        </a>
                     </div>
                 </div>
             </div>

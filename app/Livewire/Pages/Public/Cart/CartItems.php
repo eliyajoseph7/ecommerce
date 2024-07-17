@@ -94,6 +94,23 @@ class CartItems extends Component
         return $sessionId;
     }
 
+
+    public function incrementQuantity($cartId) {
+        $cart = Cart::find($cartId)->increment('quantity');
+        $this->loadCart();
+    }
+
+    public function decrementQuantity($cartId) {
+        $cart = Cart::find($cartId);
+        // dump($cart);
+        if($cart->quantity == 1) {
+            $this->removeItem($cartId);
+        } else {
+            $cart->decrement('quantity');
+        }
+        $this->loadCart();
+    }
+
     public function render()
     {
 
