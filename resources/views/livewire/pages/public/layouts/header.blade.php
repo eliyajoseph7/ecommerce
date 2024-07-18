@@ -113,7 +113,7 @@
         ])
     </div>
     <div class="bg-sky-900"
-        :class="{ 'fixed top-0 left-0 right-0 z-50 shadow-xl md:bg-gray-100 border-b-8 border-gray-100': !atTop }">
+        :class="{ 'fixed top-0 left-0 right-0 z-50 shadow-md lg:-my-2 md:bg-gray-100 border-b-8 border-sky-100': !atTop }">
         @include('livewire/pages/public/layouts/navbar', [
             'menus' => $menus,
         ])
