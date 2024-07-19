@@ -19,19 +19,21 @@ class StoreItemVisit implements ShouldQueue
     protected $userAgent;
     protected $referrer;
     protected $user_id;
+    protected $session_id;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($itemId, $ipAddress, $userAgent, $referrer, $user_id)
+    public function __construct($itemId, $ipAddress, $userAgent, $referrer, $user_id, $session_id)
     {
         $this->itemId = $itemId;
         $this->ipAddress = $ipAddress;
         $this->userAgent = $userAgent;
         $this->referrer = $referrer;
         $this->user_id = $user_id;
+        $this->session_id = $session_id;
     }
 
     /**
@@ -47,6 +49,7 @@ class StoreItemVisit implements ShouldQueue
             'user_agent' => $this->userAgent,
             'referrer' => $this->referrer,
             'user_id' => $this->user_id,
+            'session_id' => $this->session_id,
         ]);
         Item::find($this->itemId)?->increment('clicks');
     }

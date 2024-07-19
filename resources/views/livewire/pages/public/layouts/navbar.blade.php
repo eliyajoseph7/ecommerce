@@ -24,10 +24,7 @@
                             </a>
                         </div>
                         <div class="hidden md:flex md:col-span-4 lg:col-span-8">
-
-                            <input type="text" id="search"
-                                class="block p-2 w-full z-20 text-sm text-gray-900 bg-green-50 focus:bg-gray-50 rounded-md border-transparent focus:ring-0 focus:border-gray-100"
-                                placeholder="Search product items..." />
+                            @livewire('pages.public.layouts.search')
                         </div>
                     </div>
                 </div>

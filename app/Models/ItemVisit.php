@@ -15,5 +15,6 @@ class ItemVisit extends Model
         'user_agent',
         'referrer',
         'user_id',
+        'session_id',
     ];
 }
