@@ -11,43 +11,73 @@
             <form>
                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                     <div>
-                        <label for="first_name"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Region <span
-                                class="text-red-500">*</span></label>
-                        <input type="text" id="first_name"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="John" required />
+                        <label for="region_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Region
+                            <span class="text-red-500">*</span></label>
+                        <select wire:model.live="region_id"
+                            class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="">Select Category</option>
+                            @foreach (isset($regions) ? $regions : [] as $region)
+                                <option value="{{ $region->id }}">{{ $region->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('region_id')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
                     <div>
-                        <label for="last_name"
+                        <label for="district_id"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">District <span
                                 class="text-red-500">*</span></label>
-                        <input type="text" id="last_name"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="Doe" required />
+                        <select wire:model.live="district_id"
+                            class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="">Select Category</option>
+                            @foreach (isset($districts) ? $districts : [] as $district)
+                                <option value="{{ $district->id }}">{{ $district->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('district_id')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
                     <div>
-                        <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ward
+                        <label for="ward_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ward
                             <span class="text-red-500">*</span></label>
-                        <input type="tel" id="phone"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="255123456789" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required />
+                        <select wire:model.live="ward_id"
+                            class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="">Select Category</option>
+                            @foreach (isset($wards) ? $wards : [] as $ward)
+                                <option value="{{ $ward->id }}">{{ $ward->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('ward_id')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
                     <div class="">
-                        <label for="email"
+                        <label for="village_id"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Village/Street <span
                                 class="text-red-500">*</span></label>
-                        <input type="email" id="email"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="john.doe@company.com" required />
+                        <select wire:model.live="village_id"
+                            class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="">Select Category</option>
+                            @foreach (isset($villages) ? $villages : [] as $village)
+                                <option value="{{ $village->id }}">{{ $village->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('village_id')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
                     <div class="col-span-full">
                         <label for="company"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address <span
                                 class="text-red-500">*</span></label>
-                        <input type="text" id="company"
+                        <input type="text" id="company" wire:model.live.debounce.500ms="address"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="Flowbite" />
+                            placeholder="Azikiwe st, HNo. 12" />
+                            @error('address')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
                     </div>
                 </div>
                 <div class="">Billing address</div>
@@ -63,56 +93,94 @@
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name <span
                                 class="text-red-500">*</span></label>
                         <input type="text" id="billing_first_name"
+                            wire:model.live.debounce.500ms="billing.first_name"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="John" required />
+                            @error('billing.first_name')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
                     </div>
                     <div>
                         <label for="billing_last_name"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Name <span
                                 class="text-red-500">*</span></label>
-                        <input type="text" id="billing_last_name"
+                        <input type="text" id="billing_last_name" wire:model.live.debounce.500ms="billing.last_name"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Doe" required />
+                            @error('billing.last_name')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
                     </div>
                     <div>
-                        <label for="billing_region_id"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Region <span
-                                class="text-red-500">*</span></label>
-                        <input type="text" id="billing_region_id"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="John" required />
+                        <label for="billing.region_id"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Region
+                            <span class="text-red-500">*</span></label>
+                        <select wire:model.live="billing.region_id"
+                            class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="">Select Category</option>
+                            @foreach (isset($billingRegions) ? $billingRegions : [] as $region)
+                                <option value="{{ $region->id }}">{{ $region->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('billing.region_id')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
                     <div>
-                        <label for="billing_district_id"
+                        <label for="billing.district_id"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">District <span
                                 class="text-red-500">*</span></label>
-                        <input type="text" id="billing_district_id"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="Doe" required />
+                        <select wire:model.live="billing.district_id"
+                            class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="">Select Category</option>
+                            @foreach (isset($billingDistricts) ? $billingDistricts : [] as $district)
+                                <option value="{{ $district->id }}">{{ $district->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('billing.district_id')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
                     <div>
-                        <label for="billing_ward"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ward <span
-                                class="text-red-500">*</span></label>
-                        <input type="tel" id="billing_ward"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="255123456789" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required />
+                        <label for="billing.ward_id"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ward
+                            <span class="text-red-500">*</span></label>
+                        <select wire:model.live="billing.ward_id"
+                            class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="">Select Category</option>
+                            @foreach (isset($billingWards) ? $billingWards : [] as $ward)
+                                <option value="{{ $ward->id }}">{{ $ward->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('billing.ward_id')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
                     <div class="">
                         <label for="billing_village_id"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Village/Street <span
                                 class="text-red-500">*</span></label>
-                        <input type="text" id="billing_village_id"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="jSample" required />
+                        <select wire:model.live="billing.village_id"
+                            class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="">Select Category</option>
+                            @foreach (isset($billingVillages) ? $billingVillages : [] as $village)
+                                <option value="{{ $village->id }}">{{ $village->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('billing.village_id')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
                     <div class="col-span-full">
-                        <label for="company"
+                        <label for="billing_address"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address <span
                                 class="text-red-500">*</span></label>
-                        <input type="text" id="company"
+                        <input type="text" id="billing_address" wire:model.live.debounce.500ms="billing.address"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="Flowbite" />
+                            placeholder="Azikiwe, HNo. 12" />
+                        @error('billing.address')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
             </form>

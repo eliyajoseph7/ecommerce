@@ -12,7 +12,8 @@
 
                 <ul class="grid w-full gap-6 md:grid-cols-2">
                     <li class="col-span-full">
-                        <input type="radio" checked id="hosting-big" name="hosting" value="hosting-big" class="hidden peer">
+                        <input type="radio" checked id="hosting-big" name="hosting" value="hosting-big"
+                            class="hidden peer">
                         <div
                             class="text-gray-500 bg-inherit border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-teal-500 peer-checked:border-teal-600 peer-checked:text-teal-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
                             <label for="hosting-big" class="cursor-pointer">
@@ -78,9 +79,11 @@
                                 <div class="inline-flex items-center justify-between w-full p-5 bg-inherit ">
                                     <div class="block">
                                         <div class="w-full text-lg font-semibold flex space-x-2 items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                              </svg>                                              
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="size-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                            </svg>
                                             <span>Mobile Money</span>
                                         </div>
                                     </div>
@@ -97,7 +100,9 @@
                         </div>
                     </li>
                 </ul>
-
+                @error('paymethod')
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                @enderror
             </form>
 
         </div>

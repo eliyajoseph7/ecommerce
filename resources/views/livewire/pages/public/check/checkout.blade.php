@@ -102,8 +102,9 @@
                     </div>
                 </div>
                 <div class="py-8">
-                    <div class="flex justify-end">
-                        <button class="bg-gray-800 px-3 py-1 rounded-md text-white hover:bg-gray-700">Signin</button>
+                    <div class="flex justify-end space-x-2 items-center">
+                        <div class="text-gray-400">To automatically fill your information</div>
+                        <button class="bg-gray-800/50 px-3 py-1 rounded-md text-white hover:bg-gray-700">Signin</button>
                     </div>
                     @livewire('pages.public.check.components.customer-info')
                     @livewire('pages.public.check.components.delivery-info')
@@ -138,7 +139,7 @@
                         </div>
                     </div>
                     <div class="mt-10">
-                        <button
+                        <button wire:click="$dispatch('submit_order')"
                             class="bg-teal-600 hover:bg-teal-500 rounded-md font-bold items-center px-0 py-2 w-full flex justify-center space-x-2 text-white">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" class="size-5">
