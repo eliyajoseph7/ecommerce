@@ -10,6 +10,8 @@ use App\Livewire\Pages\Admin\Mainmenu\MenuForm;
 use App\Livewire\Pages\Admin\Mainmenu\MenuList;
 use App\Livewire\Pages\Admin\Subcategories\SubCategoryForm;
 use App\Livewire\Pages\Admin\Subcategories\SubCategoryList;
+use App\Livewire\Pages\Public\Auth\Login;
+use App\Livewire\Pages\Public\Auth\Register;
 use App\Livewire\Pages\Public\Cart\CartItems;
 use App\Livewire\Pages\Public\Check\Checkout;
 use App\Livewire\Pages\Public\Home\Home;
@@ -37,6 +39,10 @@ Route::get('bs/{slug}', Items::class)->name('public_items');
 Route::get('my-cart', CartItems::class)->name('cart');
 Route::get('my-wish-list', WishLists::class)->name('wish_list');
 Route::get('checkout', Checkout::class)->name('checkout');
+Route::prefix('auth')->group(function() {
+    Route::get('signin', Login::class)->name('signin');
+    Route::get('signup', Register::class)->name('signup');
+});
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
