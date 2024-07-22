@@ -2,13 +2,16 @@
 
 namespace App\Livewire\Pages\Public\Auth;
 
+use App\Models\Cart;
 use App\Models\Country;
 use App\Models\District;
+use App\Models\ItemVisit;
 use App\Models\Region;
 use App\Models\Village;
 use App\Models\Ward;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -117,6 +120,7 @@ class Register extends Component
 
     public function submit() {
 
+        $sessionId = $this->getSessionId();
         $this->validate();
         $customer = Customer::create([
             'first_name' => $this->first_name,
@@ -126,7 +130,7 @@ class Register extends Component
             'phone' => $this->phone,
             'company' => $this->company,
             'tin' => $this->tin,
-            'session_id' => Str::uuid()->toString(),
+            'session_id' => $sessionId,
             'subscribed' => $this->subscribe ? '1' : '0',
         ]);
 
@@ -154,6 +158,14 @@ class Register extends Component
             'ward_id' => $this->billing['ward_id'],    
             'village_id' => $this->billing['village_id'],
             'address' => $this->billing['address'],
+        ]);
+
+        Cart::where('session_id', $sessionId)->update([
+            'customer_id' => $customer->id
+        ]);
+
+        ItemVisit::where('session_id', $sessionId)->update([
+            'customer_id' => $customer->id
         ]);
 
         session()->flash('info', [
