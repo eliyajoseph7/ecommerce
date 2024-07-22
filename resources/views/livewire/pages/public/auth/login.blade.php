@@ -68,9 +68,9 @@
                         </div> --}}
                         <div class="pt-2">
                             <a class="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
-                                        href="{{ route('signup') }}">
-                                        {{ __('Create new account') }}
-                                    </a>
+                                href="{{ route('signup') }}">
+                                {{ __('Create new account') }}
+                            </a>
                         </div>
                         <div class="mt-4 flex items-center justify-between">
                             <span class="border-b w-1/5 md:w-1/4"></span>
@@ -83,4 +83,16 @@
             </div>
         </div>
     </div>
+    @if (session()->has('info'))
+        <script>
+            Swal.fire({
+                position: "top-end",
+                icon: '{{ session('info.type') }}',
+                title: '{{ session('info.message') }}',
+                text: "Enter your credentials to login!",
+                showConfirmButton: false,
+                timer: 3500
+            });
+        </script>
+    @endif
 </div>

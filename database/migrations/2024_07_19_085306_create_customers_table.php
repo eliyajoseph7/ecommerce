@@ -18,7 +18,10 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('phone');
+            $table->string('company')->nullable();
+            $table->string('tin')->nullable();
             $table->string('session_id');
+            $table->enum('subscribed', ['0', '1'])->default(0);
             $table->timestamps();
         });
     }
