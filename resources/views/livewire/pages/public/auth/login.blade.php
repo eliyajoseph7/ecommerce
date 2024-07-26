@@ -4,7 +4,7 @@
         <div
             class="lg:flex bg-white rounded-lg overflow-hidden mx-auto max- w-sm lg:max-w-4xl shadow-md border-t-4 border-sky-900">
             <div class="hidden lg:block lg:w-1/2 bg-cover bg-left"
-                style="background-image:url('https://unctad.org/sites/default/files/2024-03/20240315_NewsPic_shutterstock_694579021_1200X675.jpg')">
+                style="background-image:url('{{ asset('assets/images/kiosk.png') }}')">
             </div>
             <div class="sm:w-full lg:w-1/2">
 
@@ -33,7 +33,7 @@
                         </div>
                         <div class="mt-4">
                             <label class="block text-gray-700 text-sm font-bold mb-2">Email Address</label>
-                            <input wire:model="form.email" id="email"
+                            <input wire:model="email" id="email"
                                 class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
                                 type="email" />
                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
@@ -48,7 +48,7 @@
                                     </a>
                                 @endif
                             </div>
-                            <input wire:model="form.password" id="password"
+                            <input wire:model="password" id="password"
                                 class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
                                 type="password" />
                             <x-input-error :messages="$errors->get('password')" class="mt-2" />

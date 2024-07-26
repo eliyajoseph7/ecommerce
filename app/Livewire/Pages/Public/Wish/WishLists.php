@@ -3,6 +3,7 @@
 namespace App\Livewire\Pages\Public\Wish;
 
 use App\Http\Controllers\Actions\ItemVisitController;
+use App\Http\Controllers\CustomerSessionController;
 use App\Models\WishList;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Str;
@@ -26,7 +27,7 @@ class WishLists extends Component
 
     public function loadWishList()
     {
-        $sessionId = $this->getSessionId();
+        $sessionId = (new CustomerSessionController)->getSessionId();
         $this->wishListItems = WishList::where('session_id', $sessionId)->with('item')->get();
         $this->wishListCount = WishList::where('session_id', $sessionId)->count();
     }
@@ -34,7 +35,7 @@ class WishLists extends Component
     #[On('wish_item')]
     public function addToWishList($itemId)
     {
-        $sessionId = $this->getSessionId();
+        $sessionId = (new CustomerSessionController)->getSessionId();
         $wishList = WishList::where('session_id', $sessionId)->where('item_id', $itemId)->first();
 
         if ($wishList) {
@@ -64,21 +65,9 @@ class WishLists extends Component
 
     #[On('clear_wish_list')]
     public function clearList() {
-        WishList::where('session_id', $this->getSessionId())?->delete();
+        WishList::where('session_id', (new CustomerSessionController)->getSessionId())?->delete();
         $this->loadWishList();
         $this->dispatch('wishListUpdated', $this->wishListCount);
-    }
-
-    private function getSessionId()
-    {
-        $sessionId = Cookie::get('cart_session_id');
-
-        if (!$sessionId) {
-            $sessionId = Str::uuid()->toString();
-            Cookie::queue('cart_session_id', $sessionId, 60 * 24 * 90); // 90 days
-        }
-
-        return $sessionId;
     }
 
 

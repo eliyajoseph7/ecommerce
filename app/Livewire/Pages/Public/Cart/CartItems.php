@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Pages\Public\Cart;
 
+use App\Http\Controllers\CustomerSessionController;
 use App\Models\Cart;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Str;
@@ -28,7 +29,7 @@ class CartItems extends Component
 
     public function loadCart()
     {
-        $sessionId = $this->getSessionId();
+        $sessionId = (new CustomerSessionController)->getSessionId();
         $this->cartItems = Cart::where('session_id', $sessionId)->with('item')->get();
         $this->cartCount = Cart::where('session_id', $sessionId)->sum('quantity');
     }
@@ -36,7 +37,7 @@ class CartItems extends Component
     #[On('add_item')]
     public function addToCart($itemId)
     {
-        $sessionId = $this->getSessionId();
+        $sessionId = (new CustomerSessionController)->getSessionId();
         $cart = Cart::where('session_id', $sessionId)->where('item_id', $itemId)->first();
 
         if ($cart) {
@@ -77,21 +78,9 @@ class CartItems extends Component
 
     #[On('clear_cart')]
     public function clearCart() {
-        Cart::where('session_id', $this->getSessionId())?->delete();
+        Cart::where('session_id', (new CustomerSessionController)->getSessionId())?->delete();
         $this->loadCart();
         $this->dispatch('cartUpdated', $this->cartCount);
-    }
-
-    private function getSessionId()
-    {
-        $sessionId = Cookie::get('cart_session_id');
-
-        if (!$sessionId) {
-            $sessionId = Str::uuid()->toString();
-            Cookie::queue('cart_session_id', $sessionId, 60 * 24 * 90); // 90 days
-        }
-
-        return $sessionId;
     }
 
 

@@ -5,7 +5,16 @@
 
             <p>Registration</p>
         </div>
-        <div class="py-2 w-full">
+        <div class="py-2 w-full relative">
+            <div class="fixed top-1/3 left-2/4 {{ $redirecting ? '' : 'hidden' }}">
+                <div class="w-40 h-40 flex justify-center items-center">
+                    <div class="bg-black/60 p-5 text-center rounded-md text-gray-200">
+                        <i class="fa fa-spinner fa-spin text-4xl"></i>
+                        <div class="">Redirecting..</div>
+                    </div>
+
+                </div>
+            </div>
             <div class="grid sm:grid-cols-1 lg:grid-cols-8 gap-4 px-4 w-full">
                 <div class="col-span-full lg:col-span-4">
                     <div class="text-2xl md:text-3xl font-bold text-gray-800">Profile Details</div>
@@ -71,7 +80,9 @@
                                         number <span class="text-red-500">*</span></label>
                                     <input type="tel" id="phone" wire:model.live.debounce.500ms="phone"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
-                                        placeholder="255123456789" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" />
+                                        placeholder="255123456789" 
+                                        {{-- pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"  --}}
+                                        />
                                     @error('phone')
                                         <span class="text-red-500 text-sm">{{ $message }}</span>
                                     @enderror
@@ -304,4 +315,18 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('livewire:init', () => {
+            Livewire.on('success', (message) => {
+                Toast.fire({
+                    icon: 'success',
+                    title: message,
+                });
+
+                setTimeout(() => {
+                    Livewire.dispatch('registered')
+                }, 3000);
+            })
+        })
+    </script>
 </div>

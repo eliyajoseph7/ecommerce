@@ -46,6 +46,17 @@
 @yield('scripts')
 
 <script>
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-right',
+        iconColor: 'green',
+        customClass: {
+            popup: 'colored-toast',
+        },
+        showConfirmButton: false,
+        timer: 5000,
+        timerProgressBar: true,
+    });
     // document.addEventListener('livewire:init', () => {
     //     Livewire.on('add_item', (data) => {
     //         console.log(data);

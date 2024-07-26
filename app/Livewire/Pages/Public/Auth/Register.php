@@ -2,23 +2,31 @@
 
 namespace App\Livewire\Pages\Public\Auth;
 
+use App\Helpers\Helper;
+use App\Http\Controllers\CustomerSessionController;
+use App\Models\BillingAddress;
 use App\Models\Cart;
 use App\Models\Country;
+use App\Models\Customer;
+use App\Models\DeliveryAddress;
 use App\Models\District;
 use App\Models\ItemVisit;
 use App\Models\Region;
 use App\Models\Village;
 use App\Models\Ward;
+use App\Models\WishList;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 #[Layout('livewire.pages.public.layouts.base')]
 class Register extends Component
 {
+    public $redirecting = false;
     public $toggleBillAddress = false;
     public $districts = [];
     public $wards = [];
@@ -116,12 +124,19 @@ class Register extends Component
             $this->billingVillages = [];
             $this->billing['village_id'] = null;
         }
+        if ($name === 'ward_id') {
+            $this->billingVillages = Village::where('ward_id', $value)->get();
+        }
     }
 
     public function submit() {
 
-        $sessionId = $this->getSessionId();
+        $sessionId = (new CustomerSessionController)->getSessionId();
         $this->validate();
+        $check = Customer::where('session_id', $sessionId)->exists();
+        if($check) {
+            $sessionId = Str::uuid()->toString();
+        }
         $customer = Customer::create([
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
@@ -168,25 +183,38 @@ class Register extends Component
             'customer_id' => $customer->id
         ]);
 
+        WishList::where('session_id', $sessionId)->update([
+            'customer_id' => $customer->id
+        ]);
+
+        // Order::where('session_id', $sessionId)->update([
+        //     'session_id' => (new CustomerSessionController)->getSessionId();        // ]);
+
+        $customer->session_id = (new CustomerSessionController)->getSessionId();
+        $customer->loggedin = '1';
+        $customer->last_login = now();
+        $customer->save();
+
         session()->flash('info', [
             'type' => 'success',
             'message' => 'Account successfully created.',
         ]);
 
-        return redirect()->route('signin');
+        $this->dispatch('success', 'Account successfully created.');
+        $this->redirecting = true;
+    }
+    
+    #[On('registered')]
+    public function redirectTo() {
+        return redirect()->to('/' . '#items');
     }
 
-    private function getSessionId()
-    {
-        $sessionId = Cookie::get('cart_session_id');
-
-        if (!$sessionId) {
-            $sessionId = Str::uuid()->toString();
-            Cookie::queue('cart_session_id', $sessionId, 60 * 24 * 90); // 90 days
+    public function mount() {
+        if(Helper::is_auth()) {
+            $this->redirectTo();
         }
-
-        return $sessionId;
     }
+
 
     public function render()
     {

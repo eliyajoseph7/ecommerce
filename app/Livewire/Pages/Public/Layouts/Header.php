@@ -2,7 +2,9 @@
 
 namespace App\Livewire\Pages\Public\Layouts;
 
+use App\Http\Controllers\CustomerSessionController;
 use App\Models\Cart;
+use App\Models\Customer;
 use App\Models\MainCategory;
 use App\Models\WishList;
 use Illuminate\Support\Facades\Cookie;
@@ -32,6 +34,16 @@ class Header extends Component
     #[On('wishListUpdated')]
     public function updateWishCount($count) {
         $this->wishCount = $count;
+    }
+
+    #[On('signout')]
+    public function signout() {
+        $customer = Customer::where('session_id', (new CustomerSessionController)->getSessionId())->first();
+        if($customer) {
+            $customer->loggedin = '0';
+            $customer->save();
+        }
+        return redirect()->route('home');
     }
 
     public function render()

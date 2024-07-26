@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('session_id');
             $table->foreignId('item_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('customer_id')->nullable()->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

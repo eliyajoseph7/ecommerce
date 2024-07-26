@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('tin')->nullable();
             $table->string('session_id');
             $table->enum('subscribed', ['0', '1'])->default(0);
+            $table->enum('loggedin', ['0', '1'])->default(0);
+            $table->timestamp('last_login')->nullable();
             $table->timestamps();
         });
     }

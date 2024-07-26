@@ -1,4 +1,4 @@
-<div class="py-8">
+<div class="py-8" id="items">
     <div class="text-2xl font-bold w-full">You may be interested</div>
     <div class="w-36 h-0.5 bg-gray-200"></div>
 
