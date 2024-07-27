@@ -189,18 +189,18 @@
                                 </div>
                                 <div class="text-xl md:text-2xl font-bold text-gray-700">Billing address</div>
                                 <div class="flex items-center my-4">
-                                    <input id="default-checkbox" type="checkbox" wire:change.live="toggleBillAddress"
+                                    <input id="default-checkbox" @checked($toggleBillAddress) type="checkbox" wire:change.live="toggleBillAddress" wire:click="$dispatch('toggle_bill_info')"
                                         class="w-4 h-4 cursor-pointer text-teal-600 bg-gray-50 border-teal-300 rounded focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                     <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">My
                                         billing info are same with shipping information</label>
                                 </div>
-                                <div class="grid gap-6 mb-6 md:grid-cols-3">
+                                <div class="grid gap-6 mb-6 md:grid-cols-3 {{ $toggleBillAddress ? 'hidden' : '' }}">
                                     <div>
                                         <label for="billing_first_name"
                                             class="block mb-2 text-sm font-bold text-gray-700 dark:text-white">First Name <span
                                                 class="text-red-500">*</span></label>
                                         <input type="text" id="billing_first_name"
-                                            wire:model.live.debounce.500ms="billing.first_name"
+                                            wire:model.live="billing.first_name"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
                                             placeholder="John" />
                                             @error('billing.first_name')

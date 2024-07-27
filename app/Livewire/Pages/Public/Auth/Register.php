@@ -89,21 +89,34 @@ class Register extends Component
         'billing.*.required' => 'This field is required'
     ];
     
-
-    public function toggleBillAddress() {
+    #[On('toggle_bill_info')]
+    public function updateBillAddress() {
         $this->toggleBillAddress = !$this->toggleBillAddress;
+        if($this->toggleBillAddress) {
+            $this->billing['first_name'] = $this->first_name;
+            $this->billing['last_name'] = $this->last_name;
+            $this->billing['region_id'] = $this->region_id;
+            $this->billing['district_id'] = $this->district_id;
+            $this->billing['ward_id'] = $this->ward_id;
+            $this->billing['village_id'] = $this->village_id;
+            $this->billing['address'] = $this->address;
+
+        } else {
+            $this->reset('billing');
+        }
     }
 
     public function updatedRegionId() {
         $this->districts = District::where('region_id', $this->region_id)->orderBy('name')->get();
-        $this->reset(['wards', 'ward_id', 'villages', 'village_id']);
+        $this->reset(['district_id', 'wards', 'ward_id', 'villages', 'village_id']);
     }
     public function updatedDistrictId() {
         $this->wards = Ward::where('district_id', $this->district_id)->orderBy('name')->get();
-        $this->reset(['villages', 'village_id']);
+        $this->reset(['ward_id', 'villages', 'village_id']);
     }
     public function updatedWardId() {
         $this->villages = Village::where('ward_id', $this->ward_id)->orderBy('name')->get();
+        $this->reset('village_id');
     }
 
     public function updatedBilling($value, $name)
@@ -112,20 +125,16 @@ class Register extends Component
 
         if ($name === 'region_id') {
             $this->billingDistricts = District::where('region_id', $value)->get();
-            $this->billingWards = [];
-            $this->billing['ward_id'] = null;
-
-            $this->billingVillages = [];
-            $this->billing['village_id'] = null;
+            $this->reset(['billing.district_id', 'billing.wards', 'billing.ward_id', 'billing.villages', 'billing.village_id']);
         }
 
         if ($name === 'district_id') {
             $this->billingWards = Ward::where('district_id', $value)->get();
-            $this->billingVillages = [];
-            $this->billing['village_id'] = null;
+            $this->reset(['billing.ward_id', 'billing.villages', 'billing.village_id']);
         }
         if ($name === 'ward_id') {
             $this->billingVillages = Village::where('ward_id', $value)->get();
+            $this->reset('billing.village_id');
         }
     }
 

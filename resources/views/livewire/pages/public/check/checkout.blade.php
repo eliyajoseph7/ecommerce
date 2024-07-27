@@ -102,10 +102,12 @@
                     </div>
                 </div>
                 <div class="py-8">
-                    <div class="flex justify-end space-x-2 items-center">
-                        <div class="text-gray-400">To automatically fill your information</div>
-                        <button class="bg-gray-800/50 px-3 py-1 rounded-md text-white hover:bg-gray-700">Signin</button>
-                    </div>
+                    @if (!Helper::is_auth())
+                        <div class="flex justify-end space-x-2 items-center">
+                            <div class="text-gray-400">To automatically fill your information</div>
+                            <a href="{{ route('signin') }}" class="bg-gray-800/50 px-3 py-1 rounded-md text-white hover:bg-gray-700">Signin</a>
+                        </div>
+                    @endif
                     @livewire('pages.public.check.components.customer-info')
                     @livewire('pages.public.check.components.delivery-info')
                     @livewire('pages.public.check.components.payment-info')

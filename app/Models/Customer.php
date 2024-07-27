@@ -25,4 +25,8 @@ class Customer extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
+    public function billingAddress() {
+        return $this->hasOne(BillingAddress::class);
+    }
 }

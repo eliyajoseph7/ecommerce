@@ -69,9 +69,9 @@
                         </ul>
                         <div class="py-2">
                             @if (Helper::is_auth())
-                            <a wire:click="signout"
-                                class="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign
-                                out</a>
+                                <a wire:click="signout"
+                                    class="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign
+                                    out</a>
                             @else
                                 <a href="{{ route('signin') }}"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign
@@ -80,30 +80,35 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex space-x-3 items-center">
-                    <a href="{{ route('wish_list') }}" title="My wish list" class="hover:text-teal-500">
-
-                        <div class="relative hover:bg-gray-200 rounded-full cursor-pointer">
+                <div class="flex space-x-3 items-center" :class="{'hidden': !atTop}">
+                    <div class="">
+                        <a href="{{ route('wish_list') }}" title="My wish list" class="hover:text-teal-500">
+                            <div class="relative hover:bg-gray-200 rounded-full cursor-pointer">
+                                <div
+                                    class="absolute -top-4 -right-2 bg-red-500 text-white border-gray-100 border-2 shadow-2xl ring-0 rounded-full px-1.5 text-sm">
+                                    {{ $wishCount }}</div>
+                                    <div class="">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="size-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                                        </svg>
+                                    </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="">
+                        <a href="{{ route('cart') }}" class="relative hover:bg-gray-200 rounded-full cursor-pointer">
                             <div
-                                class="absolute -top-4 -right-2 bg-red-500 text-white border-gray-100 border-2 shadow-2xl ring-0 rounded-full px-1.5 text-sm">
-                                {{ $wishCount }}</div>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                                class="absolute -top-3 -right-2 w-6 h-6 text-center {{ $cartCount > 0 ? 'bg-red-600 animate-bounce text-white' : 'bg-gray-50' }} border-gray-100 border-2 shadow-2xl ring-0 rounded-full px-0.5 py-0 text-sm">
+                                {{ $cartCount }}</div>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="w-10 h-10 px-1.5 text-sky-900">
+                                <path
+                                    d="M2.25 2.25a.75.75 0 0 0 0 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 0 0-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 0 0 0-1.5H5.378A2.25 2.25 0 0 1 7.5 15h11.218a.75.75 0 0 0 .674-.421 60.358 60.358 0 0 0 2.96-7.228.75.75 0 0 0-.525-.965A60.864 60.864 0 0 0 5.68 4.509l-.232-.867A1.875 1.875 0 0 0 3.636 2.25H2.25ZM3.75 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0ZM16.5 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z" />
                             </svg>
-                        </div>
-                    </a>
-                    <a href="{{ route('cart') }}" class="relative hover:bg-gray-200 rounded-full cursor-pointer">
-                        <div
-                            class="absolute -top-3 -right-2 w-6 h-6 text-center {{ $cartCount > 0 ? 'bg-red-600 animate-bounce text-white' : 'bg-gray-50' }} border-gray-100 border-2 shadow-2xl ring-0 rounded-full px-0.5 py-0 text-sm">
-                            {{ $cartCount }}</div>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                            class="w-10 h-10 px-1.5 text-sky-900">
-                            <path
-                                d="M2.25 2.25a.75.75 0 0 0 0 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 0 0-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 0 0 0-1.5H5.378A2.25 2.25 0 0 1 7.5 15h11.218a.75.75 0 0 0 .674-.421 60.358 60.358 0 0 0 2.96-7.228.75.75 0 0 0-.525-.965A60.864 60.864 0 0 0 5.68 4.509l-.232-.867A1.875 1.875 0 0 0 3.636 2.25H2.25ZM3.75 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0ZM16.5 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z" />
-                        </svg>
-                    </a>
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="flex justify-start lg:space-x-5 lg:w-2/3 items-center p-2.5 lg:p-0 lg:float-left">

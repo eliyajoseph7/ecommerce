@@ -7,7 +7,6 @@
             <div class="font-bold text-2xl text-gray-700">Customer Information</div>
         </div>
         <div class="pl-16 py-4">
-            {{ $first_name }}
             <form>
                 <div class="grid gap-6 mb-6 md:grid-cols-3">
                     <div>
