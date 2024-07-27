@@ -9,7 +9,11 @@ use Livewire\Component;
 class PaymentInfo extends Component
 {
     #[Validate('required', as: 'pay method')]
-    public $paymethod;
+    public $paymethod = 'cash';
+
+    public function updatedPaymethod() {
+        
+    }
 
 
     #[On('submit_order')]
