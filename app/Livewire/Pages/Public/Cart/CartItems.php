@@ -85,7 +85,7 @@ class CartItems extends Component
 
 
     public function incrementQuantity($cartId) {
-        $cart = Cart::find($cartId)->increment('quantity');
+        Cart::find($cartId)->increment('quantity');
         $this->loadCart();
     }
 

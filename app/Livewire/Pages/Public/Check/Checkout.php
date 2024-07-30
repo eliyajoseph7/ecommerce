@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Pages\Public\Check;
 
+use App\Http\Controllers\CustomerSessionController;
 use App\Models\Cart;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Str;
@@ -12,6 +13,7 @@ use Livewire\Component;
 #[Layout('livewire.pages.public.layouts.base')]
 class Checkout extends Component
 {
+    public $redirecting = false;
     public $items = [];
     public function mount()
     {
@@ -40,19 +42,6 @@ class Checkout extends Component
     }
 
 
-    private function getSessionId()
-    {
-        $sessionId = Cookie::get('cart_session_id');
-
-        if (!$sessionId) {
-            $sessionId = Str::uuid()->toString();
-            Cookie::queue('cart_session_id', $sessionId, 60 * 24 * 90); // 90 days
-        }
-
-        return $sessionId;
-    }
-
-
     public function incrementQuantity($cartId) {
         Cart::find($cartId)->increment('quantity');
         $this->loadCart();
@@ -68,11 +57,18 @@ class Checkout extends Component
         $this->loadCart();
     }
 
+    #[On('order_completed')]
+    public function orderCompleted() {
+        $this->redirecting = true;
+        $this->loadCart();
+    }
+
     public function loadCart()
     {
-        $sessionId = $this->getSessionId();
+        $sessionId = (new CustomerSessionController)->getSessionId();
         $this->items = Cart::where('session_id', $sessionId)->with('item')->get();
         $this->cartCount = Cart::where('session_id', $sessionId)->sum('quantity');
+        // dd($this->items->sum('cost'));
     }
 
     public function render()

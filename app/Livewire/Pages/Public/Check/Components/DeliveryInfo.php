@@ -4,7 +4,10 @@ namespace App\Livewire\Pages\Public\Check\Components;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\CustomerSessionController;
+use App\Models\BillingAddress;
+use App\Models\Country;
 use App\Models\Customer;
+use App\Models\DeliveryAddress;
 use App\Models\District;
 use App\Models\Region;
 use App\Models\Village;
@@ -161,9 +164,40 @@ class DeliveryInfo extends Component
     }
 
     #[On('submit_order')]
-    public function save()
+    public function validityCheck()
     {
         $this->validate();
+    }
+
+    #[On('complete_order_details')]
+    public function save($customer_id)
+    {
+        
+        $country = Country::where('country_code', 'TZ')->first()?->id;
+
+        // delivery information
+        $delivery = DeliveryAddress::updateOrCreate(['customer_id' => $customer_id ?? null], [
+            'country_id' => $country, 
+            'region_id' => $this->region_id, 
+            'district_id' => $this->district_id, 
+            'ward_id' => $this->ward_id,    
+            'village_id' => $this->village_id,
+            'address' => $this->address,
+        ]);
+
+        // billing information 
+        $billing = BillingAddress::updateOrCreate(['customer_id' => $customer_id ?? null], [
+            'first_name' => $this->billing['first_name'],
+            'last_name' => $this->billing['last_name'],
+            'country_id' => $country, 
+            'region_id' => $this->billing['region_id'] ?? $this->region_id, // this billing['region_id] will be null if is the same as delivery region_id 
+            'district_id' => $this->billing['district_id'] ?? $this->district_id, // this billing['district_id] will be null if is the same as delivery district_id 
+            'ward_id' => $this->billing['ward_id'] ?? $this->ward_id, // this billing['ward_id] will be null if is the same as delivery ward_id    
+            'village_id' => $this->billing['village_id'] ?? $this->village_id, // this billing['village_id] will be null if is the same as delivery village_id
+            'address' => $this->billing['address'] ?? $this->address, // this billing['address] will be null if is the same as delivery address,
+        ]);
+
+        $this->dispatch('save_order', customer_id: $customer_id, delivery_address_id: $delivery->id, billing_address_id: $billing->id);
     }
 
     public function render()

@@ -28,6 +28,11 @@ class Item extends Model
         return $this->belongsTo(SubCategory::class, 'sub_category_id');
     }
 
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
+
     public function scopeSearch($qs, $keyword)
     {
         $qs->where('name', 'like', '%' . $keyword . '%')
