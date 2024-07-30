@@ -8,12 +8,17 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 #[Layout('livewire.pages.public.layouts.base')]
 class Checkout extends Component
 {
     public $redirecting = false;
+
+    #[Validate('accepted', as: 'terms & conditions', message:'You must agree to our terms & conditions')]
+    public $terms = false;
+
     public $items = [];
     public function mount()
     {
@@ -57,6 +62,12 @@ class Checkout extends Component
         $this->loadCart();
     }
 
+    #[On('checkout')]
+    public function submitOrder() {
+        $this->validate();
+        $this->dispatch('submit_order');
+    }
+
     #[On('order_completed')]
     public function orderCompleted() {
         $this->redirecting = true;
@@ -69,6 +80,12 @@ class Checkout extends Component
         $this->items = Cart::where('session_id', $sessionId)->with('item')->get();
         $this->cartCount = Cart::where('session_id', $sessionId)->sum('quantity');
         // dd($this->items->sum('cost'));
+    }
+
+    #[On('to_order_screen')]
+    public function redirectAfterCheckout()
+    {
+        return redirect()->route('home');
     }
 
     public function render()

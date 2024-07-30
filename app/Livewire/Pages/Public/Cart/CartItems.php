@@ -35,18 +35,23 @@ class CartItems extends Component
     }
 
     #[On('add_item')]
-    public function addToCart($itemId)
+    public function addToCart($itemId, $quantity = null)
     {
         $sessionId = (new CustomerSessionController)->getSessionId();
         $cart = Cart::where('session_id', $sessionId)->where('item_id', $itemId)->first();
 
         if ($cart) {
-            $cart->increment('quantity');
+            if($quantity) {
+                $cart->quantity += $quantity;
+                $cart->save();
+            } else {
+                $cart->increment('quantity');
+            }
         } else {
             Cart::create([
                 'session_id' => $sessionId,
                 'item_id' => $itemId,
-                'quantity' => 1,
+                'quantity' => $quantity ? $quantity : 1,
             ]);
         }
 
@@ -87,6 +92,7 @@ class CartItems extends Component
     public function incrementQuantity($cartId) {
         Cart::find($cartId)->increment('quantity');
         $this->loadCart();
+        $this->dispatch('cartUpdated', $this->cartCount);
     }
 
     public function decrementQuantity($cartId) {
@@ -98,6 +104,7 @@ class CartItems extends Component
             $cart->decrement('quantity');
         }
         $this->loadCart();
+        $this->dispatch('cartUpdated', $this->cartCount);
     }
 
     public function render()

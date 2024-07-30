@@ -127,7 +127,7 @@
                                 </div>
                             </div>
                             <div class="col-span-4">
-                                <button
+                                <button wire:click="$dispatch('add_item', {itemId: {{ $data->id }}, quantity: '{{ $quantity }}'})"
                                     class="bg-teal-600 hover:bg-teal-500 rounded-md font-bold items-center px-3 py-2 w-full flex justify-center space-x-2 text-white">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                         class="size-7">
@@ -139,7 +139,7 @@
                             </div>
                         </div>
                         <div class="" x-data="{ hovered: false }">
-                            <a href="" class="flex justify-center items-center space-x-2 text-teal-700"
+                            <a wire:click="$dispatch('wish_item', {itemId: {{ $data->id }}})" class="flex cursor-pointer justify-center items-center space-x-2 text-teal-700"
                                 title="Add to wish list" @mouseover="hovered = true" @mouseleave="hovered = false">
                                 <i class="fa-regular fa-heart" x-show="!hovered"></i>
                                 <i class="fa-solid fa-heart" x-show="hovered"></i>

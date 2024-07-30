@@ -2,8 +2,12 @@
 
 namespace App\Livewire\Pages\Public\Check\Components;
 
+use App\Http\Controllers\CustomerSessionController;
+use App\Models\Cart;
 use App\Models\Customer;
+use App\Models\Item;
 use App\Models\Order;
+use App\Models\OrderItem;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -32,7 +36,14 @@ class CustomerNote extends Component
             $customer->save();
         }
 
+        $item_ids = OrderItem::where('order_id', $order_id)->pluck('item_id');
+        Item::whereIn('id', $item_ids)->increment('ordered');
+
+        $sessionId = (new CustomerSessionController)->getSessionId();
+        Cart::where('session_id', $sessionId)?->delete();
+
         $this->dispatch('order_completed');
+        $this->dispatch('cartUpdated');
     }
 
     public function render()

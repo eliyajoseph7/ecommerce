@@ -25,10 +25,15 @@ class Header extends Component
         $this->cartCount = Cart::where('session_id', $sessionId)->sum('quantity');
         $this->wishCount = WishList::where('session_id', $sessionId)->count();
     }
-
+    
     #[On('cartUpdated')]
-    public function updateCount($count) {
-        $this->cartCount = $count;
+    public function updateCount($count = null) {
+        if($count) {
+            $this->cartCount = $count;
+        } else {
+            $sessionId = Cookie::get('cart_session_id');
+            $this->cartCount = Cart::where('session_id', $sessionId)->sum('quantity');
+        }
     }
 
     #[On('wishListUpdated')]

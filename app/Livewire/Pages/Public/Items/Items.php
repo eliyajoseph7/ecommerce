@@ -44,6 +44,10 @@ class Items extends Component
         $this->getData();
     }
 
+    public function updatedQuantity() {
+        $this->data->price *= $this->quantity;
+    }
+
     public function updatingSelectedMinPrice() {
         $this->getFilters();
     }
@@ -114,11 +118,13 @@ class Items extends Component
 
     public function incrementQuantity() {
         $this->quantity +=1;
+        $this->updatedQuantity();
     }
-
+    
     public function decrementQuantity() {
         if($this->quantity > 1) {
             $this->quantity -=1;
+            $this->updatedQuantity();
         }
     }
 

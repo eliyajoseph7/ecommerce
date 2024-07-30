@@ -32,6 +32,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
 </head>
 
 <body class="font-sans text-gray-900 antialiased relative" x-data="{ atTop: true }">
@@ -57,14 +60,25 @@
         timer: 5000,
         timerProgressBar: true,
     });
-    // document.addEventListener('livewire:init', () => {
-    //     Livewire.on('add_item', (data) => {
-    //         console.log(data);
-    //         Livewire.dispatch('add_to_cart', {
-    //             'itemId': data
-    //         })
-    //     })
-    // });
+    document.addEventListener('livewire:init', () => {
+        Livewire.on('cartUpdated', () => {
+            Toastify({
+                text: "Cart updated",
+                duration: 3000,
+                // destination: "https://github.com/apvarun/toastify-js",
+                newWindow: true,
+                // close: true,
+                gravity: "top", // `top` or `bottom`
+                position: "right", // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                style: {
+                    background: "linear-gradient(to right, #00b09b, #96c93d)",
+                    'border-radius': '10px',
+                },
+                onClick: function() {} // Callback after click
+            }).showToast();
+        })
+    });
 
     // $(document).on('click', '.add_to_cart', function() {
     //     Livewire.dispatch('add_to_cart', {
