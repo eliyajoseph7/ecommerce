@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Detergents') }}</title>
+    <title>{{ config('app.name', 'ejtz') }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -43,7 +43,7 @@
 
 <body class="font-sans antialiased w-screen overflow-x-hidden">
     <div
-        class="relative min-h-screen bg-dots-darker bg-center bg-gray-200 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white overflow-x-hidden bg -[url('{{ asset('assets/images/bg.jpg') }}')] bg-cover bg-blend-overlay">
+        class="relative min-h-screen bg-dots-darker bg-center bg-white dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white overflow-x-hidden bg -[url('{{ asset('assets/images/bg.jpg') }}')] bg-cover bg-blend-overlay">
         <livewire:layouts.admin.nav />
         @include('livewire.layouts.admin.sidenav')
 
