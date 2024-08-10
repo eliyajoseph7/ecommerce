@@ -2,12 +2,18 @@
 
 use App\Livewire\Pages\Admin\Categories\CategoryForm;
 use App\Livewire\Pages\Admin\Categories\CategoryList;
+use App\Livewire\Pages\Admin\Customers\CustomerList;
+use App\Livewire\Pages\Admin\Customers\CustomerView;
 use App\Livewire\Pages\Admin\Dashboard\Dashboard;
+use App\Livewire\Pages\Admin\Discounts\DiscountForm;
+use App\Livewire\Pages\Admin\Discounts\DiscountList;
 use App\Livewire\Pages\Admin\Items\ItemForm;
 use App\Livewire\Pages\Admin\Items\ItemList;
 use App\Livewire\Pages\Admin\Items\ItemView;
 use App\Livewire\Pages\Admin\Mainmenu\MenuForm;
 use App\Livewire\Pages\Admin\Mainmenu\MenuList;
+use App\Livewire\Pages\Admin\Orders\OrderList;
+use App\Livewire\Pages\Admin\Orders\OrderView;
 use App\Livewire\Pages\Admin\Subcategories\SubCategoryForm;
 use App\Livewire\Pages\Admin\Subcategories\SubCategoryList;
 use App\Livewire\Pages\Public\Auth\Login;
@@ -50,6 +56,25 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::prefix('admin')->group(function() {
         Route::get('dashboard', Dashboard::class)->name('dashboard');
+
+        // orders management
+        Route::prefix('orders')->group(function() {
+            Route::get('list', OrderList::class)->name('order_list');
+            Route::get('form/{orderId}', OrderView::class)->name('order_view');
+        });
+
+        // customers management
+        Route::prefix('customers')->group(function() {
+            Route::get('list', CustomerList::class)->name('customer_list');
+            Route::get('form/{customerId}', CustomerView::class)->name('customer_view');
+        });
+
+        // discounts management
+        Route::prefix('discounts')->group(function() {
+            Route::get('list', DiscountList::class)->name('discount_list');
+            Route::get('form', DiscountForm::class)->name('discount_form');
+            Route::get('form/{discountId}', DiscountForm::class)->name('discount_form_edit');
+        });
 
         // main menu management
         Route::prefix('main-menus')->group(function() {

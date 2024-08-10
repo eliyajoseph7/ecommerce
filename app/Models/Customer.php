@@ -29,4 +29,21 @@ class Customer extends Authenticatable
     public function billingAddress() {
         return $this->hasOne(BillingAddress::class);
     }
+
+    protected $appends = ['full_name'];
+
+    public function getFullnameAttribute() {
+        return $this->first_name . ' ' . $this->last_name;
+    }
+
+    public function scopeSearch($qs, $keyword)
+    {
+        return $qs->where('first_name', 'like', '%' . $keyword . '%')
+        ->orWhere('last_name', 'like', '%' . $keyword . '%')
+        ->orWhere('phone', 'like', '%' . $keyword . '%')
+        ->orWhere('email', 'like', '%' . $keyword . '%')
+        ->orWhere('company', 'like', '%' . $keyword . '%')
+        ->orWhere('created_at', 'like', '%' . $keyword . '%')
+        ->orWhere('tin', 'like', '%' . $keyword . '%');
+    }
 }

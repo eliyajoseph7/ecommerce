@@ -33,4 +33,19 @@ class Order extends Model
     {
         return $this->belongsTo(BillingAddress::class, 'billing_address_id');
     }
+
+
+    public function scopeSearch($qs, $keyword)
+    {
+        return $qs->where('orderno', 'like', '%' . $keyword . '%')
+        ->orWhere('status', 'like', '%' . $keyword . '%')
+        ->orWhere('payment_status', 'like', '%' . $keyword . '%')
+        ->orWhere('payment_method', 'like', '%' . $keyword . '%')
+        ->orWhere('order_date', 'like', '%' . $keyword . '%')
+        ->orWhere('total_amount', 'like', '%' . $keyword . '%')
+        ->orWhereHas('customer', function($qs) use($keyword) {
+            $qs->where('first_name', 'like', '%' . $keyword . '%')
+            ->orWhere('last_name', 'like', '%' . $keyword . '%');
+        });
+    }
 }
