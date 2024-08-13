@@ -59,7 +59,7 @@ class ItemReviews extends ModalComponent
         $rating->customer = $this->customer;
         $rating->save();
         
-        $this->dispatch('successToast', message: $this->action == 'add' ? '🙌 Review submitted' : '🙌 Review updated' .' successfully!');
+        $this->dispatch('successToast', message: $this->action == 'add' ? '🙌 Review submitted successfully!' : '🙌 Review updated successfully!');
         $this->submitting = false;
         $this->dispatch('load_reviews');
         $this->dispatch('load_review_updates', id: $this->reviewId); // for read more modal

@@ -18,7 +18,7 @@
                                 List</button>
                         </div>
                     @endif
-                    <div class="col-span-full grid grid-cols-4 gap-2">
+                    <div class="col-span-full grid grid-cols-4 gap-0">
                         @forelse ($data ?? [] as $dt)
                             <div x-data="{ activeTab: 0, autoChange: true }" title="{{ $dt->item->name }}"
                                 class="relative border-[1px] border-b-white hover:border-b-gray-300 px-2 py-3.5 mb-0 cursor-pointer"

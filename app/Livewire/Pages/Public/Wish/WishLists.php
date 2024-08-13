@@ -49,6 +49,7 @@ class WishLists extends Component
 
         $this->loadWishList();
         $this->dispatch('wishListUpdated', count: $this->wishListCount);
+        $this->dispatch('successToast', message: 'added to wishlist');
     }
 
 
@@ -60,6 +61,7 @@ class WishLists extends Component
             $wishList->delete();
             $this->loadWishList();
             $this->dispatch('wishListUpdated', $this->wishListCount);
+            $this->dispatch('successToast', message: 'removed from wishlist');
         }
     }
 
@@ -68,6 +70,7 @@ class WishLists extends Component
         WishList::where('session_id', (new CustomerSessionController)->getSessionId())?->delete();
         $this->loadWishList();
         $this->dispatch('wishListUpdated', $this->wishListCount);
+        $this->dispatch('successToast', message: 'wishlist cleared');
     }
 
 

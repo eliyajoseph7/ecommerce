@@ -57,6 +57,7 @@ class CartItems extends Component
 
         $this->loadCart();
         $this->dispatch('cartUpdated', count: $this->cartCount);
+        $this->dispatch('successToast', message: 'cart updated');
     }
 
     public function updateQuantity($cartId, $quantity)
@@ -66,6 +67,7 @@ class CartItems extends Component
             $cart->update(['quantity' => $quantity]);
             $this->loadCart();
             $this->dispatch('cartUpdated', $this->cartCount);
+            $this->dispatch('successToast', message: 'cart updated');
         }
     }
 
@@ -77,6 +79,7 @@ class CartItems extends Component
             $cart->delete();
             $this->loadCart();
             $this->dispatch('cartUpdated', $this->cartCount);
+            $this->dispatch('successToast', message: 'cart updated');
         }
     }
 
@@ -86,6 +89,7 @@ class CartItems extends Component
         Cart::where('session_id', (new CustomerSessionController)->getSessionId())?->delete();
         $this->loadCart();
         $this->dispatch('cartUpdated', $this->cartCount);
+        $this->dispatch('successToast', message: 'cart cleared');
     }
 
 
@@ -93,6 +97,7 @@ class CartItems extends Component
         Cart::find($cartId)->increment('quantity');
         $this->loadCart();
         $this->dispatch('cartUpdated', $this->cartCount);
+        $this->dispatch('successToast', message: 'cart updated');
     }
 
     public function decrementQuantity($cartId) {
@@ -105,6 +110,7 @@ class CartItems extends Component
         }
         $this->loadCart();
         $this->dispatch('cartUpdated', $this->cartCount);
+        $this->dispatch('successToast', message: 'cart updated');
     }
 
     public function render()
