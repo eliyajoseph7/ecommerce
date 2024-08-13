@@ -30,10 +30,17 @@ class Customer extends Authenticatable
         return $this->hasOne(BillingAddress::class);
     }
 
-    protected $appends = ['full_name'];
+    protected $appends = ['full_name', 'is_loggedin'];
 
     public function getFullnameAttribute() {
         return $this->first_name . ' ' . $this->last_name;
+    }
+
+    public function getIsLoggedinAttribute() {
+        if($this->loggedin === '0') {
+            return false;
+        }
+        return true;
     }
 
     public function scopeSearch($qs, $keyword)

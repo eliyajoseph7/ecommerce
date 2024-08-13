@@ -16,7 +16,7 @@
     @section('scripts')
     <script>
         $(document).ready(function() {
-            Livewire.dispatch('fetch_newest_products')
+            Livewire.dispatch('fetch_products')
         });
     </script>
     @endsection

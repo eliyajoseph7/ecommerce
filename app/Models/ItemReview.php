@@ -12,10 +12,11 @@ class ItemReview extends Model
 
     protected $appends = ['canedit'];
 
-    public function getCaneditAttribute() {
+    public function getCaneditAttribute()
+    {
         $sessionId = (new CustomerSessionController)->getSessionId();
         $diff = date_diff(now(), $this->created_at)->days;
-        if($this->session_id == $sessionId && $diff < 1) {
+        if ($this->session_id == $sessionId && $diff < 1) {
             return true;
         } else {
             return false;

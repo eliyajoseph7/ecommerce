@@ -20,7 +20,7 @@ class Newest extends Component
         $this->limit = $this->counter;
     }
 
-    #[On('fetch_newest_products')]
+    #[On('fetch_products')]
     public function fetchNewProducts() {
 
         // try {
