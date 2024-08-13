@@ -38,6 +38,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/tw-elements.min.css" />
     <script src="https://cdn.tailwindcss.com"></script>
 
+    @livewire('wire-elements-modal')
 </head>
 
 <body class="font-sans text-gray-900 antialiased relative" x-data="{ atTop: true }">
@@ -75,6 +76,24 @@
                 // close: true,
                 gravity: "top", // `top` or `bottom`
                 position: "right", // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                style: {
+                    background: "linear-gradient(to right, #00b09b, #96c93d)",
+                    'border-radius': '10px',
+                },
+                onClick: function() {} // Callback after click
+            }).showToast();
+        });
+
+        Livewire.on('successToast', (value) => {
+            Toastify({
+                text: value.message,
+                duration: 3000,
+                // destination: "https://github.com/apvarun/toastify-js",
+                newWindow: true,
+                // close: true,
+                gravity: "top", // `top` or `bottom`
+                position: "center", // `left`, `center` or `right`
                 stopOnFocus: true, // Prevents dismissing of toast on hover
                 style: {
                     background: "linear-gradient(to right, #00b09b, #96c93d)",

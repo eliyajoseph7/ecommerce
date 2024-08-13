@@ -5,7 +5,7 @@
         <ul class="space-y-2 font-medium">
             <li>
                 <a href="{{ route('dashboard') }}"
-                    class="flex items-center p-2 rounded-lg dark:text-white font-normal {{ Route::is('dashboard') ? 'bg-sky-100/50 text-sky-900 font-bold hover:bg-sky-100/50' : 'font-normal text-gray-700 hover:text-sky-900 hover:bg-sky-100/50' }} dark:hover:bg-gray-700 group">
+                    class="flex items-center p-2 rounded-lg dark:text-white font-normal {{ Route::is('dashboard') ? 'bg-sky-100/80 text-sky-900 font-bold hover:bg-sky-100/80' : 'font-normal text-gray-700 hover:text-sky-900 hover:bg-sky-100/80' }} dark:hover:bg-gray-700 group">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -20,7 +20,7 @@
     
                 <li>
                     <a href="{{ route('order_list') }}"
-                        class="flex items-center p-2 rounded-lg dark:text-white {{ in_array(Route::currentRouteName(), ['order_list', 'order_view']) ? 'bg-sky-100/50 text-sky-900 font-bold hover:bg-sky-100/50' : 'font-normal text-gray-700 hover:text-sky-900 hover:bg-sky-100/50' }} dark:hover:bg-gray-700 group">
+                        class="flex items-center p-2 rounded-lg dark:text-white {{ in_array(Route::currentRouteName(), ['order_list', 'order_view']) ? 'bg-sky-100/80 text-sky-900 font-bold hover:bg-sky-100/80' : 'font-normal text-gray-700 hover:text-sky-900 hover:bg-sky-100/80' }} dark:hover:bg-gray-700 group">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -33,7 +33,7 @@
                 </li>
                 <li>
                     <a href="{{ route('customer_list') }}"
-                        class="flex items-center p-2 rounded-lg dark:text-white {{ in_array(Route::currentRouteName(), ['customer_list', 'customer_view']) ? 'bg-sky-100/50 text-sky-900 font-bold hover:bg-sky-100/50' : 'font-normal text-gray-700 hover:text-sky-900 hover:bg-sky-100/50' }} dark:hover:bg-gray-700 group">
+                        class="flex items-center p-2 rounded-lg dark:text-white {{ in_array(Route::currentRouteName(), ['customer_list', 'customer_view']) ? 'bg-sky-100/80 text-sky-900 font-bold hover:bg-sky-100/80' : 'font-normal text-gray-700 hover:text-sky-900 hover:bg-sky-100/80' }} dark:hover:bg-gray-700 group">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -47,7 +47,7 @@
                 </li>
                 <li>
                     <a href="{{ route('sub_category_list') }}"
-                        class="flex items-center p-2 rounded-lg dark:text-white {{ Route::is('sub_category_list') || Route::is('sub_category_form') || Route::is('sub_category_form_edit') ? 'bg-sky-100/50 text-sky-900 font-bold hover:bg-sky-100/50' : 'font-normal text-gray-700 hover:text-sky-900 hover:bg-sky-100/50' }} dark:hover:bg-gray-700 group">
+                        class="flex items-center p-2 rounded-lg dark:text-white {{ Route::is('sub_category_list') || Route::is('sub_category_form') || Route::is('sub_category_form_edit') ? 'bg-sky-100/80 text-sky-900 font-bold hover:bg-sky-100/80' : 'font-normal text-gray-700 hover:text-sky-900 hover:bg-sky-100/80' }} dark:hover:bg-gray-700 group">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -65,7 +65,7 @@
     
                 <li>
                     <a href="{{ route('main_menu_list') }}"
-                        class="flex items-center p-2 rounded-lg dark:text-white {{ in_array(Route::currentRouteName(), ['main_menu_list', 'main_menu_form', 'main_menu_form_edit']) ? 'bg-sky-100/50 text-sky-900 font-bold hover:bg-sky-100/50' : 'font-normal text-gray-700 hover:text-sky-900 hover:bg-sky-100/50' }} dark:hover:bg-gray-700 group">
+                        class="flex items-center p-2 rounded-lg dark:text-white {{ in_array(Route::currentRouteName(), ['main_menu_list', 'main_menu_form', 'main_menu_form_edit']) ? 'bg-sky-100/80 text-sky-900 font-bold hover:bg-sky-100/80' : 'font-normal text-gray-700 hover:text-sky-900 hover:bg-sky-100/80' }} dark:hover:bg-gray-700 group">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -78,7 +78,7 @@
                 </li>
                 <li>
                     <a href="{{ route('category_list') }}"
-                        class="flex items-center p-2 rounded-lg dark:text-white {{ Route::is('category_list') || Route::is('category_form') || Route::is('category_form_edit') ? 'bg-sky-100/50 text-sky-900 font-bold hover:bg-sky-100/50' : 'font-normal text-gray-700 hover:text-sky-900 hover:bg-sky-100/50' }} dark:hover:bg-gray-700 group">
+                        class="flex items-center p-2 rounded-lg dark:text-white {{ Route::is('category_list') || Route::is('category_form') || Route::is('category_form_edit') ? 'bg-sky-100/80 text-sky-900 font-bold hover:bg-sky-100/80' : 'font-normal text-gray-700 hover:text-sky-900 hover:bg-sky-100/80' }} dark:hover:bg-gray-700 group">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -92,7 +92,7 @@
                 </li>
                 <li>
                     <a href="{{ route('sub_category_list') }}"
-                        class="flex items-center p-2 rounded-lg dark:text-white {{ Route::is('sub_category_list') || Route::is('sub_category_form') || Route::is('sub_category_form_edit') ? 'bg-sky-100/50 text-sky-900 font-bold hover:bg-sky-100/50' : 'font-normal text-gray-700 hover:text-sky-900 hover:bg-sky-100/50' }} dark:hover:bg-gray-700 group">
+                        class="flex items-center p-2 rounded-lg dark:text-white {{ Route::is('sub_category_list') || Route::is('sub_category_form') || Route::is('sub_category_form_edit') ? 'bg-sky-100/80 text-sky-900 font-bold hover:bg-sky-100/80' : 'font-normal text-gray-700 hover:text-sky-900 hover:bg-sky-100/80' }} dark:hover:bg-gray-700 group">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -106,7 +106,7 @@
                 </li>
                 <li>
                     <a href="{{ route('item_list') }}"
-                        class="flex items-center p-2 rounded-lg dark:text-white {{ in_array(Route::currentRouteName(), ['item_list', 'item_form', 'item_form_edit', 'item_view']) ? 'bg-sky-100/50 text-sky-900 font-bold hover:bg-sky-100/50' : 'font-normal text-gray-700 hover:text-sky-900 hover:bg-sky-100/50' }} dark:hover:bg-gray-700 group">
+                        class="flex items-center p-2 rounded-lg dark:text-white {{ in_array(Route::currentRouteName(), ['item_list', 'item_form', 'item_form_edit', 'item_view']) ? 'bg-sky-100/80 text-sky-900 font-bold hover:bg-sky-100/80' : 'font-normal text-gray-700 hover:text-sky-900 hover:bg-sky-100/80' }} dark:hover:bg-gray-700 group">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -122,7 +122,7 @@
     
                 <li>
                     <a href="{{ route('main_menu_list') }}"
-                        class="flex items-center p-2 rounded-lg dark:text-white {{ in_array(Route::currentRouteName(), ['main_menu_list', 'main_menu_form', 'main_menu_form_edit']) ? 'bg-sky-100/50 text-sky-900 font-bold hover:bg-sky-100/50' : 'font-normal text-gray-700 hover:text-sky-900 hover:bg-sky-100/50' }} dark:hover:bg-gray-700 group">
+                        class="flex items-center p-2 rounded-lg dark:text-white {{ in_array(Route::currentRouteName(), ['main_menu_list', 'main_menu_form', 'main_menu_form_edit']) ? 'bg-sky-100/80 text-sky-900 font-bold hover:bg-sky-100/80' : 'font-normal text-gray-700 hover:text-sky-900 hover:bg-sky-100/80' }} dark:hover:bg-gray-700 group">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -135,7 +135,7 @@
                 </li>
                 <li>
                     <a href="{{ route('category_list') }}"
-                        class="flex items-center p-2 rounded-lg dark:text-white {{ Route::is('category_list') || Route::is('category_form') || Route::is('category_form_edit') ? 'bg-sky-100/50 text-sky-900 font-bold hover:bg-sky-100/50' : 'font-normal text-gray-700 hover:text-sky-900 hover:bg-sky-100/50' }} dark:hover:bg-gray-700 group">
+                        class="flex items-center p-2 rounded-lg dark:text-white {{ Route::is('category_list') || Route::is('category_form') || Route::is('category_form_edit') ? 'bg-sky-100/80 text-sky-900 font-bold hover:bg-sky-100/80' : 'font-normal text-gray-700 hover:text-sky-900 hover:bg-sky-100/80' }} dark:hover:bg-gray-700 group">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -149,7 +149,7 @@
                 </li>
                 <li>
                     <a href="{{ route('sub_category_list') }}"
-                        class="flex items-center p-2 rounded-lg dark:text-white {{ Route::is('sub_category_list') || Route::is('sub_category_form') || Route::is('sub_category_form_edit') ? 'bg-sky-100/50 text-sky-900 font-bold hover:bg-sky-100/50' : 'font-normal text-gray-700 hover:text-sky-900 hover:bg-sky-100/50' }} dark:hover:bg-gray-700 group">
+                        class="flex items-center p-2 rounded-lg dark:text-white {{ Route::is('sub_category_list') || Route::is('sub_category_form') || Route::is('sub_category_form_edit') ? 'bg-sky-100/80 text-sky-900 font-bold hover:bg-sky-100/80' : 'font-normal text-gray-700 hover:text-sky-900 hover:bg-sky-100/80' }} dark:hover:bg-gray-700 group">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"

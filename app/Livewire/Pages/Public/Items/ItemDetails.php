@@ -1,5 +1,7 @@
 <?php
-
+/*
+* This component is not used, the view is rendered from Items component.
+*/
 namespace App\Livewire\Pages\Public\Items;
 
 use Livewire\Attributes\Layout;

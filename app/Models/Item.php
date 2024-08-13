@@ -33,6 +33,11 @@ class Item extends Model
         return $this->hasMany(OrderItem::class);
     }
 
+    public function reviews()
+    {
+        return $this->hasMany(ItemReview::class);
+    }
+
     public function scopeSearch($qs, $keyword)
     {
         $qs->where('name', 'like', '%' . $keyword . '%')

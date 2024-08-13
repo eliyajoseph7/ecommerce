@@ -46,6 +46,7 @@ class OrderList extends Component
         $this->sortDir = 'DESC';
     }
 
+    #[On('reload_orders')]
     public function render()
     {
         $data = $this->getData();

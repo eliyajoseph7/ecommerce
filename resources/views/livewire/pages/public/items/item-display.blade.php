@@ -4,7 +4,7 @@
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0">
                 @forelse ($data as $new)
                     <div x-data="{ activeTab: 0, autoChange: true, view: false }" title="{{ $new->name }}"
-                        class="relative border-[1px] border-b-white hover:border-b-gray-300 z-30 hover:z-40 hover:p-3 hover:rounded-sm hover:scale-110 hover:border-0 hover:shadow-md bg-white px-1 py-0.5 mb-4 cursor-pointer"
+                        class="relative border-[1px] border-b-white hover:border-b-gray-300 z-30 hover:z-40 hover:p-3 hover:rounded-sm hover:scale-105 hover:border-0 hover:shadow-md bg-white px-0.5 pb-0.5 mb-4 cursor-pointer"
                         x-init="setInterval(() => { if (autoChange && {{ count($new->images) }}) { activeTab = (activeTab + 1) % {{ count($new->images) }}; } }, 5000)" @mouseover="autoChange = false, view = true"
                         @mouseleave="autoChange = true, view=false">
                         <div class="h-32 md:h-72 relative">
@@ -34,7 +34,7 @@
                                 <div class="relative h-full w-full">
                                     @foreach ($new->images as $index => $image)
                                         <img x-show="activeTab === {{ $index }}" src="{{ asset($image->image) }}"
-                                            class="absolute inset-0 h-full w-full rounded-lg object-cover ease-in-out duration-1000"
+                                            class="absolute inset-0 h-full w-full rounded-b-lg object-cover ease-in-out duration-1000"
                                             x-transition:enter="transition ease-out duration-300"
                                             x-transition:enter-start="opacity-0 scale-98"
                                             x-transition:enter-end="opacity-100 scale-100">

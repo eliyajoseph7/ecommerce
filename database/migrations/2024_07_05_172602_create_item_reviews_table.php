@@ -17,6 +17,7 @@ return new class extends Migration
             $table->double('score');
             $table->mediumText('comment')->nullable();
             $table->string('customer')->nullable();
+            $table->string('session_id');
             $table->timestamps();
         });
     }

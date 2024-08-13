@@ -10,17 +10,40 @@ use Livewire\Component;
 class Random extends Component
 {
     public $activeItem;
-    public $loading = true;
     public $random = [];
+    public $loading = true;
+    public $loadMore = false;
+    public $counter = 5;
+    public $limit = 0;
+    public $total = 0;
 
+    
     public function mount(){
-        $this->fetchSimilarProducts();
+        $this->limit = $this->counter;
+        $this->fetchRandomProducts();
     }
-    public function fetchSimilarProducts() {
-        $this->random = Item::where('id', '!=', $this->activeItem)->get();
+    public function fetchRandomProducts() {
+        $random = Item::where('status', 'active')->where('id', '!=', $this->activeItem)->latest();
+        $this->total = $random->count();
+        $this->random = $random->limit($this->limit)->get();
+        $this->loading = false;
+        if(count($this->random) < $this->total) {
+            $this->loadMore = true;
+        } else {
+            $this->loadMore = false;
+        }
 
         $this->loading = false;
 
+    }
+
+
+    #[On('load_more')]
+    public function loadMoreData() {
+        $this->loadMore = true;
+        $this->loading = true;
+        $this->limit += $this->counter;
+        $this->fetchRandomProducts();
     }
 
     #[On('count_visit')]

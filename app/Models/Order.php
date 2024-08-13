@@ -48,4 +48,44 @@ class Order extends Model
             ->orWhere('last_name', 'like', '%' . $keyword . '%');
         });
     }
+
+    protected $casts = [
+        'order_date' => 'date'
+    ];
+
+    protected $appends = ['order_status', 'order_payment'];
+
+    public function getOrderStatusAttribute() {
+        $status = $this->status;
+        $html = '';
+        if($status == 'pending') {
+            $html = '<div class="text-sky-500 bg-sky-50 px-2 py-0 5 rounded-md font-bold">'. $status.'</div>';
+        } else if($status == 'processing') {
+            $html = '<div class="text-yellow-500 bg-yellow-50 px-2 py-0 5 rounded-md font-bold">'. $status.'</div>';
+        } else if($status == 'completed') {
+            $html = '<div class="text-green-500 bg-green-50 px-2 py-0 5 rounded-md font-bold">'. $status.'</div>';
+        } else if($status == 'cancelled') {
+            $html = '<div class="text-red-500 bg-red-50 px-2 py-0 5 rounded-md font-bold">'. $status.'</div>';
+        } else if($status == 'refunded') {
+            $html = '<div class="text-blue-500 bg-blue-50 px-2 py-0 5 rounded-md font-bold">'. $status.'</div>';
+        }
+
+        return $html;
+    }
+
+    public function getOrderPaymentAttribute() {
+        $status = $this->payment_status;
+        $html = '';
+        if($status == 'pending') {
+            $html = '<div class="text-red-500 bg-red-50 px-2 py-0 5 rounded-md font-bold">'. $status.'</div>';
+        } else if($status == 'failed') {
+            $html = '<div class="text-yellow-500 bg-yellow-50 px-2 py-0 5 rounded-md font-bold">'. $status.'</div>';
+        } else if($status == 'paid') {
+            $html = '<div class="text-green-500 bg-green-50 px-2 py-0 5 rounded-md font-bold">'. $status.'</div>';
+        } else if($status == 'refunded') {
+            $html = '<div class="text-blue-500 bg-blue-50 px-2 py-0 5 rounded-md font-bold">'. $status.'</div>';
+        }
+
+        return $html;
+    }
 }

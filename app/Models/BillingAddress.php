@@ -20,4 +20,24 @@ class BillingAddress extends Model
         'village_id',
         'address',
     ];
+
+    public function country() {
+        return $this->belongsTo(Country::class);
+    }
+
+    public function region() {
+        return $this->belongsTo(Region::class);
+    }
+
+    public function district() {
+        return $this->belongsTo(District::class);
+    }
+
+    public function ward() {
+        return $this->belongsTo(Ward::class);
+    }
+    
+    public function village() {
+        return $this->belongsTo(Village::class);
+    }
 }

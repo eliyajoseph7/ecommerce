@@ -47,7 +47,7 @@
         <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-0">
             @forelse ($newest as $new)
                 <div x-data="{ activeTab: 0, autoChange: true, view: false }" title="{{ $new->name }}"
-                    class="relative border-[1px] border-b-white hover:border-b-gray-300 px-2 py-3.5 mb-0 cursor-pointer"
+                    class="relative border-[1px] border-b-white hover:border-b-gray-300 px-0.5 pb-3.5 mb-0 cursor-pointer"
                     x-init="setInterval(() => { if (autoChange && {{ count($new->images) }}) { activeTab = (activeTab + 1) % {{ count($new->images) }}; } }, 5000)" @mouseover="autoChange = false, view = true"
                     @mouseleave="autoChange = true, view = false">
                     <div class="h-32 md:h-72 relative">
@@ -77,7 +77,7 @@
                             <div class="relative h-full w-full">
                                 @foreach ($new->images as $index => $image)
                                     <img x-show="activeTab === {{ $index }}" src="{{ asset($image->image) }}"
-                                        class="absolute inset-0 h-full w-full rounded-lg object-cover ease-in-out duration-1000"
+                                        class="absolute inset-0 h-full w-full rounded-b-lg object-cover ease-in-out duration-1000"
                                         x-transition:enter="transition ease-out duration-300"
                                         x-transition:enter-start="opacity-0 scale-98"
                                         x-transition:enter-end="opacity-100 scale-100">
@@ -101,7 +101,7 @@
                             </div>
                         @endif
                     </div>
-                    <div class="py-4">
+                    <div class="py-4 px-2">
                         <div class="">
                             <a
                                 wire:click="$dispatch('count_visit', {itemId: {{ $new->id }}, routeName: 'public_items', routeArg: '{{ $new->slug }}' })">{{ $new->name }}</a>
@@ -110,7 +110,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="md:flex justify-between pb-2">
+                    <div class="md:flex justify-between px-2 pb-2">
                         <div class="font-bold text-gray-600 leading-10">TSh. {{ number_format($new->price, 2) }}</div>
                         <button wire:click="$dispatch('add_item', {itemId: {{ $new->id }}})"
                             class="rounded-md px-2 py-0 bg-teal-100/50 rin g-2 ring-teal-700 hover:ring-teal-600 hover:bg-teal-600 hover:shadow-sm text-teal-700 hover:text-white">
@@ -128,9 +128,16 @@
         </div>
 
     @endif
-    <div class="text-center py-2">
-        <button
-            class="ring-1 ring-offset-1 ring-green-700 hover:ring-green-600 rounded-xl px-5 py-1.5 text-green-700">Load
-            More</button>
+    <div class="text-center py-8">
+        @if ($loadMore)
+            @if ($loading)
+                <div class="flex justify-start">
+                    <img src="{{ asset('assets/images/spinner.gif') }}" class="w-10">
+                </div>
+            @else
+                <button wire:click="$dispatch('load_more')" class="bg-teal-50 text-teal-500 px-3 py-1 rounded-md">Load
+                    More</button>
+            @endif
+        @endif
     </div>
 </div>

@@ -40,22 +40,26 @@ class Items extends Component
         } else if ($this->isItemSlug($this->slug)) {
             $this->category = 'item';
         }
-        
+
         $this->getData();
     }
 
-    public function updatedQuantity() {
+    public function updatedQuantity()
+    {
         $this->data->price *= $this->quantity;
     }
 
-    public function updatingSelectedMinPrice() {
+    public function updatingSelectedMinPrice()
+    {
         $this->getFilters();
     }
-    public function updatingSelectedMaxPrice() {
+    public function updatingSelectedMaxPrice()
+    {
         $this->getFilters();
     }
 
-    public function getData() {
+    public function getData()
+    {
         if ($this->category == 'category') {
             $qs = Category::where('slug', $this->slug)->first();
             $this->view = 'livewire.pages.public.items.items';
@@ -65,7 +69,7 @@ class Items extends Component
                 'level' => 1
             ];
             $this->qs = $qs;
-        } else if($this->category == 'sub_category') {
+        } else if ($this->category == 'sub_category') {
             $qs = SubCategory::where('slug', $this->slug)->first();
             $this->view = 'livewire.pages.public.items.items';
             $this->context = [
@@ -76,17 +80,22 @@ class Items extends Component
             $this->qs = $qs;
         } elseif ($this->category == 'item') {
             // no need for updating this->query here
-            $this->data = Item::where('slug', $this->slug)->first();
-            $this->view = 'livewire.pages.public.items.item-details';
-            $this->context = [
-                'category' => $this->data->category->category,
-                'sub_category' => $this->data->category,
-                'active_img' => $this->data->images->first()->image,
-            ];
+            $this->loadItemDetail();
         } else {
             abort(404);
         }
         $this->loading = false;
+    }
+
+    public function loadItemDetail()
+    {
+        $this->data = Item::with('reviews')->where('slug', $this->slug)->first();
+        $this->view = 'livewire.pages.public.items.item-details';
+        $this->context = [
+            'category' => $this->data->category->category,
+            'sub_category' => $this->data->category,
+            'active_img' => $this->data->images->first()->image,
+        ];
     }
 
     protected function isCategorySlug($slug)
@@ -106,7 +115,8 @@ class Items extends Component
 
     // update active image for image details view
     #[On('update_active_img')]
-    public function updateActiveImg($image) {
+    public function updateActiveImg($image)
+    {
         $this->context['active_img'] = $image;
     }
 
@@ -116,14 +126,16 @@ class Items extends Component
         return view($this->view);
     }
 
-    public function incrementQuantity() {
-        $this->quantity +=1;
+    public function incrementQuantity()
+    {
+        $this->quantity += 1;
         $this->updatedQuantity();
     }
-    
-    public function decrementQuantity() {
-        if($this->quantity > 1) {
-            $this->quantity -=1;
+
+    public function decrementQuantity()
+    {
+        if ($this->quantity > 1) {
+            $this->quantity -= 1;
             $this->updatedQuantity();
         }
     }
@@ -144,7 +156,8 @@ class Items extends Component
     }
 
     #[On('call_filter')]
-    public function getFilters() {
+    public function getFilters()
+    {
         $context = [
             'min_price' => $this->selectedMinPrice,
             'max_price' => $this->selectedMaxPrice,

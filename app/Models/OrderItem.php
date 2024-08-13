@@ -22,4 +22,10 @@ class OrderItem extends Model
     {
         return $this->belongsTo(Order::class);
     }
+
+    protected $appends = ['total_price'];
+
+    public function getTotalPriceAttribute() {
+        return $this->quantity * $this->price;
+    }
 }
