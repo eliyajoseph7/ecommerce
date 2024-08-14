@@ -29,7 +29,7 @@ class Reviews extends Component
         }
     }
 
-    #[On('load_more')]
+    #[On('load_more_reviews')]
     public function loadMoreReviews() {
         $this->loadMore = true;
         $this->loading = true;

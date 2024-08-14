@@ -19,7 +19,7 @@
 
                 <div class="">
                     <div class="">{{ $review->customer }}</div>
-                    <div class="flex items-center mb-4 text-gray-300">
+                    <div class="flex items-center text-gray-300">
                         @for ($i = 1; $i <= 5; $i++)
                             <svg class="w-5 h-5 me-1 cursor-pointer {{ $review->score >= $i ? 'text-amber-500' : 'text-gray-300' }}"
                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -35,9 +35,10 @@
                             </div>
                         @endif
                     </div>
+                    <div class="text-sm text-gray-400">{{ $review->created_at->diffForHumans() }}</div>
                 </div>
             </div>
-            <div class="px-4 mb-2">
+            <div class="px-4 mt-4 mb-2">
                 {!! Str::limit($review->comment, 200, '..') !!}
                 @if (Str::length($review->comment) > 200)
                     <button
@@ -61,7 +62,7 @@
                 <img src="{{ asset('assets/images/spinner.gif') }}" class="w-10">
             </div>
         @else
-            <button wire:click="$dispatch('load_more')" class="bg-teal-50 text-teal-500 px-3 py-1 rounded-md">Load
+            <button wire:click="$dispatch('load_more_reviews')" class="bg-teal-50 text-teal-500 px-3 py-1 rounded-md">Load
                 More</button>
         @endif
     @endif

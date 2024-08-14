@@ -26,9 +26,9 @@
                 @endif
             </div>
 
-            <div class="">
+            <div class="mb-4">
                 <div class="">{{ $review->customer }}</div>
-                <div class="flex items-center mb-4 text-gray-300">
+                <div class="flex items-center text-gray-300">
                     @for ($i = 1; $i <= 5; $i++)
                         <svg class="w-5 h-5 me-1 cursor-pointer {{ $review->score >= $i ? 'text-amber-500' : 'text-gray-300' }}"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -44,6 +44,7 @@
                         </div>
                     @endif
                 </div>
+                <div class="text-sm text-gray-400">{{ $review->created_at->diffForHumans() }}</div>
             </div>
         </div>
         <div class="max-h-[90vh] min-h-[50vh] overflow-y-auto">
