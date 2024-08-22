@@ -16,6 +16,7 @@ class Item extends Model
         'description',
         'price',
         'sub_category_id',
+        'discount_id',
     ];
 
     public function images()
@@ -26,6 +27,11 @@ class Item extends Model
     public function category()
     {
         return $this->belongsTo(SubCategory::class, 'sub_category_id');
+    }
+
+    public function discount()
+    {
+        return $this->belongsTo(Discount::class);
     }
 
     public function orderItems()
@@ -63,5 +69,15 @@ class Item extends Model
                             });
                     });
             });
+    }
+
+    protected $appends = ['amount'];
+
+    public function getAmountAttribute() {
+        if($this->discount) {
+            $amount = ($this->price * $this->discount->percentage) / 100;
+
+            return $amount;
+        }
     }
 }

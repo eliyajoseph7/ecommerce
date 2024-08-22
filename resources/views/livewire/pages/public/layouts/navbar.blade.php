@@ -1,7 +1,7 @@
 <div class="">
     <nav class=" border-green-200 dark:bg-green-900 dark:border-green-700 z-50">
         <div
-            class="w-screen-xl flex md:block flex-wrap items-center justify-between mx-auto sm:py-1 md:py-3 sm:px-2 md:px-32 lg:px-72">
+            class="w-screen-xl flex md:block flex-wrap items-center justify-between mx-auto sm:py-1 md:py-3 sm:px-2 lg:px-72">
             <div class="hidden md:flex">
                 <div class="" :class="{ 'hidden': atTop }">
                     <div class="grid md:grid-cols-8 lg:grid-cols-10 gap-4 items-center">

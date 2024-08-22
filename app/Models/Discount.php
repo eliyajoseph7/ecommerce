@@ -26,4 +26,10 @@ class Discount extends Model
         ->orWhere('end_date', 'like', '%' . $keyword . '%')
         ->orWhere('created_at', 'like', '%' . $keyword . '%');
     }
+
+    protected $appends = ['info'];
+
+    public function getInfoAttribute() {
+        return $this->percentage . '% ('. $this->start_date?->format('M d, Y') . ' - ' . $this->end_date?->format('M d, Y') . ')';
+    }
 }

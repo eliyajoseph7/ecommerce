@@ -1,9 +1,9 @@
 <div class="w-full">
     <style>
-        
+
     </style>
-    <div class="pt-4 w-full px-4 md:px-32 lg:px-72">
-        <div class="text-gray-400 py-2 flex space-x-1 border-b border-gray-300/70">
+    <div class="pt-4 w-full px-4 lg:px-72">
+        <div class="text-gray-400 py-2 md:flex space-x-1 border-b border-gray-300/70">
             <a class="pr-1 hover:text-teal-700" href="{{ route('home') }}">Home</a>/
             <a class="pr-1 hover:text-teal-700"
                 href="{{ route('public_items', $context['category']['slug']) }}">{{ $context['category']['name'] }}</a>/
@@ -15,24 +15,49 @@
             <div class="">{{ $data->name }}</div>
             <div class="grid sm:grid-cols-1 md:grid-cols-12 gap-2">
 
-                <div class="grid gap-4 md:col-span-8">
+                <div class="grid gap-4 md:col-span-7 lg:col-span-8">
                     <div>
-                        <img class="h-[60vh] w-full rounded-lg object-cover" src="{{ $context['active_img'] }}"
-                            alt="">
+                        <img class="h-[20vh] md:h-[40vh] lg:h-[60vh] w-full rounded-lg object-cover"
+                            src="{{ $context['active_img'] }}" alt="">
                     </div>
-                    <div class="grid grid-cols-6 gap-4">
-                        @foreach ($data->images as $image)
-                            @if ($image->image != $context['active_img'])
-                                <div>
-                                    <div class="h-28 rounded-md p-2 cursor-pointer"
-                                        wire:click="$dispatch('update_active_img', {image: '{{ $image->image }}'})">
-                                        {{-- <img src="{{ asset($image->image) }}" class="w-full h-full object-cover rounded-md"> --}}
-                                        <img class="h-full w-full rounded-lg object-cover"
-                                            src="{{ asset($image->image) }}" alt="">
-                                    </div>
-                                </div>
-                            @endif
-                        @endforeach
+                    <div class="w-96 lg:w-full">
+                        <div class="relative w-full">
+                            <!-- Left Arrow -->
+                            <button id="scroll-left"
+                                class="absolute -left-3 top-1/2 transform -translate-y-1/2 rounded-full bg-gray-100/80 text-sky-800 p-2 z-10">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5" />
+                                </svg>
+                            </button>
+
+                            <!-- Scrollable Container -->
+                            <div id="scroll-container-2" class="flex space-x-4 overflow-x-scroll no-scrollbar">
+                                @foreach ($data->images as $image)
+                                    @if ($image->image != $context['active_img'])
+                                        <div class="w-32 z-0">
+                                            <div class="h-28 w-32 rounded-md p-2 cursor-pointer"
+                                                wire:click="$dispatch('update_active_img', {image: '{{ $image->image }}'})">
+                                                {{-- <img src="{{ asset($image->image) }}" class="w-full h-full object-cover rounded-md"> --}}
+                                                <img class="h-full w-full rounded-lg object-cover"
+                                                    src="{{ asset($image->image) }}" alt="">
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            </div>
+
+                            <!-- Right Arrow -->
+                            <button id="scroll-right"
+                                class="absolute -right-3 top-1/2 transform -translate-y-1/2 rounded-full bg-gray-100/80 text-sky-800 p-2 z-10">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
+                                </svg>
+                            </button>
+                        </div>
                     </div>
 
                     <div class="py-4" wire:ignore>
@@ -64,7 +89,7 @@
                                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="reviews"
                                     role="tabpanel" aria-labelledby="reviews-tab">
                                     @livewire('pages.public.items.reviews', [
-                                        'itemId' => $data->id
+                                        'itemId' => $data->id,
                                     ])
                                 </div>
                             </div>
@@ -72,12 +97,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="md:col-span-4 px-3">
+                <div class="md:col-span-4 lg:col-span-4">
                     <div class="bg-gray-50 rounded-md shadow-lg px-4 py-2 border-t-2 border-gray-200">
                         <div class="">
                             <div class="flex space-x-2 items-center">
                                 <div class="flex items-center mb-4 text-gray-300">
-                                    @for ($i=0; $i<5; $i++)
+                                    @for ($i = 0; $i < 5; $i++)
                                         <svg class="w-5 h-5 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                             fill="currentColor" viewBox="0 0 22 20">
                                             <path
@@ -86,7 +111,9 @@
                                     @endfor
                                 </div>
                                 <div class="-mt-2.5">
-                                    <button wire:click="$dispatch('openModal', {component: 'pages.public.items.modals.item-reviews', arguments: {id: {{ $data->id }} }})" class="text-teal-500 hover:underline">Write review</button>
+                                    <button
+                                        wire:click="$dispatch('openModal', {component: 'pages.public.items.modals.item-reviews', arguments: {id: {{ $data->id }} }})"
+                                        class="text-teal-500 hover:underline">Write review</button>
                                 </div>
                             </div>
                         </div>
@@ -97,8 +124,8 @@
                             <div class="col-span-2">
                                 <div class="flex space-x-2 bg-gray-200/50 px-2 text-gray-600 rounded-md py-0.5">
                                     <button class="" wire:click="decrementQuantity">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                            class="size-4">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                            fill="currentColor" class="size-4">
                                             <path fill-rule="evenodd"
                                                 d="M4.25 12a.75.75 0 0 1 .75-.75h14a.75.75 0 0 1 0 1.5H5a.75.75 0 0 1-.75-.75Z"
                                                 clip-rule="evenodd" />
@@ -107,8 +134,8 @@
                                     <input type="text" wire:model.live="quantity" id=""
                                         class="w-8 px-0 text-center border-0 focus:outline-none focus:ring-0 focus:shadow-none rounded-md shadow-sm bg-transparent focus:border-sky-700">
                                     <button class="" wire:click="incrementQuantity">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                            class="size-4">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                            fill="currentColor" class="size-4">
                                             <path fill-rule="evenodd"
                                                 d="M12 3.75a.75.75 0 0 1 .75.75v6.75h6.75a.75.75 0 0 1 0 1.5h-6.75v6.75a.75.75 0 0 1-1.5 0v-6.75H4.5a.75.75 0 0 1 0-1.5h6.75V4.5a.75.75 0 0 1 .75-.75Z"
                                                 clip-rule="evenodd" />
@@ -117,7 +144,8 @@
                                 </div>
                             </div>
                             <div class="col-span-4">
-                                <button wire:click="$dispatch('add_item', {itemId: {{ $data->id }}, quantity: '{{ $quantity }}'})"
+                                <button
+                                    wire:click="$dispatch('add_item', {itemId: {{ $data->id }}, quantity: '{{ $quantity }}'})"
                                     class="bg-teal-600 hover:bg-teal-500 rounded-md font-bold items-center px-3 py-2 w-full flex justify-center space-x-2 text-white">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                         class="size-7">
@@ -129,7 +157,8 @@
                             </div>
                         </div>
                         <div class="" x-data="{ hovered: false }">
-                            <a wire:click="$dispatch('wish_item', {itemId: {{ $data->id }}})" class="flex cursor-pointer justify-center items-center space-x-2 text-teal-700"
+                            <a wire:click="$dispatch('wish_item', {itemId: {{ $data->id }}})"
+                                class="flex cursor-pointer justify-center items-center space-x-2 text-teal-700"
                                 title="Add to wish list" @mouseover="hovered = true" @mouseleave="hovered = false">
                                 <i class="fa-regular fa-heart" x-show="!hovered"></i>
                                 <i class="fa-solid fa-heart" x-show="hovered"></i>
@@ -236,4 +265,44 @@
             </div>
         </div>
     </div>
+
+    <!-- Add this script for arrow functionality -->
+    <script>
+        const scrollContainer = document.getElementById('scroll-container-2');
+        const scrollLeft = document.getElementById('scroll-left');
+        const scrollRight = document.getElementById('scroll-right');
+
+
+        function checkOverflow() {
+            // Check if the container is overflowing
+            if (scrollContainer.scrollWidth > scrollContainer.clientWidth) {
+                scrollLeft.classList.remove('hidden');
+                scrollRight.classList.remove('hidden');
+            } else {
+                scrollLeft.classList.add('hidden');
+                scrollRight.classList.add('hidden');
+            }
+        }
+
+        scrollLeft.addEventListener('click', () => {
+            scrollContainer.scrollBy({
+                left: -300, // Adjust scroll amount as needed
+                behavior: 'smooth'
+            });
+        });
+
+        scrollRight.addEventListener('click', () => {
+            scrollContainer.scrollBy({
+                left: 300, // Adjust scroll amount as needed
+                behavior: 'smooth'
+            });
+        });
+
+        // Listen for scrolling to update the arrow visibility
+        scrollContainer.addEventListener('scroll', checkOverflow);
+
+        // Run on page load to check initial state
+        window.addEventListener('load', checkOverflow);
+        window.addEventListener('resize', checkOverflow); // Handle window resize
+    </script>
 </div>

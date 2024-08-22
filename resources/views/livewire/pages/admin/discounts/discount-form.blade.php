@@ -88,8 +88,7 @@
                                 </div>
 
                                 <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">End Date<span
-                                            class="text-red-500 text-sm">*</span></label>
+                                    <label class="block text-sm font-medium text-gray-700">End Date</label>
                                     <input type="date" wire:model.live="discounts.{{ $index }}.end_date"
                                         class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" />
                                     @error("discounts.$index.end_date")

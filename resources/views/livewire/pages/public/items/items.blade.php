@@ -1,5 +1,5 @@
 <div class="w-full">
-    <div class="w-full px-2 md:px-32 lg:px-72">
+    <div class="w-full px-2 lg:px-72">
         <div class="pt-8 font-bold text-2xl text-gray-700">
             {{ $qs->name }}
         </div>
@@ -15,7 +15,7 @@
         </div>
         <div class="py-4">
             <div class="grid sm:grid-cols-1 md:grid-cols-12 gap-1">
-                <div class="md:col-span-2">
+                <div class="md:col-span-3 lg:col-span-2">
                     @forelse ($context['sub_categories'] as $dt)
                         <div class="py-1 font-bold text-sm text-gray-800">
                             <a href="{{ route('public_items', $dt->slug) }}" class="block hover:text-teal-700">{{ $dt->name }}</a>
@@ -57,7 +57,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="md:col-span-10 bg-red-50/10">
+                <div class="md:col-span-9 lg:col-span-10 bg-red-50/10">
                     @livewire('pages.public.items.item-display')
                 </div>
             </div>

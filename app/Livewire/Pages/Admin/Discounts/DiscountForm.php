@@ -17,7 +17,7 @@ class DiscountForm extends Component
         'discounts.*.description' => 'required|string',
         'discounts.*.percentage' => 'required|numeric',
         'discounts.*.start_date' => 'required',
-        'discounts.*.end_date' => 'required',
+        // 'discounts.*.end_date' => 'required',
     ];
 
     protected $messages =

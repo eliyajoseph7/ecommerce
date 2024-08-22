@@ -1,5 +1,5 @@
 <div class="">
-    <div class="h-28 sm:px-2 md:px-32 lg:px-72 items-center"
+    <div class="h-28 sm:px-2 lg:px-72 items-center"
         @scroll.window="atTop = (window.pageYOffset > 100) ? false : true">
         <div class="md:py-10 flex-col-reverse md:flex-row justify-between items-center">
             <div
@@ -166,7 +166,7 @@
             </div>
         </a>
         <a href="{{ route('wish_list') }}" title="My wish list"
-            class="mt-5 text-gray-700 hover:text-teal-500 flex justify-center hover:bg-gray-200 rounded-full bg-gray-100 shadow-sm">
+            class="mt-5 text-gray-700 hover:text-teal-500 flex justify-center hover:bg-gray-200 rounded-full bg-gray-100 shadow-sm py-1">
             <div class="relative hover:bg-gray-200 rounded-full cursor-pointer">
                 <div
                     class="absolute -top-4 -right-2 bg-red-500 text-white border-gray-100 border-2 shadow-2xl ring-0 rounded-full px-1.5 text-sm">

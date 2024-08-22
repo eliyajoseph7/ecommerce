@@ -61,6 +61,7 @@
                                                     'name' => 'price',
                                                     'displayName' => 'Price (Tsh.)',
                                                 ])
+                                                <th scope="col" class="px-4 py-3">Discount Amount</th>
                                                 @include('includes.table-header-sort', [
                                                     'name' => 'status',
                                                     'displayName' => 'Status',
@@ -95,6 +96,8 @@
                                                             {{ $dt->short_description }}</td>
                                                         <td class="px-4 py-3 whitespace-nowrap text-right">
                                                             {{ number_format($dt->price, 2) }}</td>
+                                                            <td class="px-4 py-3 whitespace-nowrap text-right">
+                                                                {{ number_format($dt->amount, 2) }}</td>
                                                         <td class="px-4 py-3 whitespace-nowrap">
                                                             {{ $dt->status }}</td>
                                                         <td class="px-4 py-3 whitespace-nowrap">

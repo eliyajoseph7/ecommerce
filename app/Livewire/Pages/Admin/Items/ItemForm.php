@@ -3,6 +3,7 @@
 namespace App\Livewire\Pages\Admin\Items;
 
 use App\Models\Category;
+use App\Models\Discount;
 use App\Models\Gallery;
 use App\Models\Item;
 use App\Models\MainCategory;
@@ -33,6 +34,7 @@ class ItemForm extends Component
         'items.*.main_category_id' => 'nullable|exists:main_categories,id',
         'items.*.category_id' => 'nullable|exists:categories,id',
         'items.*.sub_category_id' => 'required|exists:sub_categories,id',
+        'items.*.discount_id' => 'exclude',
     ];
 
     protected $messages =
@@ -61,6 +63,7 @@ class ItemForm extends Component
                 'main_category_id' => $item->category->category->main_category_id ?? null,
                 'category_id' => $item->category->category_id ?? null,
                 'sub_category_id' => $item->sub_category_id,
+                'discount_id' => $item->discount_id,
                 'images' => [],
                 'existing_images' => $item->images->pluck('image')->toArray(),
             ];
@@ -83,6 +86,7 @@ class ItemForm extends Component
             'main_category_id' => '',
             'category_id' => '',
             'sub_category_id' => '',
+            'discount_id' => '',
             'images' => [],
         ];
 
@@ -176,6 +180,7 @@ class ItemForm extends Component
                 'description' => $itemData['description'], // Ensure this contains HTML from TinyMCE
                 'price' => $itemData['price'],
                 'sub_category_id' => $itemData['sub_category_id'],
+                'discount_id' => $itemData['discount_id'],
             ]);
             foreach ($itemData['images'] as $image) {
                 $fileNameToSave = null;
@@ -224,6 +229,7 @@ class ItemForm extends Component
 
     public function render()
     {
-        return view('livewire.pages.admin.items.item-form');
+        $discounts = Discount::whereNull('end_date')->orWhereDate('end_date', '>=', today())->get();
+        return view('livewire.pages.admin.items.item-form', compact('discounts'));
     }
 }

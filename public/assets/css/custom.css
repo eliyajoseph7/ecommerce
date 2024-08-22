@@ -229,6 +229,14 @@ button[aria-selected=true]:hover {
   color: rgb(3, 166, 166);
 }
 
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+
 @media (min-width: 768px) {
   .md\:px-32 {
       padding-left: 8rem

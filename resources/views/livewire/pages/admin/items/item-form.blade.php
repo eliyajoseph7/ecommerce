@@ -133,6 +133,20 @@
                                 @enderror
                             </div>
 
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700">Discount</label>
+                                <select wire:model="items.{{ $index }}.discount_id"
+                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                                    <option value="">Select..</option>
+                                    @foreach (isset($discounts) ? $discounts : [] as $discount)
+                                        <option value="{{ $discount->id }}">{{ $discount->info }}</option>
+                                    @endforeach
+                                </select>
+                                @error("items.$index.discount_id")
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
+                            </div>
+
                             @if ($action == 'add')
                                 <div class="mb-4">
                                     <label class="block text-sm font-medium text-gray-700">Images <span
