@@ -44,7 +44,7 @@
                                                 <th scope="col" class="px-4 py-3 w-[50px]">S/No.</th>
                                                 @include('includes.table-header-sort', [
                                                     'name' => 'first_name',
-                                                    'displayName' => 'Full_name',
+                                                    'displayName' => 'Full Name',
                                                 ])
                                                 @include('includes.table-header-sort', [
                                                     'name' => 'phone',

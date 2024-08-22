@@ -33,7 +33,7 @@ class ItemReviews extends ModalComponent
         $sessionId = (new CustomerSessionController)->getSessionId();
         $customer = Customer::where('session_id', $sessionId)->first();
 
-        $this->customer = $customer->is_loggedin ? $customer?->fullname : null;
+        $this->customer = $customer?->is_loggedin ? $customer?->fullname : null;
         if($reviewId) {
             $this->action = 'update';
             $this->reviewId = $reviewId;

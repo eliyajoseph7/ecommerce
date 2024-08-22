@@ -79,7 +79,7 @@
             </div>
             <div class="-mt-2.5">
                 <button
-                    wire:click="$dispatch('openModal', {component: 'pages.public.items.modals.item-reviews', arguments: {id: {{ $review->item_id }} }})"
+                    wire:click="$dispatch('openModal', {component: 'pages.public.items.modals.item-reviews', arguments: {id: {{ $itemId }} }})"
                     class="text-teal-500 hover:underline">Write your review</button>
             </div>
         </div>

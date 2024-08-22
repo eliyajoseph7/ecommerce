@@ -46,8 +46,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('sub_category_list') }}"
-                        class="flex items-center p-2 rounded-lg dark:text-white {{ Route::is('sub_category_list') || Route::is('sub_category_form') || Route::is('sub_category_form_edit') ? 'bg-sky-100/80 text-sky-900 font-bold hover:bg-sky-100/80' : 'font-normal text-gray-700 hover:text-sky-900 hover:bg-sky-100/80' }} dark:hover:bg-gray-700 group">
+                    <a href="{{ route('discount_list') }}"
+                        class="flex items-center p-2 rounded-lg dark:text-white {{ Route::is('discount_list') || Route::is('discount_form') || Route::is('discount_form_edit') ? 'bg-sky-100/80 text-sky-900 font-bold hover:bg-sky-100/80' : 'font-normal text-gray-700 hover:text-sky-900 hover:bg-sky-100/80' }} dark:hover:bg-gray-700 group">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
