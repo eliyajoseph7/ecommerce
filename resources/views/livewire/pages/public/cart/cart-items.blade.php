@@ -72,7 +72,7 @@
                             </div>
                             <div class="">
                                 <div class="mt-1 font-bold lg:hidden">Unit Price</div>
-                                <div class="lg:text-right">{{ number_format($dt->item->price) }}</div>
+                                <div class="lg:text-right">{{ number_format($dt->item->discount ? $dt->item->amount : $dt->item->price) }}</div>
                             </div>
                             <div class="">
                                 <div class="mt-1 font-bold lg:hidden">Quantity</div>

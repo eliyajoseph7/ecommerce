@@ -22,7 +22,7 @@ class Cart extends Model
     protected $appends = ['cost'];
 
     public function getCostAttribute() {
-        $cost = $this->quantity * $this->item->price;
+        $cost = $this->quantity * ($this->item->discount ? $this->item->amount : $this->item->price);
 
         return $cost;
     }

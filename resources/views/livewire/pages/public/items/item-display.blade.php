@@ -3,7 +3,8 @@
         <div>
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0">
                 @forelse ($data as $new)
-                    <div x-data="{ activeTab: 0, autoChange: true, view: false }" title="{{ $new->name }}"
+                    @include('livewire.pages.public.components.item-card', ['item' => $new])
+                    {{-- <div x-data="{ activeTab: 0, autoChange: true, view: false }" title="{{ $new->name }}"
                         class="relative border-[1px] border-b-white hover:border-b-gray-300 z-30 hover:z-40 hover:p-3 hover:rounded-sm hover:scale-105 hover:border-0 hover:shadow-md bg-white px-0.5 pb-0.5 mb-4 cursor-pointer"
                         x-init="setInterval(() => { if (autoChange && {{ count($new->images) }}) { activeTab = (activeTab + 1) % {{ count($new->images) }}; } }, 5000)" @mouseover="autoChange = false, view = true"
                         @mouseleave="autoChange = true, view=false">
@@ -79,7 +80,7 @@
                                 </svg>
                             </button>
                         </div>
-                    </div>
+                    </div> --}}
                 @empty
                     <p>No items found</p>
                 @endforelse
@@ -92,6 +93,18 @@
                 </div>
             @endif
 
+        </div>
+        <div class="text-center py-2">
+            @if ($loadMore)
+                @if ($loading)
+                    <div class="flex justify-start">
+                        <img src="{{ asset('assets/images/spinner.gif') }}" class="w-10">
+                    </div>
+                @else
+                    <button wire:click="$dispatch('load_more_items')" class="bg-teal-50 text-teal-500 px-3 py-1 rounded-md">Load
+                        More</button>
+                @endif
+            @endif
         </div>
         <script>
             document.addEventListener('livewire:initialized', () => {

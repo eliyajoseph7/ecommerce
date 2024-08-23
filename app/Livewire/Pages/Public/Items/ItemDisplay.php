@@ -19,8 +19,19 @@ class ItemDisplay extends Component
 
     // #[Reactive]
     public $loading = true;
-    public $test;
+    public $loadMore = false;
+    public $counter = 5;
+    public $limit = 0;
+    public $total = 0;
 
+    public $category;
+    public $slug;
+    public $filter;
+
+    public function mount(){
+        $this->limit = $this->counter;
+        // $this->fetchRandomProducts();
+    }
 
     #[On('set_loading')]
     public function setLoading($value) {
@@ -29,6 +40,10 @@ class ItemDisplay extends Component
 
     #[On('filter_items')]
     public function getData($category, $slug, $filter) {
+        $this->category = $category;
+        $this->slug = $slug;
+        $this->filter = $filter;
+
         $this->loading = true;
         $query = Item::query();
         if($category == 'category') {
@@ -44,11 +59,26 @@ class ItemDisplay extends Component
         if(isset($filter['max_price'])) {
             $query = $query->where('price', '<=', $filter['max_price']);
         }
-
-        $this->data = $query->get();
-
+        $this->total = $query->count();
+        $this->data = $query->limit($this->limit)->get();
+        // dump($this->data);
         $this->loading = false;
+        if(count($this->data) < $this->total) {
+            $this->loadMore = true;
+        } else {
+            $this->loadMore = false;
+        }
+
+        // $this->loading = false;
         $this->render();
+    }
+
+    #[On('load_more_items')]
+    public function loadMoreData() {
+        $this->loadMore = true;
+        $this->loading = true;
+        $this->limit += $this->counter;
+        $this->getData($this->category, $this->slug, $this->filter);
     }
 
     #[On('count_visit')]

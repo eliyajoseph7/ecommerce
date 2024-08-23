@@ -16,9 +16,16 @@
             <div class="grid sm:grid-cols-1 md:grid-cols-12 gap-2">
 
                 <div class="grid gap-4 md:col-span-7 lg:col-span-8">
-                    <div>
+                    <div class="relative">
                         <img class="h-[20vh] md:h-[40vh] lg:h-[60vh] w-full rounded-lg object-cover"
                             src="{{ $context['active_img'] }}" alt="">
+                        @if ($data->discount)
+                            <div
+                                class="absolute bottom-0 right-0 font-bold bg-red-100/50 rounded-md text-red-500 px-2 py-0.5">
+                               <div class="">Discount: {{ round($data->discount->percentage) }}% Off</div>
+                               <div class="text-sm font-normal">{{ $data->discount->days_remain }}</div>
+                            </div>
+                        @endif
                     </div>
                     <div class="w-96 lg:w-full">
                         <div class="relative w-full">
@@ -118,7 +125,16 @@
                             </div>
                         </div>
                         <div class="text-xl font-black leading-3 py-2">
-                            <span class="text-gray-500">Tsh.</span> {{ number_format($data->price) }}
+                            @if ($data->discount)
+                                <div class="flex justify-start space-x-2">
+                                    <span class="text-gray-500">Tsh. <span
+                                            class="line-through">{{ number_format($data->price) }}</span></span>
+                                    <span class="text-gray-500"></span> {{ number_format($data->amount) }}
+
+                                </div>
+                            @else
+                                <span class="text-gray-500">Tsh.</span> {{ number_format($data->price) }}
+                            @endif
                         </div>
                         <div class="py-4 grid grid-cols-6 gap-4">
                             <div class="col-span-2">

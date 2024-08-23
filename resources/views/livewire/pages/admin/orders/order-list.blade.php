@@ -82,7 +82,7 @@
                                                     <td class="px-4 py-3 whitespace-nowrap">
                                                         {{ $dt->orderno }}</td>
                                                     <td class="px-4 py-3 whitespace-nowrap">
-                                                        {{ $dt->order_date }}</td>
+                                                        {{ $dt->order_date->format('M d, Y') }}</td>
                                                     <td class="px-4 py-3 whitespace-nowrap">
                                                         {{ $dt->customer?->full_name }}</td>
                                                     <td class="px-4 py-3 whitespace-nowrap">

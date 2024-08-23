@@ -75,7 +75,7 @@ class Item extends Model
 
     public function getAmountAttribute() {
         if($this->discount) {
-            $amount = ($this->price * $this->discount->percentage) / 100;
+            $amount = $this->price - ($this->price * $this->discount->percentage) / 100;
 
             return $amount;
         }

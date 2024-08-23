@@ -52,7 +52,7 @@ class PaymentInfo extends Component
                 'order_id' => $order->id,
                 'item_id' => $ct->item->id,
                 'quantity' => $ct->quantity,
-                'price' => $ct->item->price,
+                'price' => $ct->item->discount ? $ct->item->amount : $ct->item->price,
                 'total' => $ct->cost,
                 'created_at' => now(),
                 'updated_at' => now(),

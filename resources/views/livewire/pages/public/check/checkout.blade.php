@@ -50,7 +50,7 @@
                                     <div class="lg:col-span-2">
                                         <div class="mt-1 font-bold lg:hidden text-sm text-gray-400">Price</div>
                                         <div class="lg:text-rig ht whitespace-nowrap text-sm">Tsh.
-                                            {{ number_format($dt->item->price) }}</div>
+                                            {{ number_format($dt->item->discount ? $dt->item->amount : $dt->item->price) }}</div>
                                     </div>
                                     <div class="lg:col-span-2 text-sm">
                                         <div class="lmt-1 font-bold lg:hidden text-sm text-gray-400">Quantity</div>

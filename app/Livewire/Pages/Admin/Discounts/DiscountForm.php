@@ -72,6 +72,7 @@ class DiscountForm extends Component
         $this->validate();
 
         foreach ($this->discounts as $discountData) {
+            $discountData['end_date'] = $discountData['end_date'] == "" ? Null : $discountData['end_date'];
             // Update existing discount or create new discount
             $discount = Discount::updateOrCreate(['id' => $discountData['id'] ?? null], [
                 'name' => $discountData['name'],
