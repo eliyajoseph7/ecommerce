@@ -60,7 +60,7 @@
                     <img src="{{ asset('assets/images/spinner.gif') }}" class="w-10">
                 </div>
             @else
-                <button wire:click="$dispatch('load_more')" class="bg-teal-50 text-teal-500 px-3 py-1 rounded-md">Load
+                <button wire:click="$dispatch('load_more_popular')" class="bg-teal-50 text-teal-500 px-3 py-1 rounded-md">Load
                     More</button>
             @endif
         @endif

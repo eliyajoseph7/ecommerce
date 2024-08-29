@@ -37,7 +37,7 @@ class Popular extends Component
     }
 
 
-    #[On('load_more')]
+    #[On('load_more_popular')]
     public function loadMoreData() {
         $this->loadMore = true;
         $this->loading = true;

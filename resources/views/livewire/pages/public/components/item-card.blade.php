@@ -40,7 +40,7 @@
                         {{ round($item->discount->percentage) }}% Off
                     </div>
                     <div class="flex justify-between px-2 pb-2 absolute bottom-2 left-0 right-0">
-                        <div class="text-red-500 bg-red-100/50 px-2 rounded-md">
+                        <div class="text-red-500 bg-gray-100/50 px-2 rounded-md">
                             TSh. <span class="line-through">{{ number_format($item->price, 2) }}</span>
                         </div>
                         <div class="text-gray-500 bg-gray-50 text-sm">{{ $item->discount->days_remain }}</div>

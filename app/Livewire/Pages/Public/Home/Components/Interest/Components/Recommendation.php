@@ -51,7 +51,7 @@ class Recommendation extends Component
     }
 
 
-    #[On('load_more')]
+    #[On('load_more_recommended')]
     public function loadMoreData() {
         $this->loadMore = true;
         $this->loading = true;
