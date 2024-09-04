@@ -35,6 +35,7 @@ class ItemForm extends Component
         'items.*.category_id' => 'nullable|exists:categories,id',
         'items.*.sub_category_id' => 'required|exists:sub_categories,id',
         'items.*.discount_id' => 'exclude',
+        'items.*.status' => 'exclude',
     ];
 
     protected $messages =
@@ -64,6 +65,8 @@ class ItemForm extends Component
                 'category_id' => $item->category->category_id ?? null,
                 'sub_category_id' => $item->sub_category_id,
                 'discount_id' => $item->discount_id,
+                'discount_id' => $item->discount_id,
+                'status' => $item->status,
                 'images' => [],
                 'existing_images' => $item->images->pluck('image')->toArray(),
             ];
@@ -87,6 +90,7 @@ class ItemForm extends Component
             'category_id' => '',
             'sub_category_id' => '',
             'discount_id' => '',
+            'status' => '',
             'images' => [],
         ];
 
@@ -181,6 +185,8 @@ class ItemForm extends Component
                 'price' => $itemData['price'],
                 'sub_category_id' => $itemData['sub_category_id'],
                 'discount_id' => $itemData['discount_id'],
+                'discount_id' => $itemData['discount_id'],
+                'status' => $itemData['status'],
             ]);
             foreach ($itemData['images'] as $image) {
                 $fileNameToSave = null;
@@ -230,6 +236,7 @@ class ItemForm extends Component
     public function render()
     {
         $discounts = Discount::whereNull('end_date')->orWhereDate('end_date', '>=', today())->get();
-        return view('livewire.pages.admin.items.item-form', compact('discounts'));
+        $statuses = Item::$statuses;
+        return view('livewire.pages.admin.items.item-form', compact('discounts', 'statuses'));
     }
 }

@@ -17,6 +17,12 @@ class Item extends Model
         'price',
         'sub_category_id',
         'discount_id',
+        'status',
+    ];
+
+    public static $statuses = [
+        'active',
+        'in active'
     ];
 
     public function images()
@@ -73,8 +79,9 @@ class Item extends Model
 
     protected $appends = ['amount'];
 
-    public function getAmountAttribute() {
-        if($this->discount) {
+    public function getAmountAttribute()
+    {
+        if ($this->discount) {
             $amount = $this->price - ($this->price * $this->discount->percentage) / 100;
 
             return $amount;

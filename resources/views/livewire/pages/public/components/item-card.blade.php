@@ -39,11 +39,11 @@
                         class="absolute top-2 right-2 font-bold bg-red-500 rounded-md text-gray-100 px-2 py-0.5">
                         {{ round($item->discount->percentage) }}% Off
                     </div>
-                    <div class="flex justify-between px-2 pb-2 absolute bottom-2 left-0 right-0">
+                    <div class="flex justify-between px-2 pb-2 space-x-1 absolute bottom-2 left-0 right-0">
                         <div class="text-red-500 bg-gray-100/50 px-2 rounded-md">
                             TSh. <span class="line-through">{{ number_format($item->price, 2) }}</span>
                         </div>
-                        <div class="text-gray-500 bg-gray-50 text-sm">{{ $item->discount->days_remain }}</div>
+                        <div class="text-gray-500 bg-gray-50 rounded-md p-1 text-sm">{{ $item->discount->days_remain }}</div>
                     </div>
                 @endif
             </div>

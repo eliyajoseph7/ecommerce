@@ -70,9 +70,9 @@
                                                     'name' => 'created_at',
                                                     'displayName' => 'Created At',
                                                 ])
-                                                <th scope="col" class="px-4 py-3 w-[100px] float-end">
+                                                {{-- <th scope="col" class="px-4 py-3 w-[100px] float-end">
                                                     <span class="sr-only">Actions</span>
-                                                </th>
+                                                </th> --}}
                                             </tr>
                                         </thead>
                                         <tbody
@@ -97,9 +97,9 @@
                                                         {{ $dt->subscribed == '0' ? 'No' : 'Yes' }}</td>
                                                     <td class="px-4 py-3 whitespace-nowrap">
                                                         {{ $dt->created_at->format('M d, Y') }}</td>
-                                                    <td class="px-4 py-3 flex items-center justify-end space-x-1">
+                                                    {{-- <td class="px-4 py-3 flex items-center justify-end space-x-1">
                                                         <a title="Update"
-                                                            href="{{ route('main_menu_form_edit', $dt->id) }}"
+                                                            href="{{ route('customer_form_edit', $dt->id) }}"
                                                             class="px-1 bg-gray-300 hover:bg-blue-700 text-white rounded">
                                                             <i class="fa fa-edit"></i></a>
 
@@ -107,7 +107,7 @@
                                                             wire:click="$dispatch('confirm_delete', {{ $dt->id }})"
                                                             class="px-2.5 bg-gray-300 hover:bg-red-500 text-white rounded">x</button>
 
-                                                    </td>
+                                                    </td> --}}
                                                 </tr>
                                             @empty
                                                 <tr class="bg-gray-50">

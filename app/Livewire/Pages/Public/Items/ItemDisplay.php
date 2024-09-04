@@ -45,7 +45,7 @@ class ItemDisplay extends Component
         $this->filter = $filter;
 
         $this->loading = true;
-        $query = Item::query();
+        $query = Item::query()->where('status', 'active');
         if($category == 'category') {
             $qs = Category::where('slug', $slug)->first();
             $query = $query->whereIn('sub_category_id', $qs->sub_categories->pluck('id')->toArray());

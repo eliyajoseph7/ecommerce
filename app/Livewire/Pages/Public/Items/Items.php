@@ -89,7 +89,7 @@ class Items extends Component
 
     public function loadItemDetail()
     {
-        $this->data = Item::with('reviews')->where('slug', $this->slug)->first();
+        $this->data = Item::with('reviews')->where('status', 'active')->where('slug', $this->slug)->first();
         $this->view = 'livewire.pages.public.items.item-details';
         $this->context = [
             'category' => $this->data->category->category,
