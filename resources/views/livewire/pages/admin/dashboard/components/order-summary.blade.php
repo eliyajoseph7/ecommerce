@@ -1,8 +1,14 @@
 <div>
     <div class="bg-gray-50 mt-2 p-2">
         <div class="font-bold text-gray-700 py-2">Orders summary</div>
-        <div class="h-60">
-            <div wire:ignore class="order_summary h-full"></div>
+        <div class="h-60 relative">
+            <div class="text-center absolute top-1/3 left-1/3 text-sky-300 {{ $loading ? '' : 'hidden' }}">
+                <i class="fa-solid fa-spinner fa-spin fa-3x"></i>
+                <p>Loading...</p>
+            </div>
+            <div class="{{ !$loading ? '' : 'hidden' }} h-full">
+                <div wire:ignore class="order_summary h-full"></div>
+            </div>
         </div>
     </div>
 

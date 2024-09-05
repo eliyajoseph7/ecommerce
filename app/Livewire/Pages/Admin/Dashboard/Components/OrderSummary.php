@@ -9,6 +9,7 @@ class OrderSummary extends Component
 {
     public $data;
     public $date;
+    public $loading = false;
 
     public function mount()
     {
@@ -17,6 +18,7 @@ class OrderSummary extends Component
     }
     
     public function getData() {
+        $this->loading = true;
         $query = Order::query();
         $categories = (clone $query)->distinct('status')->pluck('status');
         $result = [];
@@ -32,13 +34,14 @@ class OrderSummary extends Component
         }
 
         $series = [
-            'name' => 'Order Summary',
+            'name' => 'Orders',
             'colorByPoint'=> true,
             'data' => $result
         ];
 
         $this->data = $series;
         $this->dispatch('redraw_order_chart', $series);
+        $this->loading = false;
     }
 
     public function render()

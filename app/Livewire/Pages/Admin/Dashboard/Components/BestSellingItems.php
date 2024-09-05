@@ -11,6 +11,7 @@ class BestSellingItems extends Component
 {
     public $data;
     public $date;
+    public $loading = false;
 
     public function mount()
     {
@@ -20,6 +21,7 @@ class BestSellingItems extends Component
 
     public function getData()
     {
+        $this->loading = true;
         $query = Order::query()->join('order_items', 'order_items.order_id', 'orders.id')->where('payment_status', 'paid');
         $qs = (clone $query)
             ->select('item_id', DB::raw('COUNT(item_id) as count'))
@@ -34,7 +36,7 @@ class BestSellingItems extends Component
             $qs->item = Item::find($qs->item_id);
             return $qs;
         });
-
+        $this->loading = false;
         // dd($this->data);
     }
 

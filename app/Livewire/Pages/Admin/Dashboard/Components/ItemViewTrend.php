@@ -10,6 +10,7 @@ class ItemViewTrend extends Component
     public $data;
     public $date;
     public $type = 'chart';
+    public $loading = false;
 
     public function mount() {
         $this->date = now()->format('Y-m-d');
@@ -17,11 +18,13 @@ class ItemViewTrend extends Component
     }
 
     public function display() {
+        $this->loading = true;
         if($this->type == 'chart') {
             $this->getChartData();
         } else {
             $this->getData();
         }
+        $this->loading = false;
     }
 
     public function updatedType() {
