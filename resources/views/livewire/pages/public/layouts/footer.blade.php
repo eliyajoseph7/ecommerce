@@ -1,4 +1,4 @@
-<footer class="bg-gray-100 border-t-8 border-t-sky-900/50 rounded-t-sm {{ Route::is('signin') || Route::is('signup')  ? 'hidden' : ''}}">
+<footer class="bg-gray-100 border-t-8 border-t-sky-900/50 rounded-t-sm {{ Route::is('signin') || Route::is('signup') || Route::is('customer_profile')  ? 'hidden' : ''}}">
     <div class="min-h-[40vh] grid grid-cols-1 md:grid-cols-4 gap-2 w-full space-y-2 py-10 border-b-0 border-b-sky-900/10">
         <div class="px-4">
             <div class="text-lg font-bold py-3">About Us</div>

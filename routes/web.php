@@ -17,6 +17,7 @@ use App\Livewire\Pages\Admin\Orders\OrderView;
 use App\Livewire\Pages\Admin\Subcategories\SubCategoryForm;
 use App\Livewire\Pages\Admin\Subcategories\SubCategoryList;
 use App\Livewire\Pages\Public\Auth\Login;
+use App\Livewire\Pages\Public\Auth\Profile;
 use App\Livewire\Pages\Public\Auth\Register;
 use App\Livewire\Pages\Public\Cart\CartItems;
 use App\Livewire\Pages\Public\Check\Checkout;
@@ -50,6 +51,7 @@ Route::get('my-orders', Myorder::class)->name('my_orders');
 Route::prefix('auth')->group(function() {
     Route::get('signin', Login::class)->name('signin');
     Route::get('signup', Register::class)->name('signup');
+    Route::get('profile', Profile::class)->name('customer_profile');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {

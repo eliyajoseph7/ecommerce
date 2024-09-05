@@ -10,7 +10,7 @@ class ItemViewTrend extends Component
     public $data;
     public $date;
     public $type = 'chart';
-    public $loading = false;
+    public $loading = true;
 
     public function mount() {
         $this->date = now()->format('Y-m-d');

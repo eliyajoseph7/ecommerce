@@ -11,7 +11,7 @@ class BestSellingItems extends Component
 {
     public $data;
     public $date;
-    public $loading = false;
+    public $loading = true;
 
     public function mount()
     {

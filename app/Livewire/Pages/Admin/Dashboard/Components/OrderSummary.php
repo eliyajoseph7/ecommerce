@@ -9,7 +9,7 @@ class OrderSummary extends Component
 {
     public $data;
     public $date;
-    public $loading = false;
+    public $loading = true;
 
     public function mount()
     {
