@@ -20,7 +20,8 @@
                         <td class="py-2">{{ $loop->iteration }}.</td>
                         <td class="">
                             <div class="flex space-x-1">
-                                <img src="{{ asset($dt->images()->first()->image) }}" class="w-12 h-8 object-cover rounded-md">
+                                <img src="{{ asset($dt->images()->first()->image) }}"
+                                    class="w-12 h-8 object-cover rounded-md">
                                 <div class="text-gray-700">{{ Str::limit($dt->name, 10, '...') }}</div>
                             </div>
                         </td>
@@ -29,6 +30,9 @@
                     </tr>
 
                 @empty
+                    <tr>
+                        <td colspan="4">No record</td>
+                    </tr>
                 @endforelse
             </tbody>
         </table>

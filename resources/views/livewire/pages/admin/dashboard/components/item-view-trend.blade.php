@@ -30,8 +30,11 @@
                                     </td>
                                     <td class="">{{ round($dt->percentage, 2) }}%</td>
                                 </tr>
-        
+
                             @empty
+                                <tr>
+                                    <td colspan="3">No record</td>
+                                </tr>
                             @endforelse
                         </tbody>
                     </table>
@@ -40,13 +43,13 @@
                 @endif
             </div>
         </div>
-    
+
         <script>
             document.addEventListener("DOMContentLoaded", () => {
                 // drawChart()
             });
-    
-    
+
+
             function drawChart(categories, series) {
                 // console.log(series);
                 // console.log(categories);
@@ -118,11 +121,11 @@
                     },
                     series: series
                 });
-    
-    
-    
+
+
+
             }
-    
+
             document.addEventListener('livewire:init', () => {
                 Livewire.on('redraw_view_trend_chart', (data) => {
                     // console.log(data.result);
