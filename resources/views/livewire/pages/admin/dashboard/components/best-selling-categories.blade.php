@@ -18,7 +18,7 @@
         });
 
 
-        function drawBestSaleCategoriesChart(values) {
+        function drawBestSaleCategoriesChart(values, total) {
             $('.best_selling_category').highcharts({
                 chart: {
                     type: 'pie',
@@ -34,8 +34,8 @@
                             if (!customLabel) {
                                 customLabel = chart.options.chart.custom.label =
                                     chart.renderer.label(
-                                        'Total<br/>' +
-                                        '<strong>2 877 820</strong>'
+                                        'Total <br/>' +
+                                        '<strong><small class="text-sm">TSh.</small>'+ total + '</strong>'
                                     )
                                     .css({
                                         color: '#000',
@@ -106,7 +106,7 @@
             Livewire.on('draw_selling_category_chart', (data) => {
             // console.log(data.series);
             setTimeout(() => {
-                drawBestSaleCategoriesChart(data.series);
+                drawBestSaleCategoriesChart(data.series, data.total);
             }, 100); // Delay to ensure DOM readiness
             })
         })

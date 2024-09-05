@@ -35,6 +35,7 @@ class BestSellingCategories extends Component
         });
 
         $data = [];
+        $total = number_format($this->data->sum('price'), 2);
         foreach ($this->data as $dt) {
             $data[] = [
                 'name' => $dt->category->name,
@@ -45,11 +46,11 @@ class BestSellingCategories extends Component
         $series[] = [
             'name' => 'Sale',
             'colorByPoint' => true,
-            'innerSize' => '50%',
+            'innerSize' => '70%',
             'data' => $data
         ];
 
-        $this->dispatch('draw_selling_category_chart', series: $series);
+        $this->dispatch('draw_selling_category_chart', series: $series, total: $total);
         // dump($series);
 
         $this->loading = false;
