@@ -1,6 +1,6 @@
 <div class="bg-gray-50 rounded-md mt-2 p-2">
     <div class="font-bold text-gray-700 py-2">Discounted items</div>
-    <div class="h-60 overfolw-x-auto overflow-y-auto relative">
+    <div class="max-h-60 overfolw-x-auto overflow-y-auto relative">
         <div class="text-center absolute top-1/3 left-1/3 text-sky-300 {{ $loading ? '' : 'hidden' }}">
             <i class="fa-solid fa-spinner fa-spin fa-3x"></i>
             <p>Loading...</p>
