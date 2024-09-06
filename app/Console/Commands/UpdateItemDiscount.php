@@ -27,5 +27,6 @@ class UpdateItemDiscount extends Command
     public function handle()
     {
         (new UpdateItemDiscountController)->updateDiscount();
+        $this->info('Items discount updated successfully');
     }
 }
