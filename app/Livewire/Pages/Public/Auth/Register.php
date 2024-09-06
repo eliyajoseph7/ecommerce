@@ -11,6 +11,7 @@ use App\Models\Customer;
 use App\Models\DeliveryAddress;
 use App\Models\District;
 use App\Models\ItemVisit;
+use App\Models\Order;
 use App\Models\Region;
 use App\Models\Village;
 use App\Models\Ward;
@@ -141,10 +142,13 @@ class Register extends Component
     public function submit() {
 
         $sessionId = (new CustomerSessionController)->getSessionId();
+        $newSessionId = null;
+
         $this->validate();
         $check = Customer::where('session_id', $sessionId)->exists();
         if($check) {
-            $sessionId = Str::uuid()->toString();
+            $newSessionId = Str::uuid()->toString();
+            Cookie::queue(Cookie::make('cart_session_id', $newSessionId, 60 * 24 * 90)); // 90 days
         }
         $customer = Customer::create([
             'first_name' => $this->first_name,
@@ -185,21 +189,26 @@ class Register extends Component
         ]);
 
         Cart::where('session_id', $sessionId)->update([
-            'customer_id' => $customer->id
+            'customer_id' => $customer->id,
+            'session_id' => $newSessionId ? $newSessionId : $sessionId
         ]);
 
         ItemVisit::where('session_id', $sessionId)->update([
-            'customer_id' => $customer->id
+            'customer_id' => $customer->id,
+            'session_id' => $newSessionId ? $newSessionId : $sessionId
         ]);
 
         WishList::where('session_id', $sessionId)->update([
-            'customer_id' => $customer->id
+            'customer_id' => $customer->id,
+            'session_id' => $newSessionId ? $newSessionId : $sessionId
         ]);
 
-        // Order::where('session_id', $sessionId)->update([
-        //     'session_id' => (new CustomerSessionController)->getSessionId();        // ]);
+        Order::where('session_id', $sessionId)->update([
+            'session_id' => $newSessionId ? $newSessionId : $sessionId,    
+            'customer_id' => $customer->id    
+        ]);
 
-        $customer->session_id = (new CustomerSessionController)->getSessionId();
+        $customer->session_id = $newSessionId ? $newSessionId : $sessionId;
         $customer->loggedin = '1';
         $customer->last_login = now();
         $customer->save();

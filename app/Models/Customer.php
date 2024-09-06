@@ -26,6 +26,9 @@ class Customer extends Authenticatable
         'password',
     ];
 
+    public function deliveryAddress() {
+        return $this->hasOne(BillingAddress::class);
+    }
     public function billingAddress() {
         return $this->hasOne(BillingAddress::class);
     }

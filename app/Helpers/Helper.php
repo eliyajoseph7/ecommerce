@@ -13,6 +13,7 @@ class Helper
         $sessionId = (new CustomerSessionController)->getSessionId();
         $customer = Customer::where('session_id', $sessionId);
         if ($customer->exists()) {
+            // dump($customer->first());
             if($customer->first()->loggedin == '1') {
                 return true;
             }

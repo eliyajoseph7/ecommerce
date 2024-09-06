@@ -79,6 +79,29 @@ class CustomerInfo extends Component
         
     }
 
+    #[On('update_profile')]
+    public function updateInfo() {
+        $this->validate();
+        $sessionId = (new CustomerSessionController)->getSessionId();
+        $customer = Customer::where('session_id', $sessionId)->first();
+
+        $check = Customer::where('email', $this->email)->where('id', '!=', $customer->id);
+        if($check->exists()) {
+            $this->dispatch('errorToast', message: 'User with that email exists!');
+            return;
+        }
+
+        $customer->first_name = $this->first_name;
+        $customer->last_name = $this->last_name;
+        $customer->phone = $this->phone;
+        $customer->email = $this->email;
+        $customer->company = $this->company;
+        $customer->tin = $this->tin;
+
+        $customer->save();
+
+    }
+
     public function render()
     {
         return view('livewire.pages.public.check.components.customer-info');

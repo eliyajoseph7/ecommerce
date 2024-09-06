@@ -71,6 +71,7 @@ class DeliveryInfo extends Component
             $this->getData();
         } else {
             $this->reset('billing');
+            $this->getData();
         }
     }
 
@@ -78,26 +79,30 @@ class DeliveryInfo extends Component
     {
         if (Helper::is_auth()) {
             $sessionId = (new CustomerSessionController)->getSessionId();
-            $customer = Customer::with('billingAddress')->where('session_id', $sessionId)->first();
+            $customer = Customer::with(['deliveryAddress', 'billingAddress'])->where('session_id', $sessionId)->first();
 
-            $this->region_id = $customer->region_id;
-            $this->district_id = $customer->district_id;
-            $this->ward_id = $customer->ward_id;
-            $this->village_id = $customer->village_id;
-            $this->address = $customer->address;
+            $this->region_id = $customer->deliveryAddress?->region_id;
+            $this->district_id = $customer->deliveryAddress?->district_id;
+            $this->ward_id = $customer->deliveryAddress?->ward_id;
+            $this->village_id = $customer->deliveryAddress?->village_id;
+            $this->address = $customer->deliveryAddress?->address;
 
             // billing
             $this->billing['first_name'] = $customer->first_name;
             $this->billing['last_name'] = $customer->last_name;
-            $this->region_id = $customer->billingAddress->region_id;
-            $this->district_id = $customer->billingAddress->district_id;
-            $this->ward_id = $customer->billingAddress->ward_id;
-            $this->village_id = $customer->billingAddress->village_id;
-            $this->address = $customer->billingAddress->address;
+            $this->billing['region_id'] = $customer->billingAddress?->region_id;
+            $this->billing['district_id'] = $customer->billingAddress?->district_id;
+            $this->billing['ward_id'] = $customer->billingAddress?->ward_id;
+            $this->billing['village_id'] = $customer->billingAddress?->village_id;
+            $this->billing['address'] = $customer->billingAddress?->address;
 
             $this->getDistricts();
             $this->getwards();
             $this->getVillages();
+
+            $this->billingDistricts = $this->districts;
+            $this->billingWards = $this->wards;
+            $this->billingVillages = $this->villages;
         }
     }
 
@@ -199,6 +204,48 @@ class DeliveryInfo extends Component
 
         $this->dispatch('save_order', customer_id: $customer_id, delivery_address_id: $delivery->id, billing_address_id: $billing->id);
     }
+
+
+
+    #[On('update_profile')]
+    public function updateDeliveryInfo() {
+        $this->validate();
+        // dd('dds');
+
+        $sessionId = (new CustomerSessionController)->getSessionId();
+        $customer = Customer::where('session_id', $sessionId)->first();
+
+        $delivery = DeliveryAddress::where('customer_id', $customer->id)->first();
+
+        $country = Country::where('country_code', 'TZ')->first()?->id;
+
+        // delivery information
+        $delivery->update([
+            'country_id' => $country, 
+            'region_id' => $this->region_id, 
+            'district_id' => $this->district_id, 
+            'ward_id' => $this->ward_id,    
+            'village_id' => $this->village_id,
+            'address' => $this->address,
+        ]);
+
+        // billing information 
+
+        $billing = BillingAddress::where('customer_id', $customer->id)->first();
+        $billing->update([
+            'first_name' => $this->billing['first_name'],
+            'last_name' => $this->billing['last_name'],
+            'country_id' => $country, 
+            'region_id' => $this->billing['region_id'] ?? $this->region_id, // this billing['region_id] will be null if is the same as delivery region_id 
+            'district_id' => $this->billing['district_id'] ?? $this->district_id, // this billing['district_id] will be null if is the same as delivery district_id 
+            'ward_id' => $this->billing['ward_id'] ?? $this->ward_id, // this billing['ward_id] will be null if is the same as delivery ward_id    
+            'village_id' => $this->billing['village_id'] ?? $this->village_id, // this billing['village_id] will be null if is the same as delivery village_id
+            'address' => $this->billing['address'] ?? $this->address, // this billing['address] will be null if is the same as delivery address,
+        ]);
+
+        $this->dispatch('update_password');
+    }
+
 
     public function render()
     {

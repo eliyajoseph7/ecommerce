@@ -15,7 +15,7 @@
                             <span class="text-red-500">*</span></label>
                         <select wire:model.live="region_id"
                             class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option value="">Select Category</option>
+                            <option value="">Select Region</option>
                             @foreach (isset($regions) ? $regions : [] as $region)
                                 <option value="{{ $region->id }}">{{ $region->name }}</option>
                             @endforeach
@@ -30,7 +30,7 @@
                                 class="text-red-500">*</span></label>
                         <select wire:model.live="district_id"
                             class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option value="">Select Category</option>
+                            <option value="">Select District</option>
                             @foreach (isset($districts) ? $districts : [] as $district)
                                 <option value="{{ $district->id }}">{{ $district->name }}</option>
                             @endforeach
@@ -44,7 +44,7 @@
                             <span class="text-red-500">*</span></label>
                         <select wire:model.live="ward_id"
                             class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option value="">Select Category</option>
+                            <option value="">Select Ward</option>
                             @foreach (isset($wards) ? $wards : [] as $ward)
                                 <option value="{{ $ward->id }}">{{ $ward->name }}</option>
                             @endforeach
@@ -59,7 +59,7 @@
                                 class="text-red-500">*</span></label>
                         <select wire:model.live="village_id"
                             class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option value="">Select Category</option>
+                            <option value="">Select Village/Street</option>
                             @foreach (isset($villages) ? $villages : [] as $village)
                                 <option value="{{ $village->id }}">{{ $village->name }}</option>
                             @endforeach
@@ -117,7 +117,7 @@
                             <span class="text-red-500">*</span></label>
                         <select wire:model.live="billing.region_id"
                             class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option value="">Select Category</option>
+                            <option value="">Select Region</option>
                             @foreach (isset($billingRegions) ? $billingRegions : [] as $region)
                                 <option value="{{ $region->id }}">{{ $region->name }}</option>
                             @endforeach
@@ -132,7 +132,7 @@
                                 class="text-red-500">*</span></label>
                         <select wire:model.live="billing.district_id"
                             class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option value="">Select Category</option>
+                            <option value="">Select District</option>
                             @foreach (isset($billingDistricts) ? $billingDistricts : [] as $district)
                                 <option value="{{ $district->id }}">{{ $district->name }}</option>
                             @endforeach
@@ -147,7 +147,7 @@
                             <span class="text-red-500">*</span></label>
                         <select wire:model.live="billing.ward_id"
                             class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option value="">Select Category</option>
+                            <option value="">Select Ward</option>
                             @foreach (isset($billingWards) ? $billingWards : [] as $ward)
                                 <option value="{{ $ward->id }}">{{ $ward->name }}</option>
                             @endforeach
@@ -162,7 +162,7 @@
                                 class="text-red-500">*</span></label>
                         <select wire:model.live="billing.village_id"
                             class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option value="">Select Category</option>
+                            <option value="">Select Village/street</option>
                             @foreach (isset($billingVillages) ? $billingVillages : [] as $village)
                                 <option value="{{ $village->id }}">{{ $village->name }}</option>
                             @endforeach

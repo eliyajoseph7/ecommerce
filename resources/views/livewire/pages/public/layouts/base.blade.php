@@ -101,7 +101,25 @@
                 },
                 onClick: function() {} // Callback after click
             }).showToast();
-        })
+        });
+
+        Livewire.on('errorToast', (value) => {
+            Toastify({
+                text: value.message,
+                duration: 3000,
+                // destination: "https://github.com/apvarun/toastify-js",
+                newWindow: true,
+                // close: true,
+                gravity: "top", // `top` or `bottom`
+                position: "center", // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                style: {
+                    background: "linear-gradient(to right, #e53935, #e35d5b)",
+                    'border-radius': '10px',
+                },
+                onClick: function() {} // Callback after click
+            }).showToast();
+        });
     });
 
     // $(document).on('click', '.add_to_cart', function() {

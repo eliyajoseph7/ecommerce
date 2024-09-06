@@ -7,8 +7,11 @@ use App\Http\Controllers\CustomerSessionController;
 use App\Models\Cart;
 use App\Models\Customer;
 use App\Models\ItemVisit;
+use App\Models\Order;
 use App\Models\WishList;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
@@ -26,25 +29,33 @@ class Login extends Component
             $validCustomerPasswordCredentials = Hash::check($this->password, $customer->getAuthPassword());
 
             if ($validCustomerPasswordCredentials) {
-                $sessionId = $customer->session_id;
+                $sessionId = (new CustomerSessionController)->getSessionId();
+
+                $newSessionId = Str::uuid()->toString();
+                Cookie::queue(Cookie::make('cart_session_id', $newSessionId, 60 * 24 * 90)); // 90 days
+
                 // update session id in cart and visit tables
                 Cart::where('session_id', $sessionId)->update([
-                    'session_id' => (new CustomerSessionController)->getSessionId()
-                ]);
-
-                ItemVisit::where('session_id', $sessionId)->update([
-                    'session_id' => (new CustomerSessionController)->getSessionId()
-                ]);
-
-                WishList::where('session_id', $sessionId)->update([
+                    'session_id' => $newSessionId,
                     'customer_id' => $customer->id
                 ]);
 
-                // Order::where('session_id', $sessionId)->update([
-                //     'session_id' => (new CustomerSessionController)->getSessionId()
-                // ]);
+                ItemVisit::where('session_id', $sessionId)->update([
+                    'session_id' => $newSessionId,
+                    'customer_id' => $customer->id
+                ]);
 
-                $customer->session_id = (new CustomerSessionController)->getSessionId();
+                WishList::where('session_id', $sessionId)->update([
+                    'customer_id' => $customer->id,
+                    'session_id' => $newSessionId
+                ]);
+                
+                Order::where('session_id', $sessionId)->update([
+                    'session_id' => $newSessionId,
+                    'customer_id' => $customer->id
+                ]);
+
+                $customer->session_id = $newSessionId;
                 $customer->loggedin = '1';
                 $customer->last_login = now();
                 $customer->save();

@@ -48,6 +48,12 @@ class UpdateStatus extends ModalComponent
                 $this->category == 'Order' ? 'status' : 'payment_status' => $this->status
             ]
         );
+        // update order status to completed if category is payment and status is paid
+        if($this->category == 'Payment' && $this->status == 'paid') {
+            $this->order->update([
+                'status' => 'completed'
+            ]);
+        }
         $this->dispatch('reload_orders');
         $this->dispatch('success', 'Status updated successfully');
         $this->closeModal();
