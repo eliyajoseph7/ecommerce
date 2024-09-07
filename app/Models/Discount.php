@@ -36,6 +36,9 @@ class Discount extends Model
     public function getDaysRemainAttribute() {
         if($this->end_date) {
             $diff = date_diff(now(), $this->end_date)->days;
+            if($diff == 0) {
+                return 'Available today';
+            }
             return $diff . ' day(s) remained.';
         }
         return;

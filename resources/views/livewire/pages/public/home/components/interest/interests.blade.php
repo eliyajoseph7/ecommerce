@@ -1,6 +1,6 @@
 <div class="py-8" id="items">
-    <div class="text-2xl font-bold w-full">You may be interested</div>
-    <div class="w-36 h-0.5 bg-gray-200"></div>
+    <div class="text-2xl font-bold w-full text-gray-700">You may be interested</div>
+    <div class="w-36 h-0.5 bg-teal-700"></div>
 
     <div class="py-4">
         <div class="mb-4 border-b border-gray-50 dark:border-gray-700">

@@ -1,6 +1,6 @@
 <div class="my-8">
-    <div class="text-2xl font-bold w-full">Our Services</div>
-    <div class="w-36 h-1 bg-gray-200"></div>
+    <div class="text-2xl font-bold w-full text-gray-700">Our Services</div>
+    <div class="w-36 h-0.5 bg-teal-700"></div>
     <div class="sm:mx-2 md:mx-0 text-center">
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             @include('livewire.pages.public.home.components.includes.card', [

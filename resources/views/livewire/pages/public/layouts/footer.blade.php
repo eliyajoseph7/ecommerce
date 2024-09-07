@@ -34,6 +34,6 @@
     </div>
     <div class="h-10 bg-sky-900 rounded-md items-center text-white">
     </div>
-    <div class="text-md py-2 text-gray-500">@ejtz.{{ now()->format('Y') }}</div>
+    <div class="text-md py-2 px-1 text-gray-500 text-left">@ejtz.{{ now()->format('Y') }}</div>
 
 </footer>
