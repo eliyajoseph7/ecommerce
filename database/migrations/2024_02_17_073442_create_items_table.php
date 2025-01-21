@@ -22,6 +22,8 @@ return new class extends Migration
             $table->double('ordered')->default(0);
             $table->foreignId('sub_category_id')->nullable()->constrained()->nullOnDelete();
             $table->enum('status', ['active', 'in active'])->default('active');
+            $table->foreignId('brand_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('discount_id')->nullable()->constrained()->nullOnDelete();
             $table->timestamps();
         });
     }

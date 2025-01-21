@@ -15,7 +15,7 @@
                         <input type="radio" @checked($paymethod == 'cash') id="cash" wire:model.live="paymethod"
                             value="cash" class="hidden peer">
                         <div
-                            class="text-gray-500 bg-inherit border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-teal-500 peer-checked:border-teal-600 peer-checked:text-teal-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                            class="text-gray-500 bg-inherit border border-gray-200 rounded-lg cursor-pointer dark-remove:hover:text-gray-300 dark-remove:border-gray-700 dark-remove:peer-checked:text-teal-500 peer-checked:border-teal-600 peer-checked:text-teal-600 hover:text-gray-600 hover:bg-gray-100 dark-remove:text-gray-400 dark-remove:bg-gray-800 dark-remove:hover:bg-gray-700">
                             <label for="cash" class="cursor-pointer">
                                 <div class="w-full p-5 bg-inherit ">
                                     <div class="inline-flex items-center justify-between w-full">
@@ -50,7 +50,7 @@
                         <input type="radio" @checked($paymethod == 'bank') id="bank" wire:model.live="paymethod"
                             value="bank" class="hidden peer">
                         <div
-                            class="text-gray-500 bg-inherit border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-teal-500 peer-checked:border-teal-600 peer-checked:text-teal-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                            class="text-gray-500 bg-inherit border border-gray-200 rounded-lg cursor-pointer dark-remove:hover:text-gray-300 dark-remove:border-gray-700 dark-remove:peer-checked:text-teal-500 peer-checked:border-teal-600 peer-checked:text-teal-600 hover:text-gray-600 hover:bg-gray-100 dark-remove:text-gray-400 dark-remove:bg-gray-800 dark-remove:hover:bg-gray-700">
                             <label for="bank" class="cursor-pointer">
                                 <div class="w-full p-5 bg-inherit ">
                                     <div class="inline-flex items-center justify-between w-full">
@@ -106,7 +106,7 @@
                         <input type="radio" @checked($paymethod == 'mno') id="mno" wire:model.live="paymethod"
                             value="mno" class="hidden peer">
                         <div
-                            class="text-gray-500 bg-inherit border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-teal-500 peer-checked:border-teal-600 peer-checked:text-teal-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                            class="text-gray-500 bg-inherit border border-gray-200 rounded-lg cursor-pointer dark-remove:hover:text-gray-300 dark-remove:border-gray-700 dark-remove:peer-checked:text-teal-500 peer-checked:border-teal-600 peer-checked:text-teal-600 hover:text-gray-600 hover:bg-gray-100 dark-remove:text-gray-400 dark-remove:bg-gray-800 dark-remove:hover:bg-gray-700">
                             <label for="mno" class="cursor-pointer">
                                 <div class="w-full p-5 bg-inherit ">
                                     <div class="inline-flex items-center justify-between w-full">

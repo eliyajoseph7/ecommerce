@@ -26,14 +26,14 @@
                             <div class="mt-4">
                                 <label class="block text-gray-700 text-sm font-bold mb-2">Current Password (Optional to change)</label>
                                 <input wire:model.live.debounce.500ms="current_password" id="current_password"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark-remove:bg-gray-700 dark-remove:border-gray-600 dark-remove:placeholder-gray-400 dark-remove:text-white dark-remove:focus:ring-teal-500 dark-remove:focus:border-teal-500"
                                     type="password" autocomplete="new-password" />
                                 <x-input-error :messages="$errors->get('current_password')" class="mt-2" />
                             </div>
                             <div class="mt-4">
                                 <label class="block text-gray-700 text-sm font-bold mb-2">New Password</label>
                                 <input wire:model.live.debounce.500ms="new_password" id="new_password"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark-remove:bg-gray-700 dark-remove:border-gray-600 dark-remove:placeholder-gray-400 dark-remove:text-white dark-remove:focus:ring-teal-500 dark-remove:focus:border-teal-500"
                                     type="password" autocomplete="new-password" />
                                 <x-input-error :messages="$errors->get('new_password')" class="mt-2" />
                             </div>

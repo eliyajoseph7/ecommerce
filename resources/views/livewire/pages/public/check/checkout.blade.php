@@ -145,9 +145,9 @@
                     <div class="my-10">
                         <div class="flex items-center mb-4">
                             <input id="default-checkbox" type="checkbox" wire:model.live="terms"
-                                class="w-4 h-4 cursor-pointer text-teal-600 bg-gray-50 border-teal-300 rounded focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                class="w-4 h-4 cursor-pointer text-teal-600 bg-gray-50 border-teal-300 rounded focus:ring-teal-500 dark-remove:focus:ring-teal-600 dark-remove:ring-offset-gray-800 focus:ring-2 dark-remove:bg-gray-700 dark-remove:border-gray-600">
                             <label for="default-checkbox"
-                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Agree to <a
+                                class="ms-2 text-sm font-medium text-gray-900 dark-remove:text-gray-300">Agree to <a
                                     href="#" class="text-teal-600">Terms & Conditions</a></label>
                         </div>
                         <x-input-error :messages="$errors->get('terms')" class="mt-2" />

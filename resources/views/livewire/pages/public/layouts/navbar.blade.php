@@ -1,5 +1,5 @@
 <div class="">
-    <nav class=" border-green-200 dark:bg-green-900 dark:border-green-700 z-50">
+    <nav class=" border-green-200 dark-remove:bg-green-900 dark-remove:border-green-700 z-50">
         <div
             class="w-screen-xl flex md:block flex-wrap items-center justify-between mx-auto sm:py-1 md:py-3 sm:px-2 lg:px-72">
             <div class="hidden md:flex">
@@ -34,7 +34,7 @@
                 <img src="{{ asset('assets/images/logo-2.png') }}" class="h-full">
             </a>
             <button data-collapse-toggle="navbar-multi-level" type="button"
-                class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-100 rounded-lg sm:hidden focus:outline-none focus:ring-0 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-100 rounded-lg sm:hidden focus:outline-none focus:ring-0 focus:ring-gray-200 dark-remove:text-gray-400 dark-remove:hover:bg-gray-700 dark-remove:focus:ring-gray-600"
                 aria-controls="navbar-multi-level" aria-expanded="false">
                 <span class="sr-only">Open main menu</span>
                 <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -45,11 +45,11 @@
             </button>
             <div class="hidden w-full lg:block lg:w-auto" id="navbar-multi-level">
                 <ul :class="{ 'md:hidden': !atTop }"
-                    class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-inherit rounded-lg sm:bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-inherit dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                    class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-inherit rounded-lg sm:bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-inherit dark-remove:bg-gray-800 md:dark-remove:bg-gray-900 dark-remove:border-gray-700">
                     @foreach ($menus as $menu)
                         <li>
                             <button id="{{ $menu->slug }}Link" data-dropdown-toggle="{{ $menu->slug }}"
-                                class="flex items-center justify-between text-sm w-full py-2 px-3 text-gray-300 hover:text-gray-50 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+                                class="flex items-center justify-between text-sm w-full py-2 px-3 text-gray-300 hover:text-gray-50 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 md:w-auto dark-remove:text-white md:dark-remove:hover:text-blue-500 dark-remove:focus:text-white dark-remove:hover:bg-gray-700 md:dark-remove:hover:bg-transparent"
                                 :class="{ '!md:text-sky-900 font-bold': !atTop }">
                                 {{ $menu->name }}
                                 <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -59,14 +59,14 @@
                                 </svg></button>
                             <!-- Dropdown menu -->
                             <div id="{{ $menu->slug }}"
-                                class="z-50 hidden font-normal bg-white divide-y divide-gray-100 rounded-b-md shadow w-screen min-h-32 dark:bg-gray-700 dark:divide-gray-600">
+                                class="z-50 hidden font-normal bg-white divide-y divide-gray-100 rounded-b-md shadow w-screen min-h-32 dark-remove:bg-gray-700 dark-remove:divide-gray-600">
                                 <div class="flex md:mx-80 px-20 sm:py-1 md:py-3 md:px-0 ">
-                                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200 md:grid md:grid-flow-col justify-start"
+                                    <ul class="py-2 text-sm text-gray-700 dark-remove:text-gray-200 md:grid md:grid-flow-col justify-start"
                                         aria-labelledby="dropdownLargeButton">
                                         @foreach ($menu->categories as $category)
                                             <li class="px-4">
                                                 <a href="{{ route('public_items', $category->slug) }}"
-                                                    class="block py-2 font-bold hover:text-sky-900 dark:hover:bg-gray-600 dark:hover:text-white">{{ $category->name }}</a>
+                                                    class="block py-2 font-bold hover:text-sky-900 dark-remove:hover:bg-gray-600 dark-remove:hover:text-white">{{ $category->name }}</a>
                                                 <ul>
                                                     @foreach ($category->sub_categories as $sub_category)
                                                         <li>
@@ -90,7 +90,7 @@
     </nav>
     <!-- drawer component -->
     <div id="drawer-nav"
-        class="fixed top-0 left-0 h-screen overflow-y-auto transition-transform -translate-x-full bg-white w-80 dark:bg-gray-800 z-[10000]"
+        class="fixed top-0 left-0 h-screen overflow-y-auto transition-transform -translate-x-full bg-white w-80 dark-remove:bg-gray-800 z-[10000]"
         tabindex="-1" aria-labelledby="drawer-label">
         <div class="flex items-center border-b bg-gray-50  py-4 pl-4 pr-8">
             <div class="flex space-x-4 items-center">
@@ -100,7 +100,7 @@
                 </a>
             </div>
             <button type="button" data-drawer-hide="drawer-nav" aria-controls="drawer-nav"
-                class="text-gray-400 pr-4 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
+                class="text-gray-400 pr-4 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 flex items-center justify-center dark-remove:hover:bg-gray-600 dark-remove:hover:text-white">
                 <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 14 14">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -111,12 +111,12 @@
         </div>
         <div class="w-full md:block relative">
             <ul
-                class="font-medium bg-black block w-full p-4 mt-4 border border-inherit rounded-lg md:border-0 md:bg-inherit dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                class="font-medium bg-black block w-full p-4 mt-4 border border-inherit rounded-lg md:border-0 md:bg-inherit dark-remove:bg-gray-800 md:dark-remove:bg-gray-900 dark-remove:border-gray-700">
                 @foreach ($menus as $menu)
                     <li class="py-2 w-full">
                         <button id="{{ $menu->slug }}Link" data-dropdown-toggle="new-{{ $menu->slug }}"
                             data-dropdown-placement="right"
-                            class="flex items-center justify-between text-sm w-full py-2 px-3 text-gray-300 hover:text-gray-50 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+                            class="flex items-center justify-between text-sm w-full py-2 px-3 text-gray-300 hover:text-gray-50 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 dark-remove:text-white md:dark-remove:hover:text-blue-500 dark-remove:focus:text-white dark-remove:hover:bg-gray-700 md:dark-remove:hover:bg-transparent"
                             :class="{ '!text-gray-700 font-bold': !atTop }">
                             <div class="">{{ $menu->name }}</div>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -132,14 +132,14 @@
     @foreach ($menus as $menu)
         <!-- Dropdown menu -->
         <div id="new-{{ $menu->slug }}"
-            class="border-l border-gray-200 z-[10000] h-screen hidden font-normal bg-white divide-y divide-gray-100 rounded-b-md shadow w-screen dark:bg-gray-700 dark:divide-gray-600">
+            class="border-l border-gray-200 z-[10000] h-screen hidden font-normal bg-white divide-y divide-gray-100 rounded-b-md shadow w-screen dark-remove:bg-gray-700 dark-remove:divide-gray-600">
             <div class="flex md:mx-20 px-20 sm:py-1 md:py-3 md:px-0 ">
-                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200 md:grid md:grid-flow-col justify-start"
+                <ul class="py-2 text-sm text-gray-700 dark-remove:text-gray-200 md:grid md:grid-flow-col justify-start"
                     aria-labelledby="dropdownLargeButton">
                     @foreach ($menu->categories as $category)
                         <li class="px-4">
                             <a href="{{ route('public_items', $category->slug) }}"
-                                class="block py-2 font-bold hover:text-sky-900 dark:hover:bg-gray-600 dark:hover:text-white">{{ $category->name }}</a>
+                                class="block py-2 font-bold hover:text-sky-900 dark-remove:hover:bg-gray-600 dark-remove:hover:text-white">{{ $category->name }}</a>
                             <ul>
                                 @foreach ($category->sub_categories as $sub_category)
                                     <li>

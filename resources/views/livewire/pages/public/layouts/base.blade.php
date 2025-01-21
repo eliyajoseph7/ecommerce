@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="light">
 
 <head>
     <meta charset="utf-8">
@@ -45,7 +45,7 @@
     @livewire('pages.public.layouts.header')
     {{-- @livewire('pages.public.cart.cart-items') --}}
     <div
-        class="min-h-[72vh] flex flex-col sm:justify-start items-center py-0 sm:pt-0 bg-gray-50 dark:bg-gray-900 pb-5 overflow-x-hidden">
+        class="min-h-[72vh] flex flex-col sm:justify-start items-center py-0 sm:pt-0 bg-gray-50 dark-remove:bg-gray-900 pb-5 overflow-x-hidden">
         {{ $slot }}
     </div>
     @livewire('pages.public.layouts.footer')

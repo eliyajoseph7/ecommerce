@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('ip_address');
             $table->string('user_agent')->nullable();
             $table->string('referrer')->nullable();
+            $table->string('user_id')->nullable();
+            $table->string('session_id');
             $table->foreignId('customer_id')->nullable()->constrained()->nullOnDelete();
             $table->timestamps();
         });

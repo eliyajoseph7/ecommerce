@@ -6,7 +6,7 @@
                 class="flex space-x-8 items-center md:float-right w-full md:w-auto pt-5 md:-mt-2.5 justify-between px-2.5 md:px-0 border-b-2 md:border-0">
                 <div>
                     <button id="dropdownPhoneLink" data-dropdown-toggle="dropdownPhone"
-                        class="flex items-center justify-between w-full py-2 px-3 text-gray-400 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gray-600 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
+                        class="flex items-center justify-between w-full py-2 px-3 text-gray-400 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gray-600 md:p-0 md:w-auto dark-remove:text-gray-400 dark-remove:hover:text-white dark-remove:focus:text-white dark-remove:border-gray-700 dark-remove:hover:bg-gray-700 md:dark-remove:hover:bg-transparent">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-5 h-5">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -20,31 +20,31 @@
                         </svg></button>
                     <!-- Dropdown menu -->
                     <div id="dropdownPhone"
-                        class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownLargeButton">
+                        class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark-remove:bg-gray-700 dark-remove:divide-gray-600">
+                        <ul class="py-2 text-sm text-gray-700 dark-remove:text-gray-200" aria-labelledby="dropdownLargeButton">
                             <li>
                                 <a href="#"
-                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+                                    class="block px-4 py-2 hover:bg-gray-100 dark-remove:hover:bg-gray-600 dark-remove:hover:text-white">Dashboard</a>
                             </li>
                             <li>
                                 <a href="#"
-                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+                                    class="block px-4 py-2 hover:bg-gray-100 dark-remove:hover:bg-gray-600 dark-remove:hover:text-white">Settings</a>
                             </li>
                             <li>
                                 <a href="#"
-                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
+                                    class="block px-4 py-2 hover:bg-gray-100 dark-remove:hover:bg-gray-600 dark-remove:hover:text-white">Earnings</a>
                             </li>
                         </ul>
                         <div class="py-1">
                             <a href="#"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark-remove:hover:bg-gray-600 dark-remove:text-gray-200 dark-remove:hover:text-white">Sign
                                 out</a>
                         </div>
                     </div>
                 </div>
                 <div>
                     <button id="dropdownuserLink" data-dropdown-toggle="dropdownuser"
-                        class="flex items-center justify-between w-full py-2 px-0 text-gray-400 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gray-600 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
+                        class="flex items-center justify-between w-full py-2 px-0 text-gray-400 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gray-600 md:p-0 md:w-auto dark-remove:text-gray-400 dark-remove:hover:text-white dark-remove:focus:text-white dark-remove:border-gray-700 dark-remove:hover:bg-gray-700 md:dark-remove:hover:bg-transparent">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -58,23 +58,23 @@
                         </svg></button>
                     <!-- Dropdown menu -->
                     <div id="dropdownuser"
-                        class="z-40 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownLargeButton">
+                        class="z-40 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark-remove:bg-gray-700 dark-remove:divide-gray-600">
+                        <ul class="py-2 text-sm text-gray-700 dark-remove:text-gray-200" aria-labelledby="dropdownLargeButton">
                             @if (Helper::is_auth())
                                 <li>
                                     <a href="{{ route('customer_profile') }}"
-                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Profile</a>
+                                        class="block px-4 py-2 hover:bg-gray-100 dark-remove:hover:bg-gray-600 dark-remove:hover:text-white">Profile</a>
                                 </li>
                             @endif
                         </ul>
                         <div class="py-2">
                             @if (Helper::is_auth())
                                 <a wire:click="signout"
-                                    class="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign
+                                    class="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark-remove:hover:bg-gray-600 dark-remove:text-gray-200 dark-remove:hover:text-white">Sign
                                     out</a>
                             @else
                                 <a href="{{ route('signin') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark-remove:hover:bg-gray-600 dark-remove:text-gray-200 dark-remove:hover:text-white">Sign
                                     in</a>
                             @endif
                         </div>

@@ -124,19 +124,19 @@
                         <div role="status"
                             class="col-span-full space-y-8 md:space-y-0 md:space-x-8 rtl:space-x-reverse md:flex md:items-center">
                             <div
-                                class="flex items-center justify-center h-28 bg-gray-200/50 text-gray-500 rounded w-48 dark:bg-gray-700">
+                                class="flex items-center justify-center h-28 bg-gray-200/50 text-gray-500 rounded w-48 dark-remove:bg-gray-700">
                                 Empty
                             </div>
                             <div class="w-full">
-                                <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
-                                <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[480px] mb-2.5">
+                                <div class="h-2.5 bg-gray-200 rounded-full dark-remove:bg-gray-700 w-48 mb-4"></div>
+                                <div class="h-2 bg-gray-200 rounded-full dark-remove:bg-gray-700 max-w-[480px] mb-2.5">
                                 </div>
-                                <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
-                                <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[440px] mb-2.5">
+                                <div class="h-2 bg-gray-200 rounded-full dark-remove:bg-gray-700 mb-2.5"></div>
+                                <div class="h-2 bg-gray-200 rounded-full dark-remove:bg-gray-700 max-w-[440px] mb-2.5">
                                 </div>
-                                <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[460px] mb-2.5">
+                                <div class="h-2 bg-gray-200 rounded-full dark-remove:bg-gray-700 max-w-[460px] mb-2.5">
                                 </div>
-                                <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+                                <div class="h-2 bg-gray-200 rounded-full dark-remove:bg-gray-700 max-w-[360px]"></div>
                             </div>
                             <span class="sr-only">Loading...</span>
                         </div>

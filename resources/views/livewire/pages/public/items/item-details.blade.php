@@ -69,7 +69,7 @@
 
                     <div class="py-4" wire:ignore>
                         <div class="py-4">
-                            <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
+                            <div class="mb-4 border-b border-gray-200 dark-remove:border-gray-700">
                                 <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-tab"
                                     data-tabs-toggle="#default-tab-content" role="tablist">
                                     <li class="me-2" role="presentation">
@@ -79,21 +79,21 @@
                                     </li>
                                     <li class="me-2" role="presentation">
                                         <button
-                                            class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                                            class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark-remove:hover:text-gray-300"
                                             id="reviews-tab" data-tabs-target="#reviews" type="button" role="tab"
                                             aria-controls="reviews" aria-selected="false">Reviews</button>
                                     </li>
                                 </ul>
                             </div>
                             <div id="default-tab-content">
-                                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="description"
+                                <div class="hidden p-4 rounded-lg bg-gray-50 dark-remove:bg-gray-800" id="description"
                                     role="tabpanel" aria-labelledby="description-tab">
                                     <div class="mce-content-body">
                                         <div class="pb-2 font-bold">{{ $data->short_description }}</div>
                                         <div class="">{!! $data->description !!}</div>
                                     </div>
                                 </div>
-                                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="reviews"
+                                <div class="hidden p-4 rounded-lg bg-gray-50 dark-remove:bg-gray-800" id="reviews"
                                     role="tabpanel" aria-labelledby="reviews-tab">
                                     @livewire('pages.public.items.reviews', [
                                         'itemId' => $data->id,
@@ -246,7 +246,7 @@
             <div class="w-36 h-0.5 bg-gray-200"></div>
 
             <div class="py-4">
-                <div class="mb-4 border-b border-gray-50 dark:border-gray-700">
+                <div class="mb-4 border-b border-gray-50 dark-remove:border-gray-700">
                     <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-tab"
                         data-tabs-toggle="#default-tab-content" role="tablist">
                         <li class="me-2" role="presentation">
@@ -256,21 +256,21 @@
                         </li>
                         <li class="me-2" role="presentation">
                             <button
-                                class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                                class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark-remove:hover:text-gray-300"
                                 id="random-tab" data-tabs-target="#random" type="button" role="tab"
                                 aria-controls="random" aria-selected="false">Random</button>
                         </li>
                     </ul>
                 </div>
                 <div id="default-tab-content">
-                    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="similar" role="tabpanel"
+                    <div class="hidden p-4 rounded-lg bg-gray-50 dark-remove:bg-gray-800" id="similar" role="tabpanel"
                         aria-labelledby="similar-tab">
                         @livewire('pages.public.items.interests.similar', [
                             'category' => $context['category'],
                             'activeItem' => $data->id,
                         ])
                     </div>
-                    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="random" role="tabpanel"
+                    <div class="hidden p-4 rounded-lg bg-gray-50 dark-remove:bg-gray-800" id="random" role="tabpanel"
                         aria-labelledby="random-tab">
                         @livewire('pages.public.items.interests.random', [
                             'activeItem' => $data->id,

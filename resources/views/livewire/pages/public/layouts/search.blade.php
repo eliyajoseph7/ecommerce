@@ -18,7 +18,7 @@
             @forelse ($results as $key=>$result)
             <div class="text-sm bg-gray-100/35">
                 <a href="{{ route('public_items', $result->first()->category->slug) }}"
-                    class="block py-2 font-bold hover:text-sky-900 dark:hover:bg-gray-600 dark:hover:text-white">{{ $key }}</a>
+                    class="block py-2 font-bold hover:text-sky-900 dark-remove:hover:bg-gray-600 dark-remove:hover:text-white">{{ $key }}</a>
                 
             </div>
             <div class="px-3 py-1">

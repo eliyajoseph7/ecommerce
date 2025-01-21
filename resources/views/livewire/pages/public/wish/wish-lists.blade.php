@@ -91,9 +91,9 @@
                         @empty
                             @for ($i = 0; $i < 4; $i++)
                                 <div role="status"
-                                    class="max-w-sm p-0 border border-gray-200 rounded  md:p-0 dark:border-gray-700">
+                                    class="max-w-sm p-0 border border-gray-200 rounded  md:p-0 dark-remove:border-gray-700">
                                     <div
-                                        class="flex items-center text-gray-400 justify-center h-48 mb-0 bg-gray-200/50 rounded dark:bg-gray-700">
+                                        class="flex items-center text-gray-400 justify-center h-48 mb-0 bg-gray-200/50 rounded dark-remove:bg-gray-700">
                                         Empty
                                     </div>
                                     <span class="sr-only">Loading...</span>
